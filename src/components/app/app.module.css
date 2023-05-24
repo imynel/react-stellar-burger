@@ -1,9 +1,24 @@
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('../../fonts/JetBrainsMono-Bold.ttf') format('ttf');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('../../fonts/JetBrainsMono-Regular.ttf') format('ttf');
+  font-style: normal;
+  font-weight: 400;
+}
+
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
   background-color: #131316;
   color: #f2f2f3;
+  font-family: 'JetBrainsMono', Arial, sans-serif;
 }
 
 .main {
