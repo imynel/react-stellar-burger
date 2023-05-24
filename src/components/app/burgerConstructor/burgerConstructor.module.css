@@ -1,0 +1,52 @@
+.burgerConstructor {
+    width: 600px;
+    height: 912px;
+    padding: 0;
+    padding-top: 100px;
+
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background-color: #1C1C21;
+    border-radius: 40px;
+    width: 538px;
+    justify-content: space-between;
+}
+
+.image {
+    width: 80px;
+    height: 40px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.price {
+    font-size: 28px;
+    line-height: 24px;
+}
+
+.subContainer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
