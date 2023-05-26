@@ -1,4 +1,4 @@
-import styleBurgerConstructor from './burgerConstructor.module.css'
+import styleBurgerConstructor from './BurgerConstructor.module.css'
 import { data } from '../../../utils/data'
 import { DragIcon, CurrencyIcon, LockIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -96,7 +96,9 @@ const BurgerConstructor = () => {
                 <div className='mr-10'>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType="button" type="primary" size="medium">
+                <Button htmlType="button" type="primary" size="medium" onClick={() => {
+                    document.querySelector('.Popup_popup__iVW7J').classList.add('Popup_popupOpened__oXF2R')
+                }}>
                     Оформить заказ
                 </Button>
             </div>
