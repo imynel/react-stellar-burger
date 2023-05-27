@@ -39,6 +39,10 @@
     line-height: 24px;
 }
 
+.tab {
+    display: flex;
+}
+
 .name {
     height: 48px;
     text-align: center;

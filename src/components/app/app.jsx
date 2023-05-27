@@ -3,7 +3,8 @@ import { data } from "../../utils/data";
 import AppHeader from "./AppHeader/AppHeader";
 import BurgerIngredients from "./BurgerIngredients/BurgerIngredients"
 import BurgerConstructor from "./BurgerConstructor/BurgerConstructor";
-import Popup from "./Popup/Popup";
+import PopupOrder from "./PopupOrder/PopupOrder";
+import PopupInfo from "./PopupInfo/PopupInfo";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <BurgerIngredients/>
         <BurgerConstructor/>
       </main>
-      <Popup/>
+      <PopupOrder/>
+      <PopupInfo/>
     </div>
   );
 }

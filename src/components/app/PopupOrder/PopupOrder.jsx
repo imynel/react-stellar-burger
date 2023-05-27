@@ -1,9 +1,9 @@
-import stylePopup from './Popup.module.css'
+import stylePopup from './PopupOrder.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import done from '../../../images/graphics.svg'
 
 
-const Popup = () => {
+const PopupOrder = () => {
     return (
         <section className={`${stylePopup.popup}`}>
             <div className={stylePopup.container}>
@@ -18,4 +18,4 @@ const Popup = () => {
     )
 }
 
-export default Popup
+export default PopupOrder
