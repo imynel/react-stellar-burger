@@ -1,5 +1,5 @@
 import styleBurgerConstructor from './BurgerConstructor.module.css'
-import { data } from '../../../utils/data'
+import { data } from '../../utils/data'
 import { DragIcon, CurrencyIcon, LockIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const BurgerConstructor = () => {

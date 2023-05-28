@@ -1,6 +1,6 @@
 import stylePopup from './PopupOrder.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import done from '../../../images/graphics.svg'
+import done from '../../images/graphics.svg'
 
 
 const PopupOrder = () => {

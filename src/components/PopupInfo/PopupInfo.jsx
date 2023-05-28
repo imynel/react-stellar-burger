@@ -1,6 +1,6 @@
 import stylePopupInfo from './PopupInfo.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { data } from '../../../utils/data'
+import { data } from '../../utils/data'
 
 
 const PopupInfo = (() => {

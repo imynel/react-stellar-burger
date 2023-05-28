@@ -1,10 +1,10 @@
 import styles from "./App.module.css";
 import { data } from "../../utils/data";
-import AppHeader from "./AppHeader/AppHeader";
-import BurgerIngredients from "./BurgerIngredients/BurgerIngredients"
-import BurgerConstructor from "./BurgerConstructor/BurgerConstructor";
-import PopupOrder from "./PopupOrder/PopupOrder";
-import PopupInfo from "./PopupInfo/PopupInfo";
+import AppHeader from "../AppHeader/AppHeader";
+import BurgerIngredients from "../BurgerIngredients/BurgerIngredients"
+import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import PopupOrder from "../PopupOrder/PopupOrder";
+import PopupInfo from "../PopupInfo/PopupInfo";
 
 function App() {
   return (
