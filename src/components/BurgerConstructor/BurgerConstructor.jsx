@@ -1,6 +1,6 @@
 import styleBurgerConstructor from './BurgerConstructor.module.css'
 import { data } from '../../utils/data'
-import { DragIcon, CurrencyIcon, LockIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
+import { DragIcon, CurrencyIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const BurgerConstructor = () => {
     return (
@@ -22,8 +22,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[6].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -34,8 +34,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[6].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -46,8 +46,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[6].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -58,8 +58,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[4].image} alt={data[4].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[4].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[4].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[4].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[4].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -70,8 +70,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[7].image} alt={data[7].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[7].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[7].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[7].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[7].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -82,8 +82,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[8].image} alt={data[8].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[8].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[8].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[8].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[8].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />
@@ -94,8 +94,8 @@ const BurgerConstructor = () => {
                         <DragIcon type="primary" />
                         <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
                             <img src={data[8].image} alt={data[8].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5`}>{data[8].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2`}>{data[8].price}</p>
+                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[8].name}</p>
+                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[8].price}</p>
                             <CurrencyIcon type="primary" />
                             <div className='mr-8 ml-5'>
                                 <DeleteIcon type="primary" />

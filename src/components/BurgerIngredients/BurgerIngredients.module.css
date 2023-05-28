@@ -1,15 +1,9 @@
-.title {
-    margin: 40px 0 20px 0;
-    font-size: 36px;
-    line-height: 40px;
-    font-weight: 700;
-}
-
 .card {
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
     position: relative;    
+    text-align: center;
 }
 
 .mainContainer {
@@ -44,10 +38,6 @@
 }
 
 .name {
-    height: 48px;
-    text-align: center;
-    padding: auto 0;
-    margin: 0;
     width: 272px;
 }
 
