@@ -3,8 +3,6 @@ import { data } from '../../../utils/data'
 import { DragIcon, CurrencyIcon, LockIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const BurgerConstructor = () => {
-    const upBread = '(верх)'
-    const downBread = '(низ)'
     return (
         <section className={styleBurgerConstructor.burgerConstructor}>
             <ul className={styleBurgerConstructor.mainContainer}>

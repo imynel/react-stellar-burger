@@ -1,4 +1,4 @@
-import styles from "./app.module.css";
+import styles from "./App.module.css";
 import { data } from "../../utils/data";
 import AppHeader from "./AppHeader/AppHeader";
 import BurgerIngredients from "./BurgerIngredients/BurgerIngredients"
