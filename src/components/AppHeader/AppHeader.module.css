@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    margin: 40px 40px 0 40px;
+    background-color: #1C1C21;
+    justify-content: center;
+    max-height: 88px;
+}
+
+.container {
+    display: flex;
+    padding: 16px 0;
+    margin: 16px 0;
+}
+
+.text {
+    margin: 16px 0;
+}
+
+.image {
+    margin: 16px 8px 16px 20px;
+}
+
+.logo {
+    margin: 24px 288px 24px 112px;
+}

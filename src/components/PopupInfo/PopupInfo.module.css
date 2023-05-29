@@ -1,0 +1,38 @@
+.popupInfo {
+    composes: popup from '../PopupOrder/PopupOrder.module.css';
+}
+
+.container {
+    composes: container from '../PopupOrder/PopupOrder.module.css';
+    height: 539px;
+}
+
+.popupOpened {
+    composes: popupOpened from '../PopupOrder/PopupOrder.module.css';
+}
+
+.close {
+    composes: close from '../PopupOrder/PopupOrder.module.css';
+}
+
+.title {
+    text-align: start;
+    line-height: 40px;
+}
+
+.image {
+    width: 480px;
+    height: 240px;
+}
+
+.info {
+    display: flex;
+    width: 520px;
+    gap: 20px;
+    text-align: center;
+}
+
+.infoItem {
+    width: 120px;
+    color: #8585AD;
+}

@@ -1,0 +1,48 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    position: relative;    
+    text-align: center;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    height: 912px;
+    width: 600px;
+    overflow: auto;
+}
+
+.image {
+    width: 240px;
+    height: 120px;
+    margin: 0 16px;
+}
+
+.container {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.price {
+    margin: 4px 0;
+    text-align: center;
+    font-size: 28px;
+    line-height: 24px;
+}
+
+.tab {
+    display: flex;
+}
+
+.name {
+    width: 272px;
+}
+
+.subtitle {
+    font-size: 24px;
+    line-height: 30px;
+}
+
