@@ -11,8 +11,8 @@ const BurgerConstructor = () => {
                         <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
+                            text={`${data[0].name} (вверх)`}
+                            price={data[0].price}
                             thumbnail={data[0].image}
                         />
                     </div>
@@ -20,87 +20,59 @@ const BurgerConstructor = () => {
                 <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[1].name}
+                            price={data[1].price}
+                            thumbnail={data[1].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[2].name}
+                            price={data[2].price}
+                            thumbnail={data[2].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[6].image} alt={data[6].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[6].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[6].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[3].name}
+                            price={data[3].price}
+                            thumbnail={data[3].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[4].image} alt={data[4].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[4].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[4].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[4].name}
+                            price={data[4].price}
+                            thumbnail={data[4].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}> 
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[7].image} alt={data[7].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[7].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[7].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[5].name}
+                            price={data[5].price}
+                            thumbnail={data[5].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[8].image} alt={data[8].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[8].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[8].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[6].name}
+                            price={data[6].price}
+                            thumbnail={data[6].image}
+                        />
                     </li>
                     <li className={styleBurgerConstructor.card}>
                         <DragIcon type="primary" />
-                        <div className={`${styleBurgerConstructor.container} pt-4 pb-4`}>
-                            <img src={data[8].image} alt={data[8].name} className={`${styleBurgerConstructor.image} mr-5 ml-6`}/>
-                            <p className={`${styleBurgerConstructor.name} mr-5 text_type_main-small`}>{data[8].name}</p>
-                            <p className={`${styleBurgerConstructor.price} mr-2 text_type_digits-default`}>{data[8].price}</p>
-                            <CurrencyIcon type="primary" />
-                            <div className='mr-8 ml-5'>
-                                <DeleteIcon type="primary" />
-                            </div>
-                        </div>
+                        <ConstructorElement
+                            text={data[7].name}
+                            price={data[7].price}
+                            thumbnail={data[7].image}
+                        />
                     </li>
                 </div>
                 <li className={styleBurgerConstructor.card}>
@@ -108,8 +80,8 @@ const BurgerConstructor = () => {
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
+                            text={`${data[0].name} (низ)`}
+                            price={data[0].price}
                             thumbnail={data[0].image}
                         />
                     </div>
