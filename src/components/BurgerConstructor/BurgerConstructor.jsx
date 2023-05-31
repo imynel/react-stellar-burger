@@ -1,6 +1,7 @@
 import styleBurgerConstructor from './BurgerConstructor.module.css'
 import { data } from '../../utils/data'
 import { DragIcon, CurrencyIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
+import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor'
 
 const BurgerConstructor = () => {
     return (
@@ -19,60 +20,25 @@ const BurgerConstructor = () => {
                 </li>
                 <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[1].name}
-                            price={data[1].price}
-                            thumbnail={data[1].image}
-                        />
+                        <IngregientsInConstructor {...data[1]} />
                     </li>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[2].name}
-                            price={data[2].price}
-                            thumbnail={data[2].image}
-                        />
+                        <IngregientsInConstructor {...data[2]} />
                     </li>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[3].name}
-                            price={data[3].price}
-                            thumbnail={data[3].image}
-                        />
+                        <IngregientsInConstructor {...data[3]} />
                     </li>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[4].name}
-                            price={data[4].price}
-                            thumbnail={data[4].image}
-                        />
+                        <IngregientsInConstructor {...data[4]} />
                     </li>
                     <li className={styleBurgerConstructor.card}> 
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[5].name}
-                            price={data[5].price}
-                            thumbnail={data[5].image}
-                        />
+                        <IngregientsInConstructor {...data[5]} />
                     </li>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[6].name}
-                            price={data[6].price}
-                            thumbnail={data[6].image}
-                        />
+                        <IngregientsInConstructor {...data[6]} />
                     </li>
                     <li className={styleBurgerConstructor.card}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text={data[7].name}
-                            price={data[7].price}
-                            thumbnail={data[7].image}
-                        />
+                        <IngregientsInConstructor {...data[7]} />
                     </li>
                 </div>
                 <li className={styleBurgerConstructor.card}>
