@@ -5,10 +5,9 @@ import {
     CurrencyIcon,
     Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { data } from "../../utils/data";
 import { element } from "prop-types";
 
-const BurgerIngredients = () => {
+const BurgerIngredients = (props) => {
     const [current, setCurrent] = React.useState('one')
     return (
         <section className={styleBurgerIngredients.BurgerIngredients}>
@@ -27,7 +26,7 @@ const BurgerIngredients = () => {
             <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
                 <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
                 <div className={styleBurgerIngredients.container}>
-                    {data.map((element) => {
+                    {props.dataIngredients.map((element) => {
                         if (element.type === 'bun') {
                             return (
                                 <React.Fragment key={element._id}>
@@ -46,7 +45,7 @@ const BurgerIngredients = () => {
                 </div>
                 <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
                 <div className={styleBurgerIngredients.container}>
-                {data.map((element) => {
+                {props.dataIngredients.map((element) => {
                         if (element.type === 'sauce') {
                             return (
                                 <React.Fragment key={element._id}>
@@ -65,7 +64,7 @@ const BurgerIngredients = () => {
                 </div>
                 <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
                 <div className={styleBurgerIngredients.container}>
-                {data.map((element) => {
+                {props.dataIngredients.map((element) => {
                         if (element.type === 'main') {
                             return (
                                 <React.Fragment key={element._id}>
