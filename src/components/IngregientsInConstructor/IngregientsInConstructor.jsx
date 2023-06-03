@@ -1,8 +1,7 @@
 import styles from './IngregientsInConstructor.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-const IngregientsInConstructor = (props) => {
-    const [name, image, price] = props
+const IngregientsInConstructor = ({name, image, price}) => {
     return (
         <div className={`${styles.container}`}>
             <DragIcon type="primary" />
