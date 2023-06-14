@@ -3,13 +3,18 @@ import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients"
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import PopupOrder from "../PopupOrder/PopupOrder";
-import PopupInfo from "../PopupInfo/PopupInfo";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from '../Modal/Modal';
 
+
 function App() {
-  const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState(null);
   const url = 'https://norma.nomoreparties.space/api/ingredients';
+
+  const [modalOrder , setModalOrder] = useState(false)
+  const [modalIngredient, setModalIngredient] = useState(false) 
+  const [ingredient, setIngredient] = useState(null)
 
   useEffect(() => {
     const getProductData = async () => {
@@ -26,18 +31,36 @@ function App() {
     
   }, []);
 
-  console.log(productData)
+  const openIngredientsDetails = (item) => {
+    setModalIngredient(true)
+    setIngredient(item)
+  }
+
+  const openOrederDetails = () => {
+    setModalOrder(true)
+  }
+
+  const closeModal = () => {
+    setModalOrder(false)
+    setModalIngredient(false)
+  }
+
   return (
     <>
       <div className={styles.app}>
         <AppHeader/>
         <main className={styles.main}>
-          <BurgerIngredients dataIngredients={productData} />
-          <BurgerConstructor dataIngredients={productData} />
+          {productData !== null && <BurgerIngredients dataIngredients={productData} handleOpen={openIngredientsDetails} />}
+          {productData !== null && <BurgerConstructor dataIngredients={productData} handleOpen={openOrederDetails} />}
         </main>
       </div>
       <div id="react-modals" >
-        <Modal/>
+        {modalOrder && <Modal handleClose={closeModal}>
+            <OrderDetails/>
+          </Modal>}
+        {modalIngredient && <Modal handleClose={closeModal}>
+            <IngredientDetails ingredint={ingredient}/>
+          </Modal>}
       </div>
     </>
   );

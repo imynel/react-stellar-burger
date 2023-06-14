@@ -9,7 +9,7 @@
 .mainContainer {
     display: flex;
     flex-direction: column;
-    height: 912px;
+    height: 664px;
     width: 600px;
     overflow: auto;
 }

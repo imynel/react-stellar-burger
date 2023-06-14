@@ -1,9 +1,7 @@
 .burgerConstructor {
     width: 600px;
-    height: 912px;
     padding: 0;
     padding-top: 100px;
-
 }
 
 .scroll{
@@ -54,4 +52,5 @@
     display: flex;
     justify-content: end;
     align-items: center;
+    margin-bottom: 52px;
 }

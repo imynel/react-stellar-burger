@@ -1,10 +1,10 @@
 import React from 'react'
 import styleBurgerConstructor from './BurgerConstructor.module.css'
-import { DragIcon, CurrencyIcon, Button, DeleteIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor'
-import { element } from 'prop-types'
+import PropTypes from 'prop-types';
 
-const BurgerConstructor = (props) => {
+const BurgerConstructor = ({dataIngredients, handleOpen}) => {
     return (
         <section className={styleBurgerConstructor.burgerConstructor}>
             <ul className={styleBurgerConstructor.mainContainer}>
@@ -13,14 +13,14 @@ const BurgerConstructor = (props) => {
                         <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text={` (вверх)`} //props.dataIngredients[0].name
-                            price={0}
-                            thumbnail={''}
+                            text={`${dataIngredients[0].name} (вверх)`}
+                            price={dataIngredients[0].price}
+                            thumbnail={dataIngredients[0].image}
                         />
                     </div>
                 </li>
                 <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-                    {props.dataIngredients.map(ingredient => {
+                    {dataIngredients.map(ingredient => {
                         if (ingredient.type === 'main') {
                             return (
                                 <React.Fragment key={ingredient._id}>
@@ -37,9 +37,9 @@ const BurgerConstructor = (props) => {
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
-                            text={` (низ)`}
-                            price={0}
-                            thumbnail={''}
+                            text={`${dataIngredients[0].name} (низ)`}
+                            price={dataIngredients[0].price}
+                            thumbnail={dataIngredients[0].image}
                         />
                     </div>
                 </li>
@@ -49,14 +49,17 @@ const BurgerConstructor = (props) => {
                 <div className='mr-10'>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType="button" type="primary" size="medium" onClick={() => {
-                    document.querySelector('.PopupOrder_popup__JdUqc').classList.add('opupOrder_popupOpened__Dq4pJ')
-                }}>
+                <Button htmlType="button" type="primary" size="medium" onClick={() => {handleOpen()}}>
                     Оформить заказ
                 </Button>
             </div>
         </section>
     )
 } 
+
+BurgerConstructor.propTypes = {
+    handleOpen: PropTypes.func,
+    dataIngredients: PropTypes.array,  
+}
 
 export default BurgerConstructor

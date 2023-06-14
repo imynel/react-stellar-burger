@@ -1,18 +1,18 @@
 .popupInfo {
-    composes: popup from '../PopupOrder/PopupOrder.module.css';
+    composes: popup from '../OrderDetails/OrderDetails.module.css';
 }
 
 .container {
-    composes: container from '../PopupOrder/PopupOrder.module.css';
+    composes: container from '../OrderDetails/OrderDetails.module.css';
     height: 539px;
 }
 
 .popupOpened {
-    composes: popupOpened from '../PopupOrder/PopupOrder.module.css';
+    composes: popupOpened from '../OrderDetails/OrderDetails.module.css';
 }
 
 .close {
-    composes: close from '../PopupOrder/PopupOrder.module.css';
+    composes: close from '../OrderDetails/OrderDetails.module.css';
 }
 
 .title {
