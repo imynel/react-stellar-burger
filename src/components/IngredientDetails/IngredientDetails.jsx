@@ -6,7 +6,7 @@ const IngredientDetails = (({ingredint}) => {
     return (
         <>
             <h3 className={`${stylePopupInfo.title} mt-10 text text_type_main-large`}>Детали ингредиента</h3>
-            <img className={stylePopupInfo.image} src={ingredint.image} alt="" />
+            <img className={stylePopupInfo.image} src={ingredint.image} alt={ingredint.name} />
             <p className='mt-4 mb-8 text text_type_main-medium'>{ingredint.name}</p>
             <div className={`${stylePopupInfo.info}`}>
                 <div className={`${stylePopupInfo.infoItem} text text_type_main-small`}>Каллории, ккал {ingredint.calories}</div>

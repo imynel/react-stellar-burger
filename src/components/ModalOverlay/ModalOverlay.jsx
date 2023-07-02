@@ -1,10 +1,9 @@
 import styles from './ModalOverlay.module.css'
 
-const ModalOverlay = (props) => {
+const ModalOverlay = ({closeModal}) => {
 
     return (
-        <section className={styles.modalOverlay}>
-            {props.children}
+        <section className={styles.modalOverlay} onClick={closeModal} >
         </section>
     )
 }
