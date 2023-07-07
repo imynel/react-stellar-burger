@@ -19,8 +19,12 @@ function App() {
 
   useEffect(() => {
     async function getProductData() {
-      const { data } = await getIngredients();
-      setProductData(data);
+      try {
+        const { data } = await getIngredients();
+        setProductData(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     getProductData();
