@@ -9,11 +9,13 @@ import Modal from '../Modal/Modal';
 import getIngredients from '../../utils/api';
 import { async } from 'q';
 
-function App() {
-  const [productData, setProductData] = useState(null);
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
+import { DataContext } from '../../services/dataContext' //ПОДКЛЮЧАЕМ КОНТЕКСТ ДАТЫ
+import { data } from '../../utils/data';
 
-  const [modalOrder, setModalOrder] = useState(false);
+function App() {
+  const [productData, setProductData] = useState(null); // СТЕЙТ ДАННЫХ АПИ
+
+  const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
   const [modalIngredient, setModalIngredient] = useState(false);
   const [ingredient, setIngredient] = useState(null);
 
@@ -26,7 +28,7 @@ function App() {
         console.error(error);
       }
     }
-
+      
     getProductData();
   }, []);
 
@@ -46,29 +48,31 @@ function App() {
 
   return (
     <>
-      <div className={styles.app}>
-        <AppHeader />
-        <main className={styles.main}>
-          {productData !== null && (
-            <BurgerIngredients dataIngredients={productData} handleOpen={openIngredientsDetails} />
+      <DataContext.Provider value={productData}>
+        <div className={styles.app}>
+          <AppHeader />
+          <main className={styles.main}>
+            {productData !== null && (
+              <BurgerIngredients handleOpen={openIngredientsDetails} />
+            )}
+            {productData !== null && (
+              <BurgerConstructor handleOpen={openOrederDetails} />
+            )}
+          </main>
+        </div>
+        <div>
+          {modalOrder && (
+            <Modal handleClose={closeModal}>
+              <OrderDetails />
+            </Modal>
           )}
-          {productData !== null && (
-            <BurgerConstructor dataIngredients={productData} handleOpen={openOrederDetails} />
+          {modalIngredient && (
+            <Modal handleClose={closeModal}>
+              <IngredientDetails ingredint={ingredient} />
+            </Modal>
           )}
-        </main>
-      </div>
-      <div>
-        {modalOrder && (
-          <Modal handleClose={closeModal}>
-            <OrderDetails />
-          </Modal>
-        )}
-        {modalIngredient && (
-          <Modal handleClose={closeModal}>
-            <IngredientDetails ingredint={ingredient} />
-          </Modal>
-        )}
-      </div>
+        </div>
+      </DataContext.Provider>
     </>
   );
 }

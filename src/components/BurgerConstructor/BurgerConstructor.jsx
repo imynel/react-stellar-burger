@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useContext, useReducer } from 'react'
 import styleBurgerConstructor from './BurgerConstructor.module.css'
 import { CurrencyIcon, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor'
 import PropTypes from 'prop-types';
+import { DataContext } from '../../services/dataContext';
 
-const BurgerConstructor = ({dataIngredients, handleOpen}) => {
+
+function reducer(state, action) {
+
+}
+
+const BurgerConstructor = ({ handleOpen }) => {
+
+
+const [totalPrice, dispatch] = useReducer(reducer, { price: 0 })
+
+const dataIngredients = useContext(DataContext)
+console.log(dataIngredients)
     return (
         <section className={styleBurgerConstructor.burgerConstructor}>
             <ul className={styleBurgerConstructor.mainContainer}>
@@ -22,6 +34,7 @@ const BurgerConstructor = ({dataIngredients, handleOpen}) => {
                 <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
                     {dataIngredients.map(ingredient => {
                         if (ingredient.type === 'main') {
+                            {dispatch({})}
                             return (
                                 <React.Fragment key={ingredient._id}>
                                     <li className={styleBurgerConstructor.card}>

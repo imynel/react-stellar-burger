@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import styleBurgerIngredients from "./BurgerIngredients.module.css"
 import { 
     Tab,
     CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
+import { DataContext } from "../../services/dataContext";
 
-const BurgerIngredients = ({handleOpen, dataIngredients}) => {
+
+const BurgerIngredients = ({ handleOpen }) => {
+    const dataIngredients = useContext(DataContext)
+
     const [current, setCurrent] = React.useState('one')
     return (
         <section className={styleBurgerIngredients.BurgerIngredients}>
