@@ -6,16 +6,15 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import getIngredients from '../../utils/api';
+import { getIngredients } from '../../utils/api';
 import { async } from 'q';
 
-import { DataContext } from '../../services/dataContext' //ПОДКЛЮЧАЕМ КОНТЕКСТ ДАТЫ
+import { DataContext } from '../../services/dataContext'; //ПОДКЛЮЧАЕМ КОНТЕКСТ ДАТЫ
 import { data } from '../../utils/data';
 
 function App() {
   const [productData, setProductData] = useState(null); // СТЕЙТ ДАННЫХ АПИ
 
-  const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
   const [modalIngredient, setModalIngredient] = useState(false);
   const [ingredient, setIngredient] = useState(null);
 
@@ -28,7 +27,7 @@ function App() {
         console.error(error);
       }
     }
-      
+
     getProductData();
   }, []);
 
@@ -37,12 +36,7 @@ function App() {
     setIngredient(item);
   };
 
-  const openOrederDetails = () => {
-    setModalOrder(true);
-  };
-
   const closeModal = () => {
-    setModalOrder(false);
     setModalIngredient(false);
   };
 
@@ -52,20 +46,11 @@ function App() {
         <div className={styles.app}>
           <AppHeader />
           <main className={styles.main}>
-            {productData !== null && (
-              <BurgerIngredients handleOpen={openIngredientsDetails} />
-            )}
-            {productData !== null && (
-              <BurgerConstructor handleOpen={openOrederDetails} />
-            )}
+            {productData !== null && <BurgerIngredients handleOpen={openIngredientsDetails} />}
+            {productData !== null && <BurgerConstructor />}
           </main>
         </div>
         <div>
-          {modalOrder && (
-            <Modal handleClose={closeModal}>
-              <OrderDetails />
-            </Modal>
-          )}
           {modalIngredient && (
             <Modal handleClose={closeModal}>
               <IngredientDetails ingredint={ingredient} />
