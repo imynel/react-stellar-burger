@@ -6,10 +6,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
 import { DataContext } from "../../services/dataContext";
+import { useSelector } from "react-redux";
 
 
 const BurgerIngredients = ({ handleOpen }) => {
-    const dataIngredients = useContext(DataContext)
+    
+    const dataIngredients = useSelector(store => store.allIngredients)
+    console.log(dataIngredients)
 
     const [current, setCurrent] = React.useState('one')
     return (

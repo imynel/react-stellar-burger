@@ -1,0 +1,32 @@
+import { getIngredients } from '../../utils/api'
+
+export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST'
+export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS'
+export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED'
+
+
+export const getIngredients = () => {
+    return function(dispath) {
+        dispath({
+            type: GET_INGREDIENTS_REQUEST,
+        })
+        getIngredients()
+            .then((res) => {
+                if (res && res.success) {
+                    dispatch({
+                        type: GET_INGREDIENTS_SUCCESS,
+                        ingredint: res.data
+                    });
+                } else {
+                    dispatch({
+                        type: GET_INGREDIENTS_FAILED,
+                    });
+                }
+            })
+            .catch(() => {
+                dispatch({
+                  type: GET_INGREDIENTS_FAILED,
+                });
+              });
+    }
+}
