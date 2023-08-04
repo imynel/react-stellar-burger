@@ -42,22 +42,20 @@ function App() {
 
   return (
     <>
-      <DataContext.Provider value={productData}>
-        <div className={styles.app}>
-          <AppHeader />
-          <main className={styles.main}>
-            {productData !== null && <BurgerIngredients handleOpen={openIngredientsDetails} />}
-            {productData !== null && <BurgerConstructor />}
-          </main>
-        </div>
-        <div>
-          {modalIngredient && (
-            <Modal handleClose={closeModal}>
-              <IngredientDetails ingredint={ingredient} />
-            </Modal>
-          )}
-        </div>
-      </DataContext.Provider>
+      <div className={styles.app}>
+        <AppHeader />
+        <main className={styles.main}>
+          {productData !== null && <BurgerIngredients handleOpen={openIngredientsDetails} />}
+          {productData !== null && <BurgerConstructor />}
+        </main>
+      </div>
+      <div>
+        {modalIngredient && (
+          <Modal handleClose={closeModal}>
+            <IngredientDetails ingredint={ingredient} />
+          </Modal>
+        )}
+      </div>
     </>
   );
 }

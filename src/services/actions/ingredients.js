@@ -5,9 +5,10 @@ export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS'
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED'
 
 
-export const getIngredients = () => {
-    return function(dispath) {
-        dispath({
+export const getAllIngredients = () => {
+    debugger
+    return function(dispatch) {
+        dispatch({
             type: GET_INGREDIENTS_REQUEST,
         })
         getIngredients()
@@ -15,7 +16,7 @@ export const getIngredients = () => {
                 if (res && res.success) {
                     dispatch({
                         type: GET_INGREDIENTS_SUCCESS,
-                        ingredint: res.data
+                        ingredints: res.data
                     });
                 } else {
                     dispatch({
