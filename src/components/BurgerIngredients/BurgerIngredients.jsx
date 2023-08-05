@@ -10,10 +10,10 @@ const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllIngredients());
+    console.log('init')
   }, []);
 
-  const dataIngredients = useSelector((store) => store.allIngredients);
+  const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
   console.log(dataIngredients);
 
   const [current, setCurrent] = useState('one');
