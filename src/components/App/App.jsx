@@ -46,7 +46,7 @@ function App() {
         <AppHeader />
         <main className={styles.main}>
           {productData !== null && <BurgerIngredients handleOpen={openIngredientsDetails} />}
-          {productData !== null && <BurgerConstructor />}
+          {/* {productData !== null && <BurgerConstructor />} */}
         </main>
       </div>
       <div>

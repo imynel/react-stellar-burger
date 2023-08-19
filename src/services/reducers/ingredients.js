@@ -4,6 +4,7 @@ import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUES
 const initialState = {
     allIngredients: [],
     currentIngredients: [],
+    isLoading: true,
     ingredientsRequest: false,
     ingredientsFailed: false,
     ingredient: null,
@@ -15,21 +16,18 @@ const initialState = {
 export const ingredientsReducer = (store = initialState, action) => {
     switch(action.type) {
         case GET_INGREDIENTS_REQUEST: {
-            debugger
             return {
                 ...store, ingredientsRequest: true, ingredientsFailed: false
             }
         }
 
         case GET_INGREDIENTS_SUCCESS: {
-            debugger
             return {
-                ...store, ingredientsRequest: false, ingredientsFailed: false, allIngredients: action.ingredients
+                ...store, ingredientsRequest: false, ingredientsFailed: false, allIngredients: action.ingredient
             }
         }
 
         case GET_INGREDIENTS_FAILED: {
-            debugger
             return {
                 ...store, ingredientsFailed: true, ingredientsRequest: false
             }

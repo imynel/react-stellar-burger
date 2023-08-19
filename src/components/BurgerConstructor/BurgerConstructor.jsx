@@ -11,6 +11,7 @@ import { DataContext } from '../../services/dataContext';
 import { postIngredients } from '../../utils/api';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { useSelector } from 'react-redux';
 
 const initialTotelPrice = {
   totalPrice: 0,
@@ -18,6 +19,8 @@ const initialTotelPrice = {
 };
 
 const BurgerConstructor = () => {
+  const isLoading = useSelector(store => store.ingredient.isLoading)
+  console.log(isLoading)
   const dataIngredients = useContext(DataContext);
   const [state, dispatch] = useReducer(reducer, initialTotelPrice, undefined);
   const [buttonState, setButtonState] = useState(null);
@@ -80,14 +83,14 @@ const BurgerConstructor = () => {
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={`${dataIngredients[0].name} (вверх)`}
-              price={dataIngredients[0].price}
-              thumbnail={dataIngredients[0].image}
+              text={` (вверх)`} // ИСПРАВИТЬ
+              price={''}
+              thumbnail={''}
             />
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {dataIngredients.map((ingredient) => {
+          {isLoading ? null : dataIngredients.map((ingredient) => {
             if (ingredient.type === 'main') {
               return (
                 <React.Fragment key={ingredient._id}>
@@ -108,9 +111,9 @@ const BurgerConstructor = () => {
             <ConstructorElement
               type="bottom"
               isLocked={true}
-              text={`${dataIngredients[0].name} (низ)`}
-              price={dataIngredients[0].price}
-              thumbnail={dataIngredients[0].image}
+              text={` (низ)`} // ИСПРАВИТЬ dataIngredients[0].name
+              price={''}
+              thumbnail={''}
             />
           </div>
         </li>
