@@ -15,7 +15,8 @@ export function postIngredients(id) {
       'ingredients': id,
     })
   } 
-  ) .then(checkResponse)
+  )
+   .then(checkResponse)
     
 }
 

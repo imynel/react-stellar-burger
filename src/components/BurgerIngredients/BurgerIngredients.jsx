@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import styleBurgerIngredients from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { DataContext } from '../../services/dataContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllIngredients } from '../../services/actions/ingredients';
+import thunk from 'redux-thunk';
 
 const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllIngredients());
+    dispatch(getAllIngredients())
   }, []);
 
-  const dataIngredients = useSelector((store) => store.allIngredients);
-  console.log(dataIngredients);
+  const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
+  const isLoading = useSelector(store => store.ingredient.isLoading)
 
   const [current, setCurrent] = useState('one');
-  return (
+  return ( 
     <section className={styleBurgerIngredients.BurgerIngredients}>
       <h2 className={`${styleBurgerIngredients.title} text text_type_main-large mt-10 mb-5`}>
         Соберите бургер
@@ -36,7 +36,7 @@ const BurgerIngredients = ({ handleOpen }) => {
       <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
         <div className={styleBurgerIngredients.container}>
-          {dataIngredients.map((element) => {
+          {isLoading ? null : dataIngredients.map((element) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
@@ -65,7 +65,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
         <div className={styleBurgerIngredients.container}>
-          {dataIngredients.map((element) => {
+          {isLoading ? null : dataIngredients.map((element) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
@@ -94,7 +94,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
         <div className={styleBurgerIngredients.container}>
-          {dataIngredients.map((element) => {
+          { isLoading ? null : dataIngredients.map((element) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>
