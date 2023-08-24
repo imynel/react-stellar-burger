@@ -10,14 +10,15 @@ const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllIngredients())
+    dispatch(getAllIngredients());
   }, []);
 
   const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
-  const isLoading = useSelector(store => store.ingredient.isLoading)
+  const ingredient = dataIngredients;
+  const isLoading = useSelector((store) => store.ingredient.isLoading);
 
   const [current, setCurrent] = useState('one');
-  return ( 
+  return (
     <section className={styleBurgerIngredients.BurgerIngredients}>
       <h2 className={`${styleBurgerIngredients.title} text text_type_main-large mt-10 mb-5`}>
         Соберите бургер
@@ -36,7 +37,7 @@ const BurgerIngredients = ({ handleOpen }) => {
       <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
         <div className={styleBurgerIngredients.container}>
-          {isLoading ? null : dataIngredients.map((element) => {
+          {ingredient.map((element) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
@@ -65,7 +66,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
         <div className={styleBurgerIngredients.container}>
-          {isLoading ? null : dataIngredients.map((element) => {
+          {ingredient.map((element) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
@@ -94,7 +95,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
         <div className={styleBurgerIngredients.container}>
-          { isLoading ? null : dataIngredients.map((element) => {
+          {ingredient.map((element) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>
