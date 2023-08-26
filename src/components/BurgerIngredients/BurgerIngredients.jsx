@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styleBurgerIngredients from './BurgerIngredients.module.css';
 import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import { useDrag } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllIngredients } from '../../services/actions/ingredients';
 import thunk from 'redux-thunk';
+import Ingredient from '../Ingredient/Ingredient';
 
 const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
@@ -18,6 +20,12 @@ const BurgerIngredients = ({ handleOpen }) => {
   const isLoading = useSelector((store) => store.ingredient.isLoading);
 
   const [current, setCurrent] = useState('one');
+
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: ''
+  })
+
   return (
     <section className={styleBurgerIngredients.BurgerIngredients}>
       <h2 className={`${styleBurgerIngredients.title} text text_type_main-large mt-10 mb-5`}>

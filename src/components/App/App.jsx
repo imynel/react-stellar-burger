@@ -10,6 +10,8 @@ import { getIngredients } from '../../utils/api';
 import { getAllIngredients } from '../../services/actions/ingredients';
 
 import { useSelector } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
@@ -31,8 +33,10 @@ function App() {
       <div className={styles.app}>
         <AppHeader />
         <main className={styles.main}>
-          {<BurgerIngredients handleOpen={openIngredientsDetails} />}
-          {<BurgerConstructor />}
+          <DndProvider backend={HTML5Backend}>
+            {<BurgerIngredients handleOpen={openIngredientsDetails} />}
+            {<BurgerConstructor />}
+          </DndProvider>
         </main>
       </div>
       <div>

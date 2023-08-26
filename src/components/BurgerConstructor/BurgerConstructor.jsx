@@ -20,6 +20,7 @@ const BurgerConstructor = () => {
   const [orderNumber, setOrderNumber] = useState(null);
   const [price, setPrice] = useState(null);
 
+
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
@@ -59,7 +60,7 @@ const BurgerConstructor = () => {
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
           {currentIngredients.map((ingredient) => {
-            if (ingredient.type === 'main') {
+            if (ingredient.type !== 'bun') {
               return (
                 <React.Fragment key={ingredient._id}>
                   <li className={styleBurgerConstructor.card}>
