@@ -1,0 +1,17 @@
+.name {
+    width: 272px;
+}
+
+.image {
+    width: 240px;
+    height: 120px;
+    margin: 0 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    position: relative;    
+    text-align: center;
+}

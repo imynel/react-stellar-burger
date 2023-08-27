@@ -17,14 +17,8 @@ const BurgerIngredients = ({ handleOpen }) => {
 
   const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
   const ingredient = dataIngredients;
-  const isLoading = useSelector((store) => store.ingredient.isLoading);
 
   const [current, setCurrent] = useState('one');
-
-  const [, dragRef] = useDrag({
-    type: 'ingredient',
-    item: ''
-  })
 
   return (
     <section className={styleBurgerIngredients.BurgerIngredients}>
@@ -49,24 +43,7 @@ const BurgerIngredients = ({ handleOpen }) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
-                  <div
-                    className={styleBurgerIngredients.card}
-                    onClick={() => {
-                      handleOpen(element);
-                    }}>
-                    <img
-                      src={element.image}
-                      alt={element.name}
-                      className={styleBurgerIngredients.image}
-                    />
-                    <p className="mt-1 mb-1 text text text_type_digits-default">
-                      {element.price}
-                      <CurrencyIcon type="primary" />
-                    </p>
-                    <p className={`${styleBurgerIngredients.name} text text_type_main-small`}>
-                      {element.name}
-                    </p>
-                  </div>
+                  <Ingredient item={element}></Ingredient>
                 </React.Fragment>
               );
             }
@@ -78,24 +55,7 @@ const BurgerIngredients = ({ handleOpen }) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
-                  <div
-                    className={styleBurgerIngredients.card}
-                    onClick={() => {
-                      handleOpen(element);
-                    }}>
-                    <img
-                      src={element.image}
-                      alt={element.name}
-                      className={styleBurgerIngredients.image}
-                    />
-                    <p className="mt-1 mb-1 text text_type_digits-default">
-                      {element.price}
-                      <CurrencyIcon type="primary" />
-                    </p>
-                    <p className={`${styleBurgerIngredients.name} text text_type_main-small`}>
-                      {element.name}
-                    </p>
-                  </div>
+                  <Ingredient item={element}></Ingredient>
                 </React.Fragment>
               );
             }
@@ -107,24 +67,7 @@ const BurgerIngredients = ({ handleOpen }) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>
-                  <div
-                    className={styleBurgerIngredients.card}
-                    onClick={() => {
-                      handleOpen(element);
-                    }}>
-                    <img
-                      src={element.image}
-                      alt={element.name}
-                      className={styleBurgerIngredients.image}
-                    />
-                    <p className="mt-1 mb-1 text text_type_digits-default">
-                      {element.price}
-                      <CurrencyIcon type="primary" />
-                    </p>
-                    <p className={`${styleBurgerIngredients.name} text text_type_main-small`}>
-                      {element.name}
-                    </p>
-                  </div>
+                  <Ingredient item={element} handleOpen={handleOpen}></Ingredient>
                 </React.Fragment>
               );
             }
