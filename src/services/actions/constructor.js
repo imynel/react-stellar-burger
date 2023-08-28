@@ -5,12 +5,12 @@ export const GET_CONSTRUCTOR_SUCCESS = 'GET_CONSTRUCTOR_SUCCESS'
 export const GET_CONSTRUCTOR_FAILED = 'GET_CONSTRUCTOR_FAILED'
 
 
-const addIngredient = (ingredient) => ({
+export const addIngredient = (ingredient) => ({
     type: ADD_INGREDIENT,
     ingredient: ingredient,
 })
 
-const deleteIngredient = (ingredient) => ({
+export const deleteIngredient = (ingredient) => ({
     type: DELETE_INGREDIENT,
     ingredient: ingredient,
 })

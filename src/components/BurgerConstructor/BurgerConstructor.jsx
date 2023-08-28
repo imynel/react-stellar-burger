@@ -11,23 +11,35 @@ import { DataContext } from '../../services/dataContext';
 import { postIngredients } from '../../utils/api';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { Dispatch } from 'react';
+import { addIngredient } from '../../services/actions/constructor'
 
 const BurgerConstructor = () => {
+  const dispatch = useDispatch()
   const { bun, currentIngredients } = useSelector((store) => store.ingredient);
   const [buttonState, setButtonState] = useState(null);
   const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
   const [orderNumber, setOrderNumber] = useState(null);
   const [price, setPrice] = useState(null);
 
-
+  console.log(currentIngredients)
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
-      totalPrice = totalPrice + bun * 2;
+      totalPrice = totalPrice + (bun.price * 2);
     }
     setPrice(totalPrice);
-  }, [currentIngredients]);
+  }, [currentIngredients, bun]);
+
+
+  const [, dropRef] = useDrop({
+    accept: 'ingredient',
+    drop: ingredient => {
+      dispatch(addIngredient(ingredient))
+    }
+  })
 
   const handleClickButton = () => {
     setModalOrder(true);
@@ -44,16 +56,16 @@ const BurgerConstructor = () => {
 
   return (
     <section className={styleBurgerConstructor.burgerConstructor}>
-      <ul className={styleBurgerConstructor.mainContainer}>
+      <ul className={styleBurgerConstructor.mainContainer} ref={dropRef}>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
             {
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={`(вверх)`} // ИСПРАВИТЬ
-                price={''}
-                thumbnail={''}
+                text={`${bun.name} (вверх)`} // ИСПРАВИТЬ
+                price={bun.price}
+                thumbnail={bun.image}
               />
             }
           </div>
@@ -81,9 +93,9 @@ const BurgerConstructor = () => {
               <ConstructorElement
                 type="bottom"
                 isLocked={true}
-                text={` (низ)`} // ИСПРАВИТЬ dataIngredients[0].name
-                price={''}
-                thumbnail={''}
+                text={`${bun.name} (низ)`} // ИСПРАВИТЬ dataIngredients[0].name
+                price={bun.price}
+                thumbnail={bun.image}
               />
             }
           </div>
