@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { Dispatch } from 'react';
 import { addIngredient } from '../../services/actions/constructor'
+import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const BurgerConstructor = () => {
   const [orderNumber, setOrderNumber] = useState(null);
   const [price, setPrice] = useState(null);
 
-  console.log(currentIngredients)
+
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
@@ -74,12 +75,10 @@ const BurgerConstructor = () => {
           {currentIngredients.map((ingredient) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment key={ingredient._id}>
+                <React.Fragment key={uuidv4()}>
                   <li className={styleBurgerConstructor.card}>
                     <IngregientsInConstructor
-                      name={ingredient.name}
-                      price={ingredient.price}
-                      image={ingredient.image}
+                      ingredient={ingredient}
                     />
                   </li>
                 </React.Fragment>

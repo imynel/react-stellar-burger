@@ -1,15 +1,21 @@
 import styles from './IngregientsInConstructor.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteIngredient } from '../../services/actions/constructor';
 
-const IngregientsInConstructor = ({name, image, price}) => {
+const IngregientsInConstructor = ({ingredient}) => {
+
+    const dispatch = useDispatch()
+
     return (
         <div className={`${styles.container}`}>
             <DragIcon type="primary" />
             <ConstructorElement
-                text={name}
-                price={price}
-                thumbnail={image}
+                text={ingredient.name}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+                handleClose={() => dispatch(deleteIngredient(ingredient))}
             />
         </div>
     )

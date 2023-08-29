@@ -1,5 +1,5 @@
 import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUEST } from "../actions/ingredients"
-import { ADD_INGREDIENT } from '../actions/constructor'
+import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../actions/constructor'
 
 
 const initialState = {
@@ -56,7 +56,15 @@ export const ingredientsReducer = (store = initialState, action) => {
                     ...store, currentIngredients: [...store.currentIngredients, action.ingredient]
                 }
             }
+        }
 
+        case DELETE_INGREDIENT: {
+            return {
+                ...store, currentIngredients: [...store.currentIngredients.filter((item) => {
+                    if (item !== action.ingredient) return true
+                    else return false
+                })]
+            }
         }
         default: {
 
