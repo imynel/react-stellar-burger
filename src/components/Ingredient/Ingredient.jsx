@@ -17,7 +17,7 @@ const Ingredient = ({ item, handleOpen }) => {
     <div
       className={style.card}
       onClick={() => {
-        // handleOpen(element);
+        handleOpen(item);
       }}
       ref={dragRef}>
       <img src={item.image} alt={item.name} className={style.image} />

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import styleBurgerConstructor from './BurgerConstructor.module.css';
 import {
   CurrencyIcon,
@@ -7,42 +7,41 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor';
 import PropTypes from 'prop-types';
-import { DataContext } from '../../services/dataContext';
-import { postIngredients } from '../../utils/api';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { Dispatch } from 'react';
-import { addIngredient } from '../../services/actions/constructor'
+import { addIngredient, getOrderNumder } from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
-
+import { postOrderNumber } from '../../utils/api';
 const BurgerConstructor = () => {
-  const dispatch = useDispatch()
-  const { bun, currentIngredients } = useSelector((store) => store.ingredient);
+  const dispatch = useDispatch();
+  const { bun, currentIngredients, number } = useSelector((store) => store.ingredient);
   const [buttonState, setButtonState] = useState(null);
   const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
   const [orderNumber, setOrderNumber] = useState(null);
   const [price, setPrice] = useState(null);
-
-
+  const ID = currentIngredients.map((item) => {
+    return item._id;
+  });
+  console.log(ID);
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
-      totalPrice = totalPrice + (bun.price * 2);
+      totalPrice = totalPrice + bun.price * 2;
     }
     setPrice(totalPrice);
   }, [currentIngredients, bun]);
 
-
   const [, dropRef] = useDrop({
     accept: 'ingredient',
-    drop: ingredient => {
-      dispatch(addIngredient(ingredient))
-    }
-  })
+    drop: (ingredient) => {
+      dispatch(addIngredient(ingredient));
+    },
+  });
 
   const handleClickButton = () => {
+    dispatch(getOrderNumder(ID));
     setModalOrder(true);
     setButtonState(true);
   };
@@ -77,9 +76,7 @@ const BurgerConstructor = () => {
               return (
                 <React.Fragment key={uuidv4()}>
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor
-                      ingredient={ingredient}
-                    />
+                    <IngregientsInConstructor ingredient={ingredient} />
                   </li>
                 </React.Fragment>
               );

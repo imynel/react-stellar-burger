@@ -1,3 +1,4 @@
+import { postOrderNumber } from '../../utils/api'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT' 
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT'
 export const GET_CONSTRUCTOR_REQUEST = 'GET_CONSTRUCTOR_REQUEST' 
@@ -14,3 +15,30 @@ export const deleteIngredient = (ingredient) => ({
     type: DELETE_INGREDIENT,
     ingredient: ingredient,
 })
+
+export const getOrderNumder = () => {
+
+    return function(dispatch) {
+        dispatch({
+            type: GET_CONSTRUCTOR_REQUEST,
+        })
+        postOrderNumber()
+            .then((res) => {
+                if (res && res.success) {
+                    dispatch({
+                        type: GET_CONSTRUCTOR_SUCCESS,
+                        number: res.order.number
+                    });
+                } else {
+                    dispatch({
+                        type: GET_CONSTRUCTOR_FAILED,
+                    });
+                }
+            })
+            .catch(() => {
+                dispatch({
+                  type: GET_CONSTRUCTOR_FAILED,
+                });
+              });
+    }
+}

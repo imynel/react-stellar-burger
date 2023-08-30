@@ -1,5 +1,5 @@
 import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUEST } from "../actions/ingredients"
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../actions/constructor'
+import { ADD_INGREDIENT, DELETE_INGREDIENT, GET_CONSTRUCTOR_FAILED, GET_CONSTRUCTOR_REQUEST, GET_CONSTRUCTOR_SUCCESS } from '../actions/constructor'
 
 
 const initialState = {
@@ -7,7 +7,8 @@ const initialState = {
     currentIngredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false,
-    ingredient: null,
+    currentIngredientsRequest: false,
+    currentIngredientsFailed: false,
     bun: {
         "_id":"60666c42cc7b410027a1a9b1",
         "name":"Краторная булка N-200i",
@@ -57,17 +58,30 @@ export const ingredientsReducer = (store = initialState, action) => {
                 }
             }
         }
-
         case DELETE_INGREDIENT: {
+            const arr = store.currentIngredients
+            const index = arr.indexOf(action.ingredient);
+            if (index > -1) {arr.splice(index, 1);}
+            return {...store, currentIngredients: [...arr]}
+        }
+
+        case GET_CONSTRUCTOR_REQUEST: {
             return {
-                ...store, currentIngredients: [...store.currentIngredients.filter((item) => {
-                    if (item !== action.ingredient) return true
-                    else return false
-                })]
+                ...store, currentIngredientsRequest: true, currentIngredientsFailed: false,
+            }
+        }
+
+        case GET_CONSTRUCTOR_SUCCESS: {
+            return {
+                ...store, currentIngredientsRequest: false, currentIngredientsFailed: false, order: { number: action.number }, 
+            }
+        }
+        case GET_CONSTRUCTOR_FAILED: {
+            return {
+                ...store, currentIngredientsRequest: false, currentIngredientsFailed: true
             }
         }
         default: {
-
             return store
         }
     }
