@@ -73,7 +73,7 @@ export const ingredientsReducer = (store = initialState, action) => {
 
         case GET_CONSTRUCTOR_SUCCESS: {
             return {
-                ...store, currentIngredientsRequest: false, currentIngredientsFailed: false, order: { number: action.number }, 
+                ...store, currentIngredientsRequest: false, currentIngredientsFailed: false, order: { number: action.number }, currentIngredients: []
             }
         }
         case GET_CONSTRUCTOR_FAILED: {

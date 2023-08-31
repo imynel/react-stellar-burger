@@ -14,17 +14,18 @@ import { useDrop } from 'react-dnd';
 import { addIngredient, getOrderNumder } from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
 import { postOrderNumber } from '../../utils/api';
+
+
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { bun, currentIngredients, number } = useSelector((store) => store.ingredient);
+  const { bun, currentIngredients } = useSelector((store) => store.ingredient);
   const [buttonState, setButtonState] = useState(null);
   const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
-  const [orderNumber, setOrderNumber] = useState(null);
   const [price, setPrice] = useState(null);
   const ID = currentIngredients.map((item) => {
     return item._id;
   });
-  console.log(ID);
+  
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
@@ -108,7 +109,7 @@ const BurgerConstructor = () => {
       </div>
       {modalOrder && (
         <Modal handleClose={closeModal}>
-          <OrderDetails number={orderNumber} onClick={openOrederDetails} />
+          <OrderDetails onClick={openOrederDetails} />
         </Modal>
       )}
     </section>

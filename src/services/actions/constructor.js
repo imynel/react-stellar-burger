@@ -16,13 +16,13 @@ export const deleteIngredient = (ingredient) => ({
     ingredient: ingredient,
 })
 
-export const getOrderNumder = () => {
+export const getOrderNumder = (id) => {
 
     return function(dispatch) {
         dispatch({
             type: GET_CONSTRUCTOR_REQUEST,
         })
-        postOrderNumber()
+        postOrderNumber(id)
             .then((res) => {
                 if (res && res.success) {
                     dispatch({
