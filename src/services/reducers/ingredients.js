@@ -59,10 +59,11 @@ export const ingredientsReducer = (store = initialState, action) => {
             }
         }
         case DELETE_INGREDIENT: {
-            const arr = store.currentIngredients
-            const index = arr.indexOf(action.ingredient);
-            if (index > -1) {arr.splice(index, 1);}
-            return {...store, currentIngredients: [...arr]}
+            return {
+                ...store, currentIngredients: [...store.currentIngredients.filter(item => {
+                    if (item._id !== action.id) return true
+                })]
+            }
         }
 
         case GET_CONSTRUCTOR_REQUEST: {

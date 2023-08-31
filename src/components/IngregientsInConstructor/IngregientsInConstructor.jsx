@@ -15,7 +15,7 @@ const IngregientsInConstructor = ({ingredient}) => {
                 text={ingredient.name}
                 price={ingredient.price}
                 thumbnail={ingredient.image}
-                handleClose={() => dispatch(deleteIngredient(ingredient))}
+                handleClose={() => dispatch(deleteIngredient(ingredient, ingredient._id))}
             />
         </div>
     )

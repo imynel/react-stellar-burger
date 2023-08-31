@@ -11,9 +11,10 @@ export const addIngredient = (ingredient) => ({
     ingredient: ingredient,
 })
 
-export const deleteIngredient = (ingredient) => ({
+export const deleteIngredient = (ingredient, id) => ({
     type: DELETE_INGREDIENT,
     ingredient: ingredient,
+    id: id
 })
 
 export const getOrderNumder = (id) => {
@@ -27,7 +28,7 @@ export const getOrderNumder = (id) => {
                 if (res && res.success) {
                     dispatch({
                         type: GET_CONSTRUCTOR_SUCCESS,
-                        number: res.order.number
+                        number: res.order.number,
                     });
                 } else {
                     dispatch({
