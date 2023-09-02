@@ -1,5 +1,5 @@
 import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUEST } from "../actions/ingredients"
-import { ADD_INGREDIENT, DELETE_INGREDIENT, GET_CONSTRUCTOR_FAILED, GET_CONSTRUCTOR_REQUEST, GET_CONSTRUCTOR_SUCCESS } from '../actions/constructor'
+import { ADD_INGREDIENT, CHANGE_INGREDIENT, DELETE_INGREDIENT, GET_CONSTRUCTOR_FAILED, GET_CONSTRUCTOR_REQUEST, GET_CONSTRUCTOR_SUCCESS } from '../actions/constructor'
 
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
      },
     order: {
         number: null
-    }
+    },
 }
 
 export const ingredientsReducer = (store = initialState, action) => {
@@ -61,7 +61,7 @@ export const ingredientsReducer = (store = initialState, action) => {
         case DELETE_INGREDIENT: {
             return {
                 ...store, currentIngredients: [...store.currentIngredients.filter(item => {
-                    if (item._id !== action.id) return true
+                    if (item.key !== action.key) return true
                 })]
             }
         }
@@ -82,6 +82,10 @@ export const ingredientsReducer = (store = initialState, action) => {
                 ...store, currentIngredientsRequest: false, currentIngredientsFailed: true
             }
         }
+        case CHANGE_INGREDIENT:
+            const allCurrentIngredients = [...store.currentIngredients];
+            allCurrentIngredients.splice(action.toIndex, 0, allCurrentIngredients.splice(action.fromIndex, 1)[0]);
+            return {...store, currentIngredients: [...allCurrentIngredients],}
         default: {
             return store
         }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styleBurgerConstructor from './BurgerConstructor.module.css';
 import {
   CurrencyIcon,
@@ -11,10 +11,12 @@ import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { addIngredient, getOrderNumder } from '../../services/actions/constructor';
+import {
+  addIngredient,
+  getOrderNumder,
+  changeIngedients,
+} from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
-import { postOrderNumber } from '../../utils/api';
-
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const BurgerConstructor = () => {
   const ID = currentIngredients.map((item) => {
     return item._id;
   });
-  
+
   useEffect(() => {
     let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
@@ -47,6 +49,10 @@ const BurgerConstructor = () => {
     setButtonState(true);
   };
 
+  const change = useCallback((dragIndex, hoverIndex) => {
+    dispatch(changeIngedients(dragIndex, hoverIndex));
+  }, []);
+
   function closeModal() {
     setModalOrder(false);
   }
@@ -56,8 +62,8 @@ const BurgerConstructor = () => {
   };
 
   return (
-    <section className={styleBurgerConstructor.burgerConstructor}>
-      <ul className={styleBurgerConstructor.mainContainer} ref={dropRef}>
+    <section className={styleBurgerConstructor.burgerConstructor} ref={dropRef}>
+      <ul className={styleBurgerConstructor.mainContainer}>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
             {
@@ -72,12 +78,17 @@ const BurgerConstructor = () => {
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {currentIngredients.map((ingredient) => {
+          {currentIngredients.map((ingredient, index) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment key={uuidv4()}>
+                <React.Fragment>
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor ingredient={ingredient} />
+                    <IngregientsInConstructor
+                      key={uuidv4()}
+                      ingredient={ingredient}
+                      swap={change}
+                      index={index}
+                    />
                   </li>
                 </React.Fragment>
               );

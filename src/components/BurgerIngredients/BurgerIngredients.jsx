@@ -43,7 +43,7 @@ const BurgerIngredients = ({ handleOpen }) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
-                  <Ingredient item={element}></Ingredient>
+                  <Ingredient item={element} handleOpen={handleOpen}></Ingredient>
                 </React.Fragment>
               );
             }
@@ -55,7 +55,7 @@ const BurgerIngredients = ({ handleOpen }) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
-                  <Ingredient item={element}></Ingredient>
+                  <Ingredient item={element} handleOpen={handleOpen}></Ingredient>
                 </React.Fragment>
               );
             }
