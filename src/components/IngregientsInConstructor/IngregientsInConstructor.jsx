@@ -1,6 +1,6 @@
 import styles from './IngregientsInConstructor.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
+import { func, number, object, string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteIngredient } from '../../services/actions/constructor';
 import { useRef } from 'react';
@@ -57,9 +57,10 @@ const IngregientsInConstructor = ({ ingredient, key, index, swap }) => {
 };
 
 IngregientsInConstructor.propTypes = {
-  name: PropTypes.string,
-  image: PropTypes.string,
-  price: PropTypes.number,
+  swap: func,
+  ingredient: object,
+  index: number,
+  key: string,
 };
 
 export default IngregientsInConstructor;

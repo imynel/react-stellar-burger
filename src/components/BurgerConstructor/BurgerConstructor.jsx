@@ -66,15 +66,15 @@ const BurgerConstructor = () => {
       <ul className={styleBurgerConstructor.mainContainer}>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
-            {
+            {bun && (
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={`${bun.name} (вверх)`} // ИСПРАВИТЬ
+                text={`${bun.name} (вверх)`} 
                 price={bun.price}
                 thumbnail={bun.image}
               />
-            }
+            )}
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
@@ -97,15 +97,15 @@ const BurgerConstructor = () => {
         </div>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
-            {
+            {bun && (
               <ConstructorElement
                 type="bottom"
                 isLocked={true}
-                text={`${bun.name} (низ)`} // ИСПРАВИТЬ dataIngredients[0].name
+                text={`${bun.name} (низ)`} 
                 price={bun.price}
                 thumbnail={bun.image}
               />
-            }
+            )}
           </div>
         </li>
       </ul>
@@ -127,9 +127,5 @@ const BurgerConstructor = () => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  handleOpen: PropTypes.func,
-  dataIngredients: PropTypes.array,
-};
 
 export default BurgerConstructor;
