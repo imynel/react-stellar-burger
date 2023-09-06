@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const Ingredient = ({ item, handleOpen }) => {
 
   const [meter, setMeter] = useState(0);
-  const {bun, currentIngredients} = useSelector(store => store.ingredient)
+  const {bun, currentIngredients} = useSelector(store => store.constructorReducer)
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: item,

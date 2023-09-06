@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { bun, currentIngredients } = useSelector((store) => store.ingredient);
+  const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const [buttonState, setButtonState] = useState(null);
   const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
   const [price, setPrice] = useState(null);
@@ -44,9 +44,13 @@ const BurgerConstructor = () => {
   });
 
   const handleClickButton = () => {
-    dispatch(getOrderNumder(ID));
-    setModalOrder(true);
-    setButtonState(true);
+    if (ID.length) {
+      dispatch(getOrderNumder(ID));
+      setModalOrder(true);
+      setButtonState(true);
+    }
+    
+    
   };
 
   const change = useCallback((dragIndex, hoverIndex) => {
@@ -81,10 +85,9 @@ const BurgerConstructor = () => {
           {currentIngredients.map((ingredient, index) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment>
+                <React.Fragment key={uuidv4()}>
                   <li className={styleBurgerConstructor.card}>
                     <IngregientsInConstructor
-                      key={uuidv4()}
                       ingredient={ingredient}
                       swap={change}
                       index={index}

@@ -11,7 +11,8 @@ import Ingredient from '../Ingredient/Ingredient';
 const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
   const [current, setCurrent] = useState('one');
-  const dataIngredients = useSelector((store) => store.ingredient.allIngredients);
+  const dataIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
+  console.log(dataIngredients)
   const ingredient = dataIngredients;
 
   useEffect(() => {

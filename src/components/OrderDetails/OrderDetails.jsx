@@ -3,7 +3,7 @@ import done from '../../images/graphics.svg';
 import { useSelector } from 'react-redux';
 
 const OrderDetails = ({  }) => {
-  const orderNumber = useSelector(store => store.ingredient.order.number)
+  const orderNumber = useSelector(store => store.constructorReducer.order.number)
   return (
     <>
       <p className={`${stylePopup.number} text text_type_digits-large mt-30 mb-8`}>{orderNumber}</p>
