@@ -7,29 +7,16 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { getIngredients } from '../../utils/api';
-import { async } from 'q';
+import { getAllIngredients } from '../../services/actions/ingredients';
 
-import { DataContext } from '../../services/dataContext'; //ПОДКЛЮЧАЕМ КОНТЕКСТ ДАТЫ
-import { data } from '../../utils/data';
+import { useSelector } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
-  const [productData, setProductData] = useState(null); // СТЕЙТ ДАННЫХ АПИ
 
   const [modalIngredient, setModalIngredient] = useState(false);
   const [ingredient, setIngredient] = useState(null);
-
-  useEffect(() => {
-    async function getProductData() {
-      try {
-        const { data } = await getIngredients();
-        setProductData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getProductData();
-  }, []);
 
   const openIngredientsDetails = (item) => {
     setModalIngredient(true);
@@ -42,22 +29,22 @@ function App() {
 
   return (
     <>
-      <DataContext.Provider value={productData}>
-        <div className={styles.app}>
-          <AppHeader />
-          <main className={styles.main}>
-            {productData !== null && <BurgerIngredients handleOpen={openIngredientsDetails} />}
-            {productData !== null && <BurgerConstructor />}
-          </main>
-        </div>
-        <div>
-          {modalIngredient && (
-            <Modal handleClose={closeModal}>
-              <IngredientDetails ingredint={ingredient} />
-            </Modal>
-          )}
-        </div>
-      </DataContext.Provider>
+      <div className={styles.app}>
+        <AppHeader />
+        <main className={styles.main}>
+          <DndProvider backend={HTML5Backend}>
+            {<BurgerIngredients handleOpen={openIngredientsDetails} />}
+            {<BurgerConstructor />}
+          </DndProvider>
+        </main>
+      </div>
+      <div>
+        {modalIngredient && (
+          <Modal handleClose={closeModal}>
+            <IngredientDetails ingredient={ingredient} />
+          </Modal>
+        )}
+      </div>
     </>
   );
 }

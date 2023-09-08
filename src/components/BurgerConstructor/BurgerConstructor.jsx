@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styleBurgerConstructor from './BurgerConstructor.module.css';
 import {
   CurrencyIcon,
@@ -7,95 +7,90 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor';
 import PropTypes from 'prop-types';
-import { DataContext } from '../../services/dataContext';
-import { postIngredients } from '../../utils/api';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
-
-const initialTotelPrice = {
-  totalPrice: 0,
-  id: [],
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import {
+  addIngredient,
+  getOrderNumder,
+  changeIngedients,
+} from '../../services/actions/constructor';
+import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = () => {
-  const dataIngredients = useContext(DataContext);
-  const [state, dispatch] = useReducer(reducer, initialTotelPrice, undefined);
+  const dispatch = useDispatch();
+  const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const [buttonState, setButtonState] = useState(null);
   const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
-  const [orderNumber, setOrderNumber] = useState(null);
-  const ids = state.id;
+  const [price, setPrice] = useState(null);
+  const ID = currentIngredients.map((item) => {
+    return item._id;
+  });
 
   useEffect(() => {
-    dispatch({ type: 'addPrice' });
-  }, [dataIngredients]);
+    let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
+    if (bun) {
+      totalPrice = totalPrice + bun.price * 2;
+    }
+    setPrice(totalPrice);
+  }, [currentIngredients, bun]);
 
-  const pay = state.totalPrice;
+  const [, dropRef] = useDrop({
+    accept: 'ingredient',
+    drop: (ingredient) => {
+      dispatch(addIngredient(ingredient));
+    },
+  });
 
   const handleClickButton = () => {
-    setModalOrder(true);
-    setButtonState(true);
+    if (ID.length) {
+      dispatch(getOrderNumder(ID));
+      setModalOrder(true);
+      setButtonState(true);
+    }
+    
+    
   };
+
+  const change = useCallback((dragIndex, hoverIndex) => {
+    dispatch(changeIngedients(dragIndex, hoverIndex));
+  }, []);
 
   function closeModal() {
     setModalOrder(false);
-  }
-
-  function reducer(state, action) {
-    const bun = dataIngredients.find((item) => item.type === 'bun');
-    const noBuns = dataIngredients.filter((item) => item.type !== 'bun');
-    switch (action.type) {
-      case 'addPrice':
-        const price = bun.price * 2 + noBuns.reduce((a, b) => a + b.price, 0);
-        const arrayId = [bun._id, ...noBuns.map((id) => id._id)];
-        return { totalPrice: price, id: arrayId };
-      default:
-        return state;
-    }
   }
 
   const openOrederDetails = () => {
     setModalOrder(true);
   };
 
-  useEffect(() => {
-    async function postProductData() {
-      try {
-        const res = await postIngredients(ids);
-        const number = res.order.number;
-        setOrderNumber(number);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    if (ids.length > 0) {
-      postProductData();
-    }
-  }, [buttonState]);
-
   return (
-    <section className={styleBurgerConstructor.burgerConstructor}>
+    <section className={styleBurgerConstructor.burgerConstructor} ref={dropRef}>
       <ul className={styleBurgerConstructor.mainContainer}>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={`${dataIngredients[0].name} (вверх)`}
-              price={dataIngredients[0].price}
-              thumbnail={dataIngredients[0].image}
-            />
+            {bun && (
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${bun.name} (вверх)`} 
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            )}
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {dataIngredients.map((ingredient) => {
-            if (ingredient.type === 'main') {
+          {currentIngredients.map((ingredient, index) => {
+            if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment key={ingredient._id}>
+                <React.Fragment key={uuidv4()}>
                   <li className={styleBurgerConstructor.card}>
                     <IngregientsInConstructor
-                      name={ingredient.name}
-                      price={ingredient.price}
-                      image={ingredient.image}
+                      ingredient={ingredient}
+                      swap={change}
+                      index={index}
                     />
                   </li>
                 </React.Fragment>
@@ -105,18 +100,20 @@ const BurgerConstructor = () => {
         </div>
         <li className={styleBurgerConstructor.card}>
           <div className="ml-8">
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={`${dataIngredients[0].name} (низ)`}
-              price={dataIngredients[0].price}
-              thumbnail={dataIngredients[0].image}
-            />
+            {bun && (
+              <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${bun.name} (низ)`} 
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            )}
           </div>
         </li>
       </ul>
       <div className={styleBurgerConstructor.subContainer}>
-        <p className="mr-4 text text_type_digits-medium">{pay}</p>
+        <p className="mr-4 text text_type_digits-medium">{price}</p>
         <div className="mr-10">
           <CurrencyIcon type="primary" />
         </div>
@@ -126,16 +123,12 @@ const BurgerConstructor = () => {
       </div>
       {modalOrder && (
         <Modal handleClose={closeModal}>
-          <OrderDetails number={orderNumber} onClick={openOrederDetails} />
+          <OrderDetails onClick={openOrederDetails} />
         </Modal>
       )}
     </section>
   );
 };
 
-BurgerConstructor.propTypes = {
-  handleOpen: PropTypes.func,
-  dataIngredients: PropTypes.array,
-};
 
 export default BurgerConstructor;

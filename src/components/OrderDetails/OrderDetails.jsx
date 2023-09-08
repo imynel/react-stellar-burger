@@ -1,10 +1,12 @@
 import stylePopup from './OrderDetails.module.css';
 import done from '../../images/graphics.svg';
+import { useSelector } from 'react-redux';
 
-const OrderDetails = ({ number }) => {
+const OrderDetails = ({  }) => {
+  const orderNumber = useSelector(store => store.constructorReducer.order.number)
   return (
     <>
-      <p className={`${stylePopup.number} text text_type_digits-large mt-30 mb-8`}>{number}</p>
+      <p className={`${stylePopup.number} text text_type_digits-large mt-30 mb-8`}>{orderNumber}</p>
       <h3 className={`${stylePopup.identifier} text text_type_main-medium`}>
         Идентификатор заказа
       </h3>

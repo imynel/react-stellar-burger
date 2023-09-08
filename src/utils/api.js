@@ -5,7 +5,7 @@ export function getIngredients() {
     .then(checkResponse)
 }
 
-export function postIngredients(id) {
+export function postOrderNumber(id) {
   return fetch(`${url}orders`, {
     method: 'POST',
     headers: {
@@ -15,7 +15,8 @@ export function postIngredients(id) {
       'ingredients': id,
     })
   } 
-  ) .then(checkResponse)
+  )
+   .then(checkResponse)
     
 }
 
