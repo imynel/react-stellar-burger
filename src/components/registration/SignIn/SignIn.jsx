@@ -12,7 +12,9 @@ export const SignIn = () => {
           <div className='mt-4 mb-4'>
             <InputComponent type='password' placeholder='Пароль'/>
           </div>
-          <Button htmlType="button" type="primary" size="medium">Войти</Button>
+          <div className={styles.button}>
+            <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'>Войти</Button>
+          </div>
           <div className={styles.container}>
             <p className={`${styles.subtitle} mb-4`}>Вы — новый пользователь?</p>
             <Button htmlType="button" type="secondary" size="medium">

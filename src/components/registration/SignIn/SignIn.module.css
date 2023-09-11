@@ -1,14 +1,12 @@
 .mainContainer {
-    display: flex;
-    flex-direction: column;
     margin: 180px auto 0;
     width: 480px;
-    justify-content: center;
 }
 
 .title {
     text-align: center;
     color: #F2F2F3;
+    font-size: 24px;
 }
 
 .subtitle {
@@ -20,4 +18,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.input {
+    margin: 4 0;
+}
+
+.button {
+    text-align: center;
 }
