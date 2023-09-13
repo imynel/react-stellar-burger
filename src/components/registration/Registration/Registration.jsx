@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Registration.module.css'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { InputComponent } from '../InputComponent/InputComponent'
+import { Link } from 'react-router-dom'
 
 export const Registration  = () => {
 
@@ -20,9 +21,11 @@ export const Registration  = () => {
         </div>
         <div className={styles.container}>
           <p className={`${styles.subtitle} mb-4`}>Уже зарегистрированы?</p>
-          <Button htmlType="button" type="secondary" size="medium">
-            Войти
-          </Button>
+          <Link to='/login'>
+            <Button htmlType="button" type="secondary" size="medium">
+              Войти
+            </Button>
+          </Link>
         </div>
         
       </form>

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './SignIn.module.css'
 import { InputComponent } from '../InputComponent/InputComponent'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-
+import { Link } from 'react-router-dom'
 export const SignIn = () => {
 
     return (
@@ -17,15 +17,19 @@ export const SignIn = () => {
           </div>
           <div className={styles.container}>
             <p className={`${styles.subtitle} mb-4`}>Вы — новый пользователь?</p>
-            <Button htmlType="button" type="secondary" size="medium">
-              Зарегистрироваться
-            </Button>
+            <Link to='/registration'>
+              <Button htmlType="button" type="secondary" size="medium">
+                Зарегистрироваться
+              </Button>
+            </Link>
           </div>
           <div className={styles.container}>
             <p className={styles.subtitle}>Забыли пароль?</p>
-            <Button htmlType="button" type="secondary" size="medium">
-              Восстановить пароль
-            </Button>
+            <Link to='/forgot-password'>
+              <Button htmlType="button" type="secondary" size="medium">
+                Восстановить пароль
+              </Button>
+            </Link>
           </div>
         </form>
     )

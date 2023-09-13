@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './ForgotPassword2.module.css'
 import { InputComponent } from '../InputComponent/InputComponent'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from 'react-router-dom'
 
 export const ForgotPassword2 = () => {
 
@@ -18,9 +19,11 @@ export const ForgotPassword2 = () => {
         </div>
         <div className={styles.container}>
             <p className={`${styles.subtitle} mb-4`}>Вспомнили пароль?</p>
-            <Button htmlType="button" type="secondary" size="medium">
-                Войти
-            </Button>
+            <Link to='/login'>
+                <Button htmlType="button" type="secondary" size="medium">
+                    Войти
+                </Button>
+            </Link>
         </div>
       </form>
     )

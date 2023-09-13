@@ -26,7 +26,6 @@ const HomePage = () => {
   return (
     <>
       <div className={styles.app}>
-        <AppHeader />
         <main className={styles.main}>
           <DndProvider backend={HTML5Backend}>
             {<BurgerIngredients handleOpen={openIngredientsDetails} />}
