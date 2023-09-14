@@ -16,9 +16,22 @@ export function postOrderNumber(id) {
     })
   } 
   )
-   .then(checkResponse)
-    
+   .then(checkResponse)    
 }
+
+export function postEmail(email) {
+  return fetch(`${url}password-reset`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'email': email
+    })
+  })
+  .then(checkResponse)
+}
+
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
