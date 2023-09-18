@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './ForgotPassword2.module.css'
-import { InputComponent } from '../InputComponent/InputComponent'
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom'
 
 export const ForgotPassword2 = () => {
-
+    const [password, setPassword] = useState('')
+    const [code, setCode] = useState('')
     return (
       <form className={styles.mainContainer}>
         <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
         {/* ПОМЕНЯТЬ ICON */}
-        <InputComponent type='email' placeholder='Введите новый пароль'  icon='DragIcon' /> 
-        <div className='mb-4 mt-4'>
-            <InputComponent type='email' placeholder='Введите код из письма'/>
-        </div>
+        <Input 
+            type='password' 
+            placeholder='Введите новый пароль'  
+            icon='DragIcon' 
+            value={password} 
+            onChange={(e) => {setPassword(e.target.value)}}
+        /> 
+        <Input 
+            type='text' 
+            placeholder='Введите код из письма' 
+            value={code} 
+            onChange={(e) => {setCode(e.target.value)}} 
+            extraClass='mt-4 mb-4'
+        />
         <div className={styles.button}>
             <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'>Сохранить</Button>
         </div>

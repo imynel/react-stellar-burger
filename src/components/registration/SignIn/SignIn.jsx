@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './SignIn.module.css'
-import { InputComponent } from '../InputComponent/InputComponent'
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom'
 export const SignIn = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
     return (
         <form className={styles.mainContainer}>
           <h1 className={`${styles.title} mb-4`}>Вход</h1>
-          <InputComponent type='email' placeholder='E-mail'/>
-          <div className='mt-4 mb-4'>
-            <InputComponent type='password' placeholder='Пароль'/>
-          </div>
+          <Input 
+            type='email' 
+            placeholder='E-mail'
+            value={email} 
+            onChange={(e) => {setEmail(e.target.value)}}
+            />
+          <Input 
+            type='password' 
+            placeholder='Пароль'
+            extraClass='mt-4 mb-4'  
+            value={password} 
+            onChange={(e) => {setPassword(e.target.value)}}
+          />
           <div className={styles.button}>
             <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'>Войти</Button>
           </div>
