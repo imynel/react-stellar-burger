@@ -26,7 +26,7 @@ const AppHeader = () => {
       <div className={styleHeader.logo}>
         <Logo />
       </div>
-      <Link to='/login' className={styleHeader.link}>
+      <Link to='/profile' className={styleHeader.link}>
         <div className={styleHeader.container}>
           <ProfileIcon type="secondary" />
           <p className='mr-5 ml-2 text text_type_main-default'>Личный кабинет</p>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import styles from './Registration.module.css'
 import { Button, Input, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { postRegisterProfile } from '../../../services/actions/register'
 import { useDispatch } from 'react-redux'
 
 export const Registration  = () => {
+    const navigate = useNavigate()
     const dispath = useDispatch()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -14,6 +15,7 @@ export const Registration  = () => {
     const handleSubmit = (e) => {
       e.preventDefault()
       dispath(postRegisterProfile(email, password, name))
+      navigate('/profile')
     }
 
     return (

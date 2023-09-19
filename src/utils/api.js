@@ -61,6 +61,20 @@ export function postRegister(email, password, name) {
   .then(checkResponse)
 }
 
+export function postSignIn(email, password) {
+  return fetch(`${url}auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'email': email,
+      'password': password,
+    })
+  })
+  .then(checkResponse)
+}
+
 
 
 const checkResponse = (res) => {

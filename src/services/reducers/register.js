@@ -1,7 +1,10 @@
 import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST } from "../actions/register";
 
 const initialState = {
-    info: null,
+    email: '',
+    name: '',
+    accessToken: '',
+    refreshToken: '',
     registerRequest: false,
     registerFailed: false,
 }
@@ -16,7 +19,13 @@ export const registerReducer = (store = initialState, action) => {
 
         case POST_REGISTER_SUCCESS: {
             return {
-                ...store, registerRequest: false, registerFailed: false, info: action.payload
+                ...store, 
+                registerRequest: false, 
+                registerFailed: false, 
+                name: action.payload.user.name, 
+                email: action.payload.user.email, 
+                accessToken: action.payload.accessToken, 
+                refreshToken: action.payload.refreshToken
             }
         }
 
