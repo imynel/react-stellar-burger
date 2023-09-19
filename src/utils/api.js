@@ -32,6 +32,36 @@ export function postEmail(email) {
   .then(checkResponse)
 }
 
+export function postPassword(password, token) {
+  return fetch(`${url}password-reset/reset`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'password': password,
+      'token': token,
+    })
+  })
+  .then(checkResponse)
+}
+
+export function postRegister(email, password, name) {
+  return fetch(`${url}auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'email': email,
+      'password': password,
+      'name': name,
+    })
+  })
+  .then(checkResponse)
+}
+
+
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));

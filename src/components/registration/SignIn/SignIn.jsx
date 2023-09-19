@@ -24,7 +24,13 @@ export const SignIn = () => {
             onChange={(e) => {setPassword(e.target.value)}}
           />
           <div className={styles.button}>
-            <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'>Войти</Button>
+            <Button 
+              htmlType="submit" 
+              type="primary" 
+              size="medium" 
+              extraClass='mb-20'
+              disabled={email && password ? false : true}
+            >Войти</Button>
           </div>
           <div className={styles.container}>
             <p className={`${styles.subtitle} mb-4`}>Вы — новый пользователь?</p>

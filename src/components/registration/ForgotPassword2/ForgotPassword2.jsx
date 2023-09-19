@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
 import styles from './ForgotPassword2.module.css'
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom'
+import { postPasswordReset } from '../../../services/actions/password-reset'
+import { useDispatch } from 'react-redux'
 
 export const ForgotPassword2 = () => {
+    const dispatch = useDispatch()
     const [password, setPassword] = useState('')
     const [code, setCode] = useState('')
+
+    const handleSabmit = (e) => {
+        e.preventDefault()
+        dispatch(postPasswordReset(password, code))
+    }
+
     return (
       <form className={styles.mainContainer}>
         <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
         {/* ПОМЕНЯТЬ ICON */}
-        <Input 
+        <PasswordInput 
             type='password' 
+            name={'password'}
             placeholder='Введите новый пароль'  
             icon='DragIcon' 
             value={password} 
@@ -26,7 +36,14 @@ export const ForgotPassword2 = () => {
             extraClass='mt-4 mb-4'
         />
         <div className={styles.button}>
-            <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'>Сохранить</Button>
+            <Button 
+                htmlType="submit" 
+                type="primary" 
+                size="medium" 
+                extraClass='mb-20'
+                disabled={password && code ? false : true}
+                onClick={(e) => handleSabmit(e)}
+            >Сохранить</Button>
         </div>
         <div className={styles.container}>
             <p className={`${styles.subtitle} mb-4`}>Вспомнили пароль?</p>

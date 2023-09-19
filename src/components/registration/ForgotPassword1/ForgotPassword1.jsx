@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styles from './ForgotPassword1.module.css'
 
-import { Button, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { postEmailreset } from '../../../services/actions/password-reset'
+import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { postEmailReset } from '../../../services/actions/password-reset'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -13,11 +13,9 @@ export const ForgotPassword1 = () => {
     const [email, setEmail] = useState('')
 
     const handlesubmit = (e) => {
-        if (email) {
-            e.preventDefault()
-            dispatch(postEmailreset())
-            navigate('/reset-password')
-        }
+        e.preventDefault()
+        dispatch(postEmailReset(email))
+        navigate('/reset-password')
     }
 
     return (
