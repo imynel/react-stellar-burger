@@ -17,9 +17,27 @@ export const Profile = () => {
                 <p className={`${styles.text} text text_type_main-small`}>В этом разделе вы можете изменить свои персональные данные</p>
             </div>
             <form className={styles.form}>
-                <Input type='text' placeholder='Имя' icon='CurrencyIcon' value={name} onChange={(e) => {setName(e.target.value)}} />
-                <Input type='text' placeholder='Логин' icon='CurrencyIcon' value={login} onChange={(e) => {setLogin(e.target.value)}} />
-                <Input type='password' placeholder='Пароль' icon='CurrencyIcon' value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                <Input 
+                    type='text' 
+                    placeholder='Имя' 
+                    icon='CurrencyIcon' 
+                    value={name} 
+                    onChange={(e) => {setName(e.target.value)}} 
+                />
+                <Input 
+                    type='text' 
+                    placeholder='Логин' 
+                    icon='CurrencyIcon' 
+                    value={login} 
+                    onChange={(e) => {setLogin(e.target.value)}} 
+                />
+                <Input 
+                    type='password' 
+                    placeholder='Пароль' 
+                    icon='CurrencyIcon' 
+                    value={password} 
+                    onChange={(e) => {setPassword(e.target.value)}} 
+                />
             </form>
         </section>
     )
