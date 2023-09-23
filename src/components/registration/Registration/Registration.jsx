@@ -15,7 +15,7 @@ export const Registration  = () => {
     const handleSubmit = (e) => {
       e.preventDefault()
       dispath(postRegisterProfile(email, password, name))
-      navigate('/profile')
+      navigate('/login')
     }
 
     return (

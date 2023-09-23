@@ -1,22 +1,40 @@
 import React, { useState } from 'react'
 import styles from './SignIn.module.css'
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { postSignIn } from '../../../utils/api'
+
 export const SignIn = () => {
+  const dispath = useDispatch()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+    const handlesubmit = (e) => {
+      e.preventDefault()
+      postSignIn(email, password)
+        .then((res) => {
+          if (res && res.success) {
+            navigate('/')
+          }
+        })
+        .catch(err => {
+          console.log(`Error: ${err}`);
+        });
+    } 
 
     return (
         <form className={styles.mainContainer}>
           <h1 className={`${styles.title} mb-4`}>Вход</h1>
-          <Input 
+          <EmailInput 
             type='email' 
             placeholder='E-mail'
             value={email} 
             onChange={(e) => {setEmail(e.target.value)}}
             />
-          <Input 
+          <PasswordInput 
             type='password' 
             placeholder='Пароль'
             extraClass='mt-4 mb-4'  
@@ -30,6 +48,7 @@ export const SignIn = () => {
               size="medium" 
               extraClass='mb-20'
               disabled={email && password ? false : true}
+              onClick={(e) => handlesubmit(e)}
             >Войти</Button>
           </div>
           <div className={styles.container}>

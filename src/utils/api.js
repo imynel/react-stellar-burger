@@ -75,6 +75,32 @@ export function postSignIn(email, password) {
   .then(checkResponse)
 }
 
+export function postLogout(refreshToken) {
+  return fetch(`${url}auth/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'token': refreshToken
+    })
+  })
+  .then(checkResponse)
+}
+
+export function postToken(refreshToken) {
+  return fetch(`${url}auth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'token': refreshToken
+    })
+  })
+  .then(checkResponse)
+}
+
 
 
 const checkResponse = (res) => {
