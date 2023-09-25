@@ -101,7 +101,15 @@ export function postToken(refreshToken) {
   .then(checkResponse)
 }
 
-
+export function getUserApi() {
+  return fetch(`${url}auth/user`, {
+    method: 'GET',
+    headers: {
+      Authorization: localStorage.getItem('accessToken')
+    }
+  })
+           .then(checkResponse)
+}
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));

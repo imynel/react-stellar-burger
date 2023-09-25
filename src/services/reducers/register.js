@@ -1,4 +1,4 @@
-import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST } from "../actions/register";
+import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET_AUTH_CHECKED, SET_USER } from "../actions/register";
 
 const initialState = {
     email: '',
@@ -7,10 +7,24 @@ const initialState = {
     refreshToken: '',
     registerRequest: false,
     registerFailed: false,
+    isAuthChecked: false,
+    user: null,
 }
 
 export const registerReducer = (store = initialState, action) => {
     switch(action.type) {
+        case SET_USER: {
+            return {
+                ...store, user: action.payload
+            }
+        }
+
+        case SET_AUTH_CHECKED: {
+            return {
+                ...store, isAuthChecked: action.payload,
+            }
+        }
+
         case POST_REGISTER_REQUEST: {
             return {
                 ...store, registerRequest: true, registerFailed: false, 

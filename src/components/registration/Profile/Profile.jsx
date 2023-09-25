@@ -10,12 +10,16 @@ export const Profile = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     
+    const logout = () =>  {
+        console.log('init')
+    }
+
     return (
         <section className={styles.mainContainer}>
             <div className={styles.container}>
-                <p className={`${styles.text} text text_type_main-medium`}><Link to='/profile' activeClass={styles.active}>Профиль</Link></p>
+                <p className={`${styles.text} text text_type_main-medium`}><Link to='/profile'>Профиль</Link></p>
                 <Link to='/profile/orders' ><p className={`${styles.text} text text_type_main-medium`}>История Заказов</p></Link>
-                <Link to='/' ><p className={`${styles.text} text text_type_main-medium mb-20`}>Выход</p></Link>
+                <Link to='/' ><p className={`${styles.text} text text_type_main-medium mb-20`} onClick={logout}>Выход</p></Link>
                 <p className={`${styles.text} text text_type_main-small`}>В этом разделе вы можете изменить свои персональные данные</p>
             </div>
             <form className={styles.form}>
