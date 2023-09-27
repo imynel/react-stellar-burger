@@ -7,7 +7,7 @@ const initialState = {
     refreshToken: '',
     registerRequest: false,
     registerFailed: false,
-    isAuthChecked: false,
+    isAuthCheck: false,
     user: null,
 }
 
@@ -21,7 +21,7 @@ export const registerReducer = (store = initialState, action) => {
 
         case SET_AUTH_CHECKED: {
             return {
-                ...store, isAuthChecked: action.payload,
+                ...store, isAuthCheck: action.payload,
             }
         }
 

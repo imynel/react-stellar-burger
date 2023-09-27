@@ -78,6 +78,7 @@ export const checkUserAuth = () => {
                     localStorage.removeItem('accessToken')
                     localStorage.removeItem('refreshToken')
                     dispatch(setUser(null))
+                    dispatch(setAuthChecked(true))
                 })
                 .finally(() => {
                     dispatch(setAuthChecked(true))

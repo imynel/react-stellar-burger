@@ -1,31 +1,31 @@
-import { useSelector } from "react-redux"
-import { useLocation, Navigate } from "react-router-dom"
+import { useSelector } from 'react-redux';
+import { useLocation, Navigate } from 'react-router-dom';
 
+const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
+  const isAuthCheck = useSelector((store) => store.registerReducer.isAuthCheck);
+  const user = useSelector((store) => store.registerReducer.user);
 
+  const location = useLocation();
 
-const ProtectedRoute = ({onlyUnAuth = false, component}) => {
-    const { isAuthCheck, user } = useSelector(store => store.registerReducer)
+  if (!isAuthCheck) {
+    console.log(isAuthCheck);
+    return null;
+  }
 
-    const location = useLocation()
+  if (onlyUnAuth) {
+    const { from } = location.state || { from: { pathname: '/' } };
+    return <Navigate to={from} />;
+  }
 
-    if (!isAuthCheck) {
-        return null
-    }
+  if (!onlyUnAuth) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
 
-    if (onlyUnAuth && user) {
-        const { from } = location.state || { from: { pathname: '/'}}
-        return <Navigate to={from} />
-    }
+  return component;
+};
 
-    if (!onlyUnAuth && !user) {
-        return <Navigate to='/login' state={{from: location}} />
-    }
+export const OnlyAuth = ProtectedRoute;
 
-
-
-    return component
-}
-
-export const OnlyAuth = ProtectedRoute
-
-export const OnlyUnAuth = ({component}) => <ProtectedRoute onlyUnAuth={true} component={component}/>
+export const OnlyUnAuth = ({ component }) => (
+  <ProtectedRoute onlyUnAuth={true} component={component} />
+);
