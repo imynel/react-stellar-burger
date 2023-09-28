@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
   }, []);
-  debugger;
+
   return (
     <>
       <BrowserRouter>
@@ -30,6 +30,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword1 />} />
           <Route path="/reset-password" element={<ForgotPassword2 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+          <Route path="/ingredients/:id" />
           <Route path="*" element={<NotFound404 />} />
         </Routes>
       </BrowserRouter>

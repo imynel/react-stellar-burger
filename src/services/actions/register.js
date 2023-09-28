@@ -1,4 +1,4 @@
-import { postRegister, getUserApi, postLogout } from "../../utils/api"
+import { postRegister, getUserApi, postLogout, postSignIn } from "../../utils/api"
 
 export const POST_REGISTER_REQUEST = 'POST_REGISTER_REQUEST'
 export const POST_REGISTER_SUCCESS = 'POST_REGISTER_SUCCESS'
@@ -25,17 +25,27 @@ export const setAuthChecked = (value) => ({
     payload: value,
 })
 
-export const login = () => {
+export const login = (email, password) => {
     return function(dispatch) {
-
+        postSignIn(email, password)
+            .then((res) => {
+                dispatch(setUser(res.user))
+                dispatch(setAuthChecked(true))
+                localStorage.setItem('accessToken', res.accessToken)
+                localStorage.setItem('refreshToken', res.refreshToken)
+            })
+            .catch(() => {
+                dispatch(setAuthChecked(true))
+            })
     }
 }
 
-export const logout = (token) => {
+export const logout = () => {
     return function(dispatch) {
-        postLogout(token)
+        postLogout(localStorage.getItem('refreshToken'))
             .then((res) => {
                 console.log(res)
+                dispatch(setUser(null))
             })
     }
 }
