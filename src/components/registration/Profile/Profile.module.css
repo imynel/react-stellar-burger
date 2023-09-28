@@ -26,6 +26,11 @@
     padding: 20px 0 0 0;
 }
 
+.link {
+    text-decoration: none;
+    color: #8585AD
+}
+
 .active{
     color: white;
 }

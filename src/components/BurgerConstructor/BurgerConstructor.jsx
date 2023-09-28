@@ -49,8 +49,6 @@ const BurgerConstructor = () => {
       setModalOrder(true);
       setButtonState(true);
     }
-    
-    
   };
 
   const change = useCallback((dragIndex, hoverIndex) => {
@@ -74,7 +72,7 @@ const BurgerConstructor = () => {
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={`${bun.name} (вверх)`} 
+                text={`${bun.name} (вверх)`}
                 price={bun.price}
                 thumbnail={bun.image}
               />
@@ -87,11 +85,7 @@ const BurgerConstructor = () => {
               return (
                 <React.Fragment key={uuidv4()}>
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor
-                      ingredient={ingredient}
-                      swap={change}
-                      index={index}
-                    />
+                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} />
                   </li>
                 </React.Fragment>
               );
@@ -104,7 +98,7 @@ const BurgerConstructor = () => {
               <ConstructorElement
                 type="bottom"
                 isLocked={true}
-                text={`${bun.name} (низ)`} 
+                text={`${bun.name} (низ)`}
                 price={bun.price}
                 thumbnail={bun.image}
               />
@@ -129,6 +123,5 @@ const BurgerConstructor = () => {
     </section>
   );
 };
-
 
 export default BurgerConstructor;

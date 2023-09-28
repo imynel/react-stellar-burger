@@ -10,9 +10,7 @@ import Ingredient from '../Ingredient/Ingredient';
 
 const BurgerIngredients = ({ handleOpen }) => {
   const dispatch = useDispatch();
-  const [current, setCurrent] = useState('one');
   const dataIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-  console.log(dataIngredients)
   const ingredient = dataIngredients;
 
   useEffect(() => {
@@ -21,34 +19,30 @@ const BurgerIngredients = ({ handleOpen }) => {
 
   const [activeTab, setActiveTab] = React.useState('bun');
 
-    useEffect(() => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const distances = ['.bun', '.sauce', '.main'].map((section) => {
+        const element = document.querySelector(section);
+        const distance = Math.abs(element.getBoundingClientRect().top - 90);
+        return { section, distance };
+      });
 
-      const handleScroll = () => {
+      //находим блмжайшую секцию
+      const closestSection = distances.reduce((closest, current) =>
+        current.distance < closest.distance ? current : closest,
+      );
 
-        const distances = ['.bun', '.sauce', '.main'].map((section) => {
-          const element = document.querySelector(section);
-          const distance = Math.abs(element.getBoundingClientRect().top - 90);
-          return { section, distance };
-        });
-        
-        //находим блмжайшую секцию
-        const closestSection = distances.reduce((closest, current) =>
-          current.distance < closest.distance ? current : closest
-        );
-        
-        //устанавливаем активную ближайшую секцию
-        setActiveTab(closestSection.section.slice(1));
-      };
-    
-      const scrollWrapper = document.querySelector('.custom-scroll');
-      scrollWrapper.addEventListener('scroll', handleScroll, { passive: true });
+      //устанавливаем активную ближайшую секцию
+      setActiveTab(closestSection.section.slice(1));
+    };
 
-      return () => {
-        scrollWrapper.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
+    const scrollWrapper = document.querySelector('.custom-scroll');
+    scrollWrapper.addEventListener('scroll', handleScroll, { passive: true });
 
-  
+    return () => {
+      scrollWrapper.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <section className={styleBurgerIngredients.BurgerIngredients}>
@@ -56,7 +50,12 @@ const BurgerIngredients = ({ handleOpen }) => {
         Соберите бургер
       </h2>
       <div className={`${styleBurgerIngredients.tab} mb-10`}>
-        <Tab value="bun" active={activeTab === 'bun'} onClick={() => {setActiveTab('bun')}}>
+        <Tab
+          value="bun"
+          active={activeTab === 'bun'}
+          onClick={() => {
+            setActiveTab('bun');
+          }}>
           Булки
         </Tab>
         <Tab value="sauce" active={activeTab === 'sauce'} onClick={() => setActiveTab('sauce')}>
