@@ -1,7 +1,14 @@
+import { useNavigate, useParams } from 'react-router-dom';
 import stylePopupInfo from './IngredientDetails.module.css';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-const IngredientDetails = ({ ingredient }) => {
+const IngredientDetails = () => {
+  const { id } = useParams();
+
+  const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
+  const ingredient = ingredients.find((elm) => elm._id === id);
+
   return (
     <>
       <h3 className={`${stylePopupInfo.title} mt-10 text text_type_main-large`}>

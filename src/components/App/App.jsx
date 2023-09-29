@@ -11,6 +11,8 @@ import AppHeader from '../AppHeader/AppHeader';
 import { checkUserAuth } from '../../services/actions/register';
 import { useDispatch } from 'react-redux';
 import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute/ProtectedRoute';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +32,14 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword1 />} />
           <Route path="/reset-password" element={<ForgotPassword2 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
-          <Route path="/ingredients/:id" />
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
           <Route path="*" element={<NotFound404 />} />
         </Routes>
       </BrowserRouter>
