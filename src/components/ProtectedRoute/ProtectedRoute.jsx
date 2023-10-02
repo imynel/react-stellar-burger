@@ -8,21 +8,18 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const location = useLocation();
 
   if (!isAuthCheck) {
-    console.log(isAuthCheck);
     return null;
   }
 
   if (onlyUnAuth && user) {
-    console.log(isAuthCheck);
     const { from } = location.state || { from: { pathname: '/' } };
     return <Navigate to={from} />;
   }
 
   if (!onlyUnAuth && !user) {
-    console.log(isAuthCheck);
     return <Navigate to="/login" state={{ from: location }} />;
   }
-  console.log(isAuthCheck);
+  
   return component;
 };
 

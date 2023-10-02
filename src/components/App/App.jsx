@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from '../../pages/home-page/home-page';
 import { SignIn } from '../registration/SignIn/SignIn';
 import { Registration } from '../registration/Registration/Registration';
@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
+import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
         <AppHeader />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -32,6 +32,17 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword1 />} />
           <Route path="/reset-password" element={<ForgotPassword2 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+          <Route 
+            path='/order' 
+            element={
+              <OnlyAuth component={
+                <Modal> 
+                  <OrderDetails />
+                </Modal>
+                }
+                />
+              } 
+            />
           <Route
             path="/ingredients/:id"
             element={
@@ -42,7 +53,6 @@ function App() {
           />
           <Route path="*" element={<NotFound404 />} />
         </Routes>
-      </BrowserRouter>
     </>
   );
 }

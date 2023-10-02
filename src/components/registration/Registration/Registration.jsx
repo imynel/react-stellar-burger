@@ -17,14 +17,14 @@ export const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     dispath(postRegisterProfile(email, password, name));
     navigate('/profile');
   };
 
   return (
-    <form className={styles.mainContainer}>
+    <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
       <h1 className={`${styles.title} mb-4`}>Регистрация</h1>
       <Input
         type="text"
@@ -58,8 +58,7 @@ export const Registration = () => {
           type="primary"
           size="medium"
           extraClass="mb-20"
-          disabled={name && email && password ? false : true}
-          onClick={(e) => handleSubmit(e)}>
+          disabled={name && email && password ? false : true}>
           Зарегистрироваться
         </Button>
       </div>

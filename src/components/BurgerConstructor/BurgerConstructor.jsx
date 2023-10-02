@@ -17,12 +17,12 @@ import {
   changeIngedients,
 } from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
+import { Link } from 'react-router-dom';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
-  const [buttonState, setButtonState] = useState(null);
-  const [modalOrder, setModalOrder] = useState(false); //БУЛЕВОЕ СОСТОЯНИЕ ОКНА ЗАКАЗА
+  const { isAuthCheck, user } = useSelector(store => store.registerReducer)
   const [price, setPrice] = useState(null);
   const ID = currentIngredients.map((item) => {
     return item._id;
@@ -43,25 +43,15 @@ const BurgerConstructor = () => {
     },
   });
 
-  const handleClickButton = () => {
+  const onSubmit = () => {
     if (ID.length) {
       dispatch(getOrderNumder(ID));
-      setModalOrder(true);
-      setButtonState(true);
     }
   };
 
   const change = useCallback((dragIndex, hoverIndex) => {
     dispatch(changeIngedients(dragIndex, hoverIndex));
   }, []);
-
-  function closeModal() {
-    setModalOrder(false);
-  }
-
-  const openOrederDetails = () => {
-    setModalOrder(true);
-  };
 
   return (
     <section className={styleBurgerConstructor.burgerConstructor} ref={dropRef}>
@@ -111,15 +101,12 @@ const BurgerConstructor = () => {
         <div className="mr-10">
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="medium" onClick={handleClickButton}>
-          Оформить заказ
-        </Button>
+        <Link to={user && isAuthCheck ? '/order' : '/login'}>
+          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit} disabled={currentIngredients.length && bun   ? false : true}>
+            Оформить заказ
+          </Button>
+        </Link>
       </div>
-      {modalOrder && (
-        <Modal handleClose={closeModal}>
-          <OrderDetails onClick={openOrederDetails} />
-        </Modal>
-      )}
     </section>
   );
 };

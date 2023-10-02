@@ -13,13 +13,13 @@ export const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handlesubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     dispath(login(email, password));
   };
 
   return (
-    <form className={styles.mainContainer}>
+    <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
       <h1 className={`${styles.title} mb-4`}>Вход</h1>
       <EmailInput
         type="email"
@@ -44,8 +44,7 @@ export const SignIn = () => {
           type="primary"
           size="medium"
           extraClass="mb-20"
-          disabled={email && password ? false : true}
-          onClick={(e) => handlesubmit(e)}>
+          disabled={email && password ? false : true}>
           Войти
         </Button>
       </div>

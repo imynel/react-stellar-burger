@@ -12,14 +12,14 @@ export const ForgotPassword2 = () => {
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
 
-  const handleSabmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     dispatch(postPasswordReset(password, code));
     navigate('/');
   };
 
   return (
-    <form className={styles.mainContainer}>
+    <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
       <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
       {/* ПОМЕНЯТЬ ICON */}
       <PasswordInput
@@ -47,8 +47,7 @@ export const ForgotPassword2 = () => {
           type="primary"
           size="medium"
           extraClass="mb-20"
-          disabled={password && code ? false : true}
-          onClick={(e) => handleSabmit(e)}>
+          disabled={password && code ? false : true}>
           Сохранить
         </Button>
       </div>

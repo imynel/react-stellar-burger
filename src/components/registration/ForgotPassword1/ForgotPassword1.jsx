@@ -12,14 +12,14 @@ export const ForgotPassword1 = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState('')
 
-    const handlesubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         dispatch(postEmailReset(email))
         navigate('/reset-password')
     }
 
     return (
-        <form className={styles.mainContainer}>
+        <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
             <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
             <EmailInput 
                 type='email' 
@@ -30,12 +30,13 @@ export const ForgotPassword1 = () => {
             />
             <div className={styles.button}>
                 <Button 
-                    htmlType="button" 
+                    htmlType="submit" 
                     type="primary" 
                     size="medium" 
                     extraClass='mb-20'
                     disabled={email ? false : true}
-                    onClick={(e) => handlesubmit(e)}>Восстановить</Button>
+                    >Восстановить
+                </Button>
             </div>
             <div className={styles.container}>
                 <p className={`${styles.subtitle} mb-4`}>Вспомнили пароль?</p>

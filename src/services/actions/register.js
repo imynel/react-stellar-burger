@@ -43,9 +43,10 @@ export const login = (email, password) => {
 export const logout = () => {
     return function(dispatch) {
         postLogout(localStorage.getItem('refreshToken'))
-            .then((res) => {
-                console.log(res)
+            .then(() => {
                 dispatch(setUser(null))
+                localStorage.removeItem('accessToken')
+                localStorage.removeItem('refreshToken')
             })
     }
 }
