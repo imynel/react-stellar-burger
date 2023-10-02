@@ -14,45 +14,48 @@ import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { getAllIngredients } from '../../services/actions/ingredients';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getAllIngredients());
     dispatch(checkUserAuth());
   }, []);
 
   return (
     <>
-        <AppHeader />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<OnlyUnAuth component={<SignIn />} />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/forgot-password" element={<ForgotPassword1 />} />
-          <Route path="/reset-password" element={<ForgotPassword2 />} />
-          <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
-          <Route 
-            path='/order' 
-            element={
-              <OnlyAuth component={
-                <Modal> 
+      <AppHeader />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<OnlyUnAuth component={<SignIn />} />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/forgot-password" element={<ForgotPassword1 />} />
+        <Route path="/reset-password" element={<OnlyUnAuth component={<ForgotPassword2 />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route
+          path="/order"
+          element={
+            <OnlyAuth
+              component={
+                <Modal>
                   <OrderDetails />
                 </Modal>
-                }
-                />
-              } 
+              }
             />
-          <Route
-            path="/ingredients/:id"
-            element={
-              <Modal>
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-          <Route path="*" element={<NotFound404 />} />
-        </Routes>
+          }
+        />
+        <Route
+          path="/ingredients/:id"
+          element={
+            <Modal>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
+        <Route path="*" element={<NotFound404 />} />
+      </Routes>
     </>
   );
 }

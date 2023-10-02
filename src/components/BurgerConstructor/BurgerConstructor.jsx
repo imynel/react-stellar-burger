@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
-  const { isAuthCheck, user } = useSelector(store => store.registerReducer)
+  const { isAuthCheck, user } = useSelector((store) => store.registerReducer);
   const [price, setPrice] = useState(null);
   const ID = currentIngredients.map((item) => {
     return item._id;
@@ -101,8 +101,15 @@ const BurgerConstructor = () => {
         <div className="mr-10">
           <CurrencyIcon type="primary" />
         </div>
-        <Link to={user && isAuthCheck ? '/order' : '/login'}>
-          <Button htmlType="button" type="primary" size="medium" onClick={onSubmit} disabled={currentIngredients.length && bun   ? false : true}>
+        <Link
+          to={user && isAuthCheck ? '/order' : '/login'}
+          onClick={(e) => (!currentIngredients.length || !bun ? e.preventDefault() : null)}>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={user && isAuthCheck ? onSubmit : null}
+            disabled={currentIngredients.length && bun ? false : true}>
             Оформить заказ
           </Button>
         </Link>

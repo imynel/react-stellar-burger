@@ -1,5 +1,35 @@
 const url = 'https://norma.nomoreparties.space/api/'
 
+const fetchWithRefresh = async (url, options) => {
+  try {
+    const res = await fetch(url, options); //делаем запрос
+    return await checkResponse(res);
+  } catch (err) {
+    if (err.message === "jwt expired") {
+      const refreshData = await refreshToken(); //обновляем токен
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken); //(или в cookies)
+      options.headers.authorization = refreshData.accessToken;
+      const res = await fetch(url, options); //вызываем перезапрос данных
+      return await checkResponse(res);
+    } else {
+      return Promise.reject(err);
+    }
+  }
+};
+
+const refreshToken = () => {
+  return fetch(`${url}auth/token`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem('refreshToken')
+    })
+  }).then(checkResponse)
+}
+
 export function getIngredients() {
   return fetch(`${url}ingredients`)
     .then(checkResponse)
@@ -61,8 +91,8 @@ export function postRegister(email, password, name) {
   .then(checkResponse)
 }
 
-export function postSignIn(email, password) {
-  return fetch(`${url}auth/login`, {
+export const postSignIn = async (email, password) => {
+  const response = await fetchWithRefresh(`${url}auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -72,8 +102,11 @@ export function postSignIn(email, password) {
       'password': password,
     })
   })
-  .then(checkResponse)
+  return response
 }
+
+
+
 
 export function postLogout(refreshToken) {
   return fetch(`${url}auth/logout`, {

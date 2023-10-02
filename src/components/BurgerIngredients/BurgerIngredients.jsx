@@ -9,13 +9,8 @@ import thunk from 'redux-thunk';
 import Ingredient from '../Ingredient/Ingredient';
 
 const BurgerIngredients = ({ handleOpen }) => {
-  const dispatch = useDispatch();
   const dataIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const ingredient = dataIngredients;
-
-  useEffect(() => {
-    dispatch(getAllIngredients());
-  }, []);
 
   const [activeTab, setActiveTab] = React.useState('bun');
 
