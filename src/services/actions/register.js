@@ -1,4 +1,4 @@
-import { postRegister, getUserApi, postLogout, postSignIn } from "../../utils/api"
+import { postRegister, getUserApi, postLogout, postSignIn, patchRefreshUser } from "../../utils/api"
 
 export const POST_REGISTER_REQUEST = 'POST_REGISTER_REQUEST'
 export const POST_REGISTER_SUCCESS = 'POST_REGISTER_SUCCESS'
@@ -14,6 +14,16 @@ export const getUser = () => {
         })
     }
 } 
+
+export const refreshUser = (email, name, password) => {
+    return function(dispatch) {
+        patchRefreshUser(email, name, password)
+            .then((res) => {
+                console.log(res)
+                dispatch(setUser(res.user))
+            })
+    }
+}
 
 export const setUser = (user) => ({
     type: SET_USER,

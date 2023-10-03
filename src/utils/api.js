@@ -76,8 +76,8 @@ export function postPassword(password, token) {
   .then(checkResponse)
 }
 
-export function postRegister(email, password, name) {
-  return fetch(`${url}auth/register`, {
+export const postRegister = async (email, password, name) => {
+  const response = await fetchWithRefresh(`${url}auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -88,7 +88,8 @@ export function postRegister(email, password, name) {
       'name': name,
     })
   })
-  .then(checkResponse)
+  
+  return response
 }
 
 export const postSignIn = async (email, password) => {
@@ -102,14 +103,15 @@ export const postSignIn = async (email, password) => {
       'password': password,
     })
   })
+
   return response
 }
 
 
 
 
-export function postLogout(refreshToken) {
-  return fetch(`${url}auth/logout`, {
+export const postLogout = async (refreshToken) => {
+  const response = fetchWithRefresh(`${url}auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -118,7 +120,7 @@ export function postLogout(refreshToken) {
       'token': refreshToken
     })
   })
-  .then(checkResponse)
+  return response
 }
 
 export function postToken(refreshToken) {
@@ -134,14 +136,31 @@ export function postToken(refreshToken) {
   .then(checkResponse)
 }
 
-export function getUserApi() {
-  return fetch(`${url}auth/user`, {
+export const getUserApi = async () => {
+  const response = await fetchWithRefresh(`${url}auth/user`, {
     method: 'GET',
     headers: {
       Authorization: localStorage.getItem('accessToken')
     }
   })
-           .then(checkResponse)
+  return response
+}
+
+export const patchRefreshUser = async (email, name, password) => {
+  const response = await fetchWithRefresh(`${url}auth/user`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+      "Content-Type": 'application/json'
+    },
+    body: JSON.stringify({
+      'email': email,
+      'name': name,
+      'password': password,
+    })
+  })
+
+  return response
 }
 
 const checkResponse = (res) => {
