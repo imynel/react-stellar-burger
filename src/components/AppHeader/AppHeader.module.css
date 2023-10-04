@@ -23,3 +23,8 @@
 .logo {
     margin: 24px 288px 24px 112px;
 }
+
+.link {
+    color: white;
+    text-decoration: none;
+}

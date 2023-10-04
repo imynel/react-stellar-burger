@@ -1,50 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import styles from './App.module.css';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from '../../pages/home-page/home-page';
+import { SignIn } from '../registration/SignIn/SignIn';
+import { Registration } from '../registration/Registration/Registration';
+import { ForgotPassword1 } from '../registration/ForgotPassword1/ForgotPassword1';
+import { ForgotPassword2 } from '../registration/ForgotPassword2/ForgotPassword2';
+import { NotFound404 } from '../NotFound404/NotFound404';
+import { Profile } from '../registration/Profile/Profile';
 import AppHeader from '../AppHeader/AppHeader';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import OrderDetails from '../OrderDetails/OrderDetails';
+import { checkUserAuth } from '../../services/actions/register';
+import { useDispatch } from 'react-redux';
+import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { getIngredients } from '../../utils/api';
+import OrderDetails from '../OrderDetails/OrderDetails';
 import { getAllIngredients } from '../../services/actions/ingredients';
 
-import { useSelector } from 'react-redux';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
 function App() {
+  const dispatch = useDispatch();
 
-  const [modalIngredient, setModalIngredient] = useState(false);
-  const [ingredient, setIngredient] = useState(null);
-
-  const openIngredientsDetails = (item) => {
-    setModalIngredient(true);
-    setIngredient(item);
-  };
-
-  const closeModal = () => {
-    setModalIngredient(false);
-  };
+  useEffect(() => {
+    dispatch(getAllIngredients());
+    dispatch(checkUserAuth());
+  }, []);
 
   return (
     <>
-      <div className={styles.app}>
-        <AppHeader />
-        <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            {<BurgerIngredients handleOpen={openIngredientsDetails} />}
-            {<BurgerConstructor />}
-          </DndProvider>
-        </main>
-      </div>
-      <div>
-        {modalIngredient && (
-          <Modal handleClose={closeModal}>
-            <IngredientDetails ingredient={ingredient} />
-          </Modal>
-        )}
-      </div>
+      <AppHeader />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<OnlyUnAuth component={<SignIn />} />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/forgot-password" element={<ForgotPassword1 />} />
+        <Route path="/reset-password" element={<OnlyUnAuth component={<ForgotPassword2 />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route
+          path="/order"
+          element={
+            <OnlyAuth
+              component={
+                <Modal>
+                  <OrderDetails />
+                </Modal>
+              }
+            />
+          }
+        />
+        <Route
+          path="/ingredients/:id"
+          element={
+            <Modal>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
+        <Route path="*" element={<NotFound404 />} />
+      </Routes>
     </>
   );
 }
