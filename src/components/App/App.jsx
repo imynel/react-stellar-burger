@@ -16,6 +16,7 @@ import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { getAllIngredients } from '../../services/actions/ingredients';
 import { Feed } from '../Feed/Feed';
+import { OrderHistory } from '../OrderHistory/OrderHistory';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/reset-password" element={<OnlyUnAuth component={<ForgotPassword2 />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
         <Route path='/feed' element={<Feed/>} />
+        <Route path='/profile/orders' element={<OnlyAuth component={<OrderHistory />} />} />
         <Route
           path="/order"
           element={

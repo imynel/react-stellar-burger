@@ -1,7 +1,7 @@
 .mainContainer {
     display: grid;
-    width: 1280px;
-    grid-template-columns: 1fr 480px 1fr;
+    width: 1240px;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
     gap: 60px;
     margin: 120px auto 0;
@@ -11,13 +11,6 @@
     margin: 0 0 0 auto;
     width: 400px;
     color: #8585AD;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    max-width: 480px;
 }
 
 .text {
@@ -35,15 +28,11 @@
     color: white;
 }
 
-.containerInputs {
+.history {
     display: flex;
     flex-direction: column;
     gap: 24px;
-}
+    height: 916px;
+    overflow-x: hidden;
 
-.containerSubmit {
-    display: flex;
-    justify-content: end;
-    gap: 20px;
-    margin-top: 24px;
 }
