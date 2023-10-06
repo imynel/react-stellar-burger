@@ -17,7 +17,7 @@ const AppHeader = () => {
           <p className="mr-5 ml-2 text text_type_main-default">Конструктор</p>
         </div>
       </Link>
-      <Link to='/' className={styleHeader.link}>
+      <Link to='/feed' className={styleHeader.link}>
         <div className={styleHeader.container}>
           <ListIcon type="secondary" />
           <p className="mr-5 ml-2 text text_type_main-default">Лента Заказов</p>

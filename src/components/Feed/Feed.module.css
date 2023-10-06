@@ -1,0 +1,43 @@
+.mainContainer{
+    display: flex;
+    max-width: 1240px;
+    margin: auto;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    gap: 60px;
+}
+
+.ribbon {
+    display: flex;
+    flex-direction: column;
+    height: 768px;
+    overflow-x: hidden;
+    border-radius: 40px;
+    gap: 16px;
+}
+
+.stats {
+    width: 580px;
+}
+
+.statsContainer {
+    display: flex; 
+    gap: 36px;
+
+}
+
+.readyNumber {
+    color: #00CCCC;
+}
+
+.ready {
+    width: 280px;
+    margin: 0 0 60px 0;
+}
+
+.inProgress {
+    width: 280px;
+}
