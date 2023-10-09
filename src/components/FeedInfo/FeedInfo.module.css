@@ -1,0 +1,40 @@
+.mainContainer {
+    margin: auto;
+    width: 640px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 366px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.image {
+    width: 64px;
+    height: 64px;
+}
+
+.ingredient {
+    display: flex;
+    gap: 16px;
+}
+
+.ingregientName {
+    margin: auto 0;
+}
+
+.price {
+    margin: auto 0 auto auto;
+}
+
+.orderNumber {
+    margin-top: 122px;
+    text-align: center;
+}
+
+.priceContainer {
+    display: flex;
+}

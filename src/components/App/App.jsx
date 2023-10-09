@@ -17,6 +17,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import { getAllIngredients } from '../../services/actions/ingredients';
 import { Feed } from '../Feed/Feed';
 import { OrderHistory } from '../OrderHistory/OrderHistory';
+import { FeedInfo } from '../FeedInfo/FeedInfo';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
         <Route path='/feed' element={<Feed/>} />
         <Route path='/profile/orders' element={<OnlyAuth component={<OrderHistory />} />} />
+        <Route path='/feed/id' element={<FeedInfo />} />
         <Route
           path="/order"
           element={
