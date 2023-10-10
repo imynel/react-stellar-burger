@@ -26,6 +26,8 @@ function App() {
     dispatch(getAllIngredients());
     dispatch(checkUserAuth());
   }, []);
+   
+
 
   return (
     <>
