@@ -1,4 +1,6 @@
 const url = 'https://norma.nomoreparties.space/api/'
+export const WSS_URL = 'wss://norma.nomoreparties.space/orders/'
+
 
 const fetchWithRefresh = async (url, options) => {
   try {

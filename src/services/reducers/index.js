@@ -3,12 +3,14 @@ import { ingredientsReducer } from "./ingredients";
 import { constructorReducer } from "./constructor";
 import { passwordReducer } from "./password-reset";
 import { registerReducer } from './register'
-import { wsReduser } from "./wsReducer";
+import { feedReducer } from "./feedReducer";
+import { ordersReducer } from './ordersReducer'
 
 export const rootReducer = combineReducers({
     ingredientsReducer,
     constructorReducer,
     passwordReducer,
     registerReducer,
-    wsReduser,
+    feedReducer,
+    ordersReducer,
 })

@@ -1,44 +1,54 @@
 // socketMiddleware.js
 import { Middleware, MiddlewareAPI } from 'redux';
 
-export const socketMiddleware = wsUrl => {
+export const socketMiddleware = wsAction => {
     return store => {
         let socket = null;
 
     return next => action => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
- 
-      if (type === 'WS_CONNECTION_START') {
+      const { wsConnection, wsConnectionClosed, wsConnectionError, wsConnectionSuccess, wsGetMessage, wsSendMessage, wsDisconnect, wsConnecting } = wsAction
+      
+      if (type === wsConnection.type) {
+        if(!socket) {
+          socket = new WebSocket(action.payload);
+          dispatch(wsConnecting())
+        }
             // объект класса WebSocket
-        socket = new WebSocket(wsUrl);
+        
       }
       if (socket) {
 
                 // функция, которая вызывается при открытии сокета
-        socket.onopen = event => {
-          dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+        socket.onopen = () => {
+          dispatch(wsConnectionSuccess());
         };
 
                 // функция, которая вызывается при ошибке соединения
         socket.onerror = event => {
-          dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
+          dispatch(wsConnectionError('Error'));
         };
 
                 // функция, которая вызывается при получении события от сервера
         socket.onmessage = event => {
           const { data } = event;
-          dispatch({ type: 'WS_GET_MESSAGE', payload: data });
+          const parseData = JSON.parse(data)
+
+          dispatch(wsGetMessage(parseData))
         };
                 // функция, которая вызывается при закрытии соединения
         socket.onclose = event => {
-          dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
+          dispatch(wsConnectionClosed());
         };
 
-        if (type === 'WS_SEND_MESSAGE') {
-          const message = payload;
-                    // функция для отправки сообщения на сервер
-          socket.send(JSON.stringify(message));
+        if (wsSendMessage && type === wsSendMessage.type) {
+          socket.send(JSON.stringify(action.payload));
+        }
+
+        if (wsDisconnect.type === type) {
+          socket.close()
+          socket = null
         }
       }
 
