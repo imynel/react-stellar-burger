@@ -1,4 +1,4 @@
-import { WS_CONNECTING, WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE} from "../actions/feedActions"
+import { WS_CONNECTING, WS_CONNECTION_CLOSE, WS_CONNECTION_ERROR, WS_CONNECTION_OPEN, WS_GET_MESSAGE} from "../actions/feedActions"
 import { WebsocketStatus } from "../../utils/wsStatus";
 
 const initialState = {
@@ -17,13 +17,13 @@ export const feedReducer = (store = initialState, action) => {
             }
         }
 
-        case WS_CONNECTION_SUCCESS: {
+        case WS_CONNECTION_OPEN: {
             return {
                 ...store, status: WebsocketStatus.ONLINE, error: ''
             }
         }
 
-        case WS_CONNECTION_CLOSED: {
+        case WS_CONNECTION_CLOSE: {
                     return {
                         ...store, status: WebsocketStatus.OFFLINE,
                     }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './Feed.module.css';
 import { OrderTape } from '../OrderTape/OrderTape';
 import { useDispatch } from 'react-redux';
-import { wsConnecting, wsDisconnect } from '../../services/actions/feedActions';
+import { wsConnection, wsDisconnect } from '../../services/actions/feedActions';
 import { WSS_URL } from '../../utils/api';
 
 const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -11,7 +11,7 @@ export const Feed = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(wsConnecting(`${WSS_URL}all`));
+    dispatch(wsConnection(`${WSS_URL}all`));
     return () => {
       dispatch(wsDisconnect());
     };

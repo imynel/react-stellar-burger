@@ -3,20 +3,20 @@ import { socketMiddleware } from "./middleware";
 import { rootReducer } from "./reducers/index"; 
 
 import { wsConnection as feedConnect, 
-        wsConnectionClosed as feedWsClose, 
-        wsConnectionError as feedWsError, 
-        wsConnectionSuccess as feedWsOpen, 
-        wsGetMessage as feedWsMessage, 
         wsDisconnect as feedWsDisconnect, 
+        wsConnectionOpen as feedWsOpen,
+        wsConnectionClose as feedWsClose, 
+        wsConnectionError as feedWsError, 
+        wsGetMessage as feedWsMessage, 
         wsConnecting as feedWsConnecting
 } from "./actions/feedActions"; 
 
 import { wsConnection as ordersConnect, 
-    wsConnectionClosed as ordersWsClose, 
-    wsConnectionError as ordersWsError, 
-    wsConnectionSuccess as ordersWsOpen, 
-    wsGetMessage as ordersWsMessage, 
     wsDisconnect as ordersWsDisconnect, 
+    wsConnectionOpen as ordersWsOpen, 
+    wsConnectionClose as ordersWsClose, 
+    wsConnectionError as ordersWsError, 
+    wsGetMessage as ordersWsMessage, 
     wsConnecting as ordersWsConnecting
 } from "./actions/ordersActions"; 
 
@@ -24,21 +24,21 @@ import { wsConnection as ordersConnect,
 
 const feedMiddleWare = socketMiddleware({
     wsConnection: feedConnect,
-    wsConnectionClosed: feedWsClose,
-    wsConnectionError: feedWsError,
-    wsConnectionSuccess: feedWsOpen,
-    wsGetMessage: feedWsMessage,
     wsDisconnect: feedWsDisconnect,
+    wsConnectionOpen: feedWsOpen,
+    wsConnectionClose: feedWsClose,
+    wsConnectionError: feedWsError,
+    wsGetMessage: feedWsMessage,
     wsConnecting: feedWsConnecting,
 })
 
 const ordersMiddleWare = socketMiddleware({
     wsConnection: ordersConnect,
-    wsConnectionClosed: ordersWsClose,
-    wsConnectionError: ordersWsError,
-    wsConnectionSuccess: ordersWsOpen,
-    wsGetMessage: ordersWsMessage,
     wsDisconnect: ordersWsDisconnect,
+    wsConnectionOpen: ordersWsOpen,
+    wsConnectionClose: ordersWsClose,
+    wsConnectionError: ordersWsError,
+    wsGetMessage: ordersWsMessage,
     wsConnecting: ordersWsConnecting,
 })
 
