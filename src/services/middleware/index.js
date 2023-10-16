@@ -9,8 +9,8 @@ export const socketMiddleware = wsAction => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
       const { wsConnection, wsDisconnect, wsConnectionOpen, wsConnectionClose, wsConnectionError, wsGetMessage, wsSendMessage,  wsConnecting } = wsAction
-      console.log(type === wsConnection)
-      if (type === wsConnection) {
+      
+      if (type === wsConnection().type) {
         if(!socket) {
           socket = new WebSocket(action.payload);
           // функция, которая вызывается при открытии сокета

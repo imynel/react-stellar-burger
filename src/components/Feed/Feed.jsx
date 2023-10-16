@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import styles from './Feed.module.css';
 import { OrderTape } from '../OrderTape/OrderTape';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { wsConnection, wsDisconnect } from '../../services/actions/feedActions';
 import { WSS_URL } from '../../utils/api';
 
-const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export const Feed = () => {
   const dispatch = useDispatch();
+  const { message, total, totalToday } = useSelector(store => store.feedReducer)
 
   useEffect(() => {
     dispatch(wsConnection(`${WSS_URL}all`));
@@ -22,8 +21,8 @@ export const Feed = () => {
       <h1 className={`${styles.title}`}>Лента заказов</h1>
       <div className={styles.container}>
         <div className={`${styles.ribbon} pr-2 custom-scroll`}>
-          {arr.map(() => {
-            return <OrderTape />;
+          {message.map((elm) => {
+            return <OrderTape order={elm}/>;
           })}
         </div>
         <div className={styles.stats}>
@@ -44,9 +43,9 @@ export const Feed = () => {
             </div>
           </div>
           <h3 className="text text_type_main-medium">Выполнено за все время:</h3>
-          <p className="text text_type_digits-large">101010</p>
+          <p className="text text_type_digits-large">{total}</p>
           <h3 className="text text_type_main-medium">Выполнено за сегодня:</h3>
-          <p className="text text_type_digits-large">101</p>
+          <p className="text text_type_digits-large">{totalToday}</p>
         </div>
       </div>
     </div>

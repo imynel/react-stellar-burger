@@ -21,14 +21,23 @@
     border: 2px solid #801AB2;
     /* border-image-source: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%); */
     border-radius: 100px;
+    margin-left: -15px;
+    object-fit: cover;
+    overflow: hidden;
+    position: relative;
+    background-color: #1C1C21;
+    float: right;
 }
 
 .ingredientsContainer {
     display: flex;
-    justify-content: space-between;
 }
 
 .link {
     color: white;
     text-decoration: none;
+}
+
+.price {
+    margin: auto 0 auto auto;
 }

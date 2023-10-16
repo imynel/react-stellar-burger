@@ -41,7 +41,7 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
         <Route path='/feed' element={<Feed/>} />
         <Route path='/profile/orders' element={<OnlyAuth component={<OrderHistory />} />} />
-        <Route path='/feed/id' element={<FeedInfo />} />
+        <Route path='/feed/:id' element={<FeedInfo />} />
         <Route
           path="/order"
           element={
