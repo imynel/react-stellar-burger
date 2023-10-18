@@ -10,7 +10,7 @@ export const Feed = () => {
   const { message, total, totalToday } = useSelector(store => store.feedReducer)
 
   useEffect(() => {
-    dispatch(wsConnection(`${WSS_URL}all`));
+    dispatch(wsConnection(`${WSS_URL}/all`));
     return () => {
       dispatch(wsDisconnect());
     };

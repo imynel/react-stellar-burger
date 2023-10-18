@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styles from './FeedInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { data } from '../../utils/data';
+import { element } from 'prop-types';
 
 export const FeedInfo = () => {
   const numberOrder = useParams();
@@ -18,7 +19,7 @@ export const FeedInfo = () => {
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
-  console.log(numberOrder, orderList, order, currentIngredients);
+  console.log(currentIngredients);
 
   return (
     <>
@@ -33,78 +34,19 @@ export const FeedInfo = () => {
           </p>
           <p className={`${styles.compound} mb-4 text text_type_main-medium`}>Состав:</p>
           <div className={`${styles.container} custom-scroll pr-6`}>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
-            <div className={styles.ingredient}>
-              <img src={data[0].image} alt="" className={styles.image} />
-              <p className={`${styles.ingregientName} text text_type_main-default`}>
-                name ingredient
-              </p>
-              <p className={`${styles.price} text text_type_digits-default`}>
-                1 x 20 <CurrencyIcon type="primary" />{' '}
-              </p>
-            </div>
+            {currentIngredients.map((element) => {
+              return (
+                <div className={styles.ingredient}>
+                  <img src={element.image} alt={element.name} className={styles.image} />
+                  <p className={`${styles.ingregientName} text text_type_main-default`}>
+                    {element.name}
+                  </p>
+                  <p className={`${styles.price} text text_type_digits-default`}>
+                    1 x {element.price} <CurrencyIcon type="primary" />
+                  </p>
+                </div>
+              )
+            })}
           </div>
           <div className={styles.priceContainer}>
             <p className={`${styles.time} mt-10 text text_type_main-default text_color_inactive`}>

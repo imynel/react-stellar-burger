@@ -1,20 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './OrderHistory.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../../services/actions/register'
 import { OrderTape } from '../OrderTape/OrderTape'
+import { wsConnection, wsDisconnect } from '../../services/actions/ordersActions'
+import { WSS_URL } from '../../utils/api'
 
-const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 export const OrderHistory = () => {
+    const orderList = useSelector(store => store.ordersReducer.message)
     const dispatch = useDispatch()
+    const token = localStorage.getItem('accessToken')
+    const tokenAPI = token.replace('Bearer ', '')
 
+    useEffect(() => {
+        dispatch(wsConnection(`${WSS_URL}?token=${tokenAPI}`))
+        return () => {
+            dispatch(wsDisconnect());
+          };
+    }, [])
+ 
     const onLogout = () => {
         dispatch(logout());
       };
 
     return(
+        <>
+        {!orderList ? null : (
         <section className={styles.mainContainer}>
             <div className={styles.container}>
                 <Link to="/profile" className={`${styles.active} ${styles.link} `}>
@@ -33,10 +46,12 @@ export const OrderHistory = () => {
                 </p>
             </div>
             <div className={`${styles.history} pr-2 custom-scroll`}>
-                {arr.map(() => {
-                    return <OrderTape />
-                })}
+                {/* {orderList.map((element) => {
+                    return <OrderTape order={element}/>
+                })} */}
             </div>
         </section>
+        )}
+        </>
         )
 }
