@@ -42,6 +42,7 @@ export function postOrderNumber(id) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('accessToken')
     },
     body: JSON.stringify({
       'ingredients': id,
