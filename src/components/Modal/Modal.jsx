@@ -5,32 +5,40 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../services/actions/modal';
 
 const modalRoot = document.getElementById('react-modals');
 
-const Modal = ({ children }) => {
-  const navigate = useNavigate();
+const Modal = ({ children, onClose }) => {
+  const dispatch = useDispatch();
 
-  const handleClose = () => {
-    navigate(-1);
+  const handlerClose = () => {
+    dispatch(closeModal());
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  };
+
+  const escClose = (e) => {
+    if (e.key === 'Escape') {
+      handlerClose();
+    }
   };
 
   useEffect(() => {
-    const escClose = (e) => {
-      e.key === 'Escape' && handleClose();
-    };
     document.addEventListener('keydown', escClose);
     return () => {
       document.removeEventListener('keydown', escClose);
     };
-  }, []);
+  });
 
   return ReactDOM.createPortal(
     <>
-      <ModalOverlay closeModal={handleClose} />
+      <ModalOverlay closeModal={() => handlerClose()} />
       <section className={styles.modal}>
         <div className={styles.close}>
-          <CloseIcon onClick={handleClose} />
+          <CloseIcon onClick={() => handlerClose()} />
         </div>
         {children}
       </section>

@@ -1,6 +1,4 @@
 // socketMiddleware.js
-import { Middleware, MiddlewareAPI } from 'redux';
-
 export const socketMiddleware = wsAction => {
     return store => {
         let socket = null;
@@ -11,10 +9,12 @@ export const socketMiddleware = wsAction => {
       const { wsConnection, wsDisconnect, wsConnectionOpen, wsConnectionClose, wsConnectionError, wsGetMessage, wsSendMessage,  wsConnecting } = wsAction
       
       if (type === wsConnection().type) {
+        console.log(type === wsConnection().type)
         if(!socket) {
           socket = new WebSocket(action.payload);
           // функция, которая вызывается при открытии сокета
           socket.onopen = () => {
+            console.log('init')
             dispatch(wsConnectionOpen());
           };
           // функция, которая вызывается при ошибке соединения

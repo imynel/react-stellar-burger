@@ -15,6 +15,13 @@
     composes: close from '../OrderDetails/OrderDetails.module.css';
 }
 
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin: 10% auto;
+  }
+
 .title {
     text-align: start;
     line-height: 40px;

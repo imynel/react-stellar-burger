@@ -37,7 +37,7 @@ export const ordersReducer = (store = initialState, action) => {
 
         case WS_GET_MESSAGE: {
             return {
-                ...store, message: action.payload.orders, total: action.payload.total, totalToday: action.payload.totalToday, 
+                ...store, message: action.payload.orders,
             }
         }
 

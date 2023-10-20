@@ -19,7 +19,14 @@ export const FeedInfo = () => {
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
-  console.log(currentIngredients);
+  // Функция, которая проверяет уникальность объектов
+  function isObjectUnique(value, index, self) {
+    // Преобразуем объект в строку и сравниваем
+    const objAsString = JSON.stringify(value);
+    return self.findIndex((obj) => JSON.stringify(obj) === objAsString) === index;
+  }
+
+  const uniqueObjects = currentIngredients.filter(isObjectUnique);
 
   return (
     <>
@@ -34,7 +41,7 @@ export const FeedInfo = () => {
           </p>
           <p className={`${styles.compound} mb-4 text text_type_main-medium`}>Состав:</p>
           <div className={`${styles.container} custom-scroll pr-6`}>
-            {currentIngredients.map((element) => {
+            {uniqueObjects.map((element) => {
               return (
                 <div className={styles.ingredient}>
                   <img src={element.image} alt={element.name} className={styles.image} />
@@ -42,10 +49,10 @@ export const FeedInfo = () => {
                     {element.name}
                   </p>
                   <p className={`${styles.price} text text_type_digits-default`}>
-                    1 x {element.price} <CurrencyIcon type="primary" />
+                    x {element.price} <CurrencyIcon type="primary" />
                   </p>
                 </div>
-              )
+              );
             })}
           </div>
           <div className={styles.priceContainer}>

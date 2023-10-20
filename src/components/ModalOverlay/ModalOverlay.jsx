@@ -1,12 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './ModalOverlay.module.css';
 
-const ModalOverlay = () => {
-  const navigate = useNavigate();
-  const closeModal = () => {
-    navigate(-1);
-  };
-
+const ModalOverlay = ({ closeModal }) => {
   return <section className={styles.modalOverlay} onClick={closeModal}></section>;
 };
 
