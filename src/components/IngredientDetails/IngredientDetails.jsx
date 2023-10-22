@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import stylePopupInfo from './IngredientDetails.module.css';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 const IngredientDetails = () => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-  const location = useLocation();
-  const background = location.state && location.state.background;
   const { id } = useParams();
-  console.log(id);
-
-  // const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const ingredient = ingredients.find((elm) => elm._id === id);
-  console.log(ingredients);
 
   return (
     <>
       {ingredient ? (
-        <div className={background ? undefined : stylePopupInfo.page}>
+        <div className={stylePopupInfo.page}>
           <h3 className={`${stylePopupInfo.title} mt-10 text text_type_main-large`}>
             Детали ингредиента
           </h3>
@@ -44,8 +38,5 @@ const IngredientDetails = () => {
   );
 };
 
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.object,
-};
 
 export default IngredientDetails;

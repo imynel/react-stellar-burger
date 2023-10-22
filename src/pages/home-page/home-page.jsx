@@ -33,13 +33,6 @@ const HomePage = () => {
           </DndProvider>
         </main>
       </div>
-      <div>
-        {modalIngredient && (
-          <Modal handleClose={closeModal}>
-            <IngredientDetails ingredient={ingredient} />
-          </Modal>
-        )}
-      </div>
     </>
   );
 }

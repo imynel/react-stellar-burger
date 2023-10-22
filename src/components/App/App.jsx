@@ -48,20 +48,29 @@ function App() {
         <Route path="/profile/orders" element={<OnlyAuth component={<OrderHistory />} />} />
         <Route path="/feed/:id" element={<FeedInfo />} />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        <Route path='/profile/orders/:numberOrder' element={<FeedInfo />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
         <Routes>
           <Route
-            path="/order"
+            path="/profile/orders/:numberOrder"
             element={
               <OnlyAuth
                 component={
                   <Modal onClose={handleModalClose}>
-                    <OrderDetails />
+                    <FeedInfo />
                   </Modal>
                 }
               />
+            }
+          />
+          <Route
+            path="/feed/:numberOrder"
+            element={
+              <Modal onClose={handleModalClose}>
+                <FeedInfo />
+              </Modal>
             }
           />
           <Route

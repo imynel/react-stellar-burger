@@ -15,7 +15,7 @@ export const OrderTape = ({ order }) => {
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
   return (
-    <Link to={`/feed/${order.number}`} className={styles.link}>
+    
       <div className={styles.mainContainer}>
         <div className={styles.textContainer}>
           <p className={`${styles.orderNumber} text text_type_digits-default`}>#{order.number}</p>
@@ -40,6 +40,5 @@ export const OrderTape = ({ order }) => {
           </p>
         </div>
       </div>
-    </Link>
   );
 };

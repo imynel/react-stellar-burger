@@ -12,6 +12,10 @@
     overflow-y: auto;
 }
 
+.popap {
+    margin-top: -75px;
+}
+
 .image {
     width: 64px;
     height: 64px;

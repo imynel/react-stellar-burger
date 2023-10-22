@@ -34,5 +34,9 @@
     gap: 24px;
     height: 916px;
     overflow-x: hidden;
+}
 
+.linkUrl {
+    color: white;
+    text-decoration: none;
 }

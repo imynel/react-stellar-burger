@@ -4,8 +4,10 @@ import { OrderTape } from '../OrderTape/OrderTape';
 import { useDispatch, useSelector } from 'react-redux';
 import { wsConnection, wsDisconnect } from '../../services/actions/feedActions';
 import { WSS_URL } from '../../utils/api';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Feed = () => {
+  const location = useLocation()
   const dispatch = useDispatch();
   const { message, total, totalToday } = useSelector((store) => store.feedReducer);
 
@@ -15,7 +17,6 @@ export const Feed = () => {
       dispatch(wsDisconnect());
     };
   }, []);
-
   return (
     <>
       {!message ? null : (
@@ -24,7 +25,11 @@ export const Feed = () => {
           <div className={styles.container}>
             <div className={`${styles.ribbon} pr-2 custom-scroll`}>
               {message.map((elm) => {
-                return <OrderTape order={elm} />;
+                return (
+                  <Link to={`/feed/${elm.number}`} className={styles.link} state={{background: location}}>
+                    <OrderTape order={elm} />
+                  </Link>
+                )
               })}
             </div>
             <div className={styles.stats}>

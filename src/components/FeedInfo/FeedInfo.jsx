@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import styles from './FeedInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { data } from '../../utils/data';
 import { element } from 'prop-types';
 
 export const FeedInfo = () => {
-  const numberOrder = useParams();
+  const location = useLocation()
+  const { numberOrder } = useParams();
   const orderList = useSelector((store) => store.feedReducer.message);
-  const order = orderList.find((elm) => elm.number === parseInt(numberOrder.id));
+  const order = orderList.find((elm) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const currentIngredients = [];
 
-  order.ingredients.forEach((elm) => {
+  order && order.ingredients.forEach((elm) => {
     currentIngredients.push(allIngredients.find((element) => element._id === elm));
   });
 
@@ -31,7 +32,7 @@ export const FeedInfo = () => {
   return (
     <>
       {!orderList ? null : (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} ${location.pathname === `/feed/${numberOrder}` || location.pathname === `/profile/orders/${numberOrder}` ? styles.popap : null}`}>
           <p className={`${styles.orderNumber} mb-10 text text_type_digits-medium`}>
             #{order.number}
           </p>

@@ -41,3 +41,8 @@
 .inProgress {
     width: 280px;
 }
+
+.link {
+    color: white;
+    text-decoration: none;
+}

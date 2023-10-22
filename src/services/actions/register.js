@@ -19,7 +19,6 @@ export const refreshUser = (email, name, password) => {
     return function(dispatch) {
         patchRefreshUser(email, name, password)
             .then((res) => {
-                console.log(res)
                 dispatch(setUser(res.user))
             })
     }
