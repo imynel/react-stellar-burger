@@ -17,9 +17,10 @@ import {
   changeIngedients,
 } from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const BurgerConstructor = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const { isAuthCheck, user } = useSelector((store) => store.registerReducer);
@@ -103,7 +104,8 @@ const BurgerConstructor = () => {
         </div>
         <Link
           to={user && isAuthCheck ? '/order' : '/login'}
-          onClick={(e) => (!currentIngredients.length || !bun ? e.preventDefault() : null)}>
+          onClick={(e) => (!currentIngredients.length || !bun ? e.preventDefault() : null)}
+          state={{ background: location }}>
           <Button
             htmlType="button"
             type="primary"

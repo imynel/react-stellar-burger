@@ -7,16 +7,17 @@ import { data } from '../../utils/data';
 import { element } from 'prop-types';
 
 export const FeedInfo = () => {
-  const location = useLocation()
+  const location = useLocation();
   const { numberOrder } = useParams();
   const orderList = useSelector((store) => store.feedReducer.message);
   const order = orderList.find((elm) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const currentIngredients = [];
 
-  order && order.ingredients.forEach((elm) => {
-    currentIngredients.push(allIngredients.find((element) => element._id === elm));
-  });
+  order &&
+    order.ingredients.forEach((elm) => {
+      currentIngredients.push(allIngredients.find((element) => element._id === elm));
+    });
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
@@ -32,7 +33,13 @@ export const FeedInfo = () => {
   return (
     <>
       {!orderList ? null : (
-        <div className={`${styles.mainContainer} ${location.pathname === `/feed/${numberOrder}` || location.pathname === `/profile/orders/${numberOrder}` ? styles.popap : null}`}>
+        <div
+          className={`${styles.mainContainer} ${
+            location.pathname === `/feed/${numberOrder}` ||
+            location.pathname === `/profile/orders/${numberOrder}`
+              ? styles.popap
+              : null
+          }`}>
           <p className={`${styles.orderNumber} mb-10 text text_type_digits-medium`}>
             #{order.number}
           </p>
@@ -43,6 +50,12 @@ export const FeedInfo = () => {
           <p className={`${styles.compound} mb-4 text text_type_main-medium`}>Состав:</p>
           <div className={`${styles.container} custom-scroll pr-6`}>
             {uniqueObjects.map((element) => {
+              let count = 0;
+              currentIngredients.forEach((elm) => {
+                if (element._id === elm._id) {
+                  count++;
+                }
+              });
               return (
                 <div className={styles.ingredient}>
                   <img src={element.image} alt={element.name} className={styles.image} />
@@ -50,7 +63,7 @@ export const FeedInfo = () => {
                     {element.name}
                   </p>
                   <p className={`${styles.price} text text_type_digits-default`}>
-                    x {element.price} <CurrencyIcon type="primary" />
+                    {count} x {element.price} <CurrencyIcon type="primary" />
                   </p>
                 </div>
               );

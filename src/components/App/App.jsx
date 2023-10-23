@@ -48,7 +48,7 @@ function App() {
         <Route path="/profile/orders" element={<OnlyAuth component={<OrderHistory />} />} />
         <Route path="/feed/:id" element={<FeedInfo />} />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
-        <Route path='/profile/orders/:numberOrder' element={<FeedInfo />} />
+        <Route path="/profile/orders/:numberOrder" element={<FeedInfo />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -78,6 +78,14 @@ function App() {
             element={
               <Modal onClose={handleModalClose}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderDetails />
               </Modal>
             }
           />
