@@ -1,4 +1,6 @@
 const url = 'https://norma.nomoreparties.space/api/'
+export const WSS_URL = 'wss://norma.nomoreparties.space/orders'
+
 
 const fetchWithRefresh = async (url, options) => {
   try {
@@ -40,6 +42,7 @@ export function postOrderNumber(id) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('accessToken')
     },
     body: JSON.stringify({
       'ingredients': id,

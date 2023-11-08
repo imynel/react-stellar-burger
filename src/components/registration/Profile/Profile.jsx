@@ -79,7 +79,7 @@ export const Profile = () => {
           <Button htmlType="button" type="secondary" size="medium">
             Отмена
           </Button>
-          <Button htmlType='submit' type="primary" size="medium" >Сохранить</Button>
+          <Button htmlType='submit' type="primary" size="medium" disabled={name && login && password ? false : true}>Сохранить</Button>
         </div>
       </form>
     </section>

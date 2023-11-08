@@ -6,18 +6,13 @@ import { useSelector } from 'react-redux';
 
 const IngredientDetails = () => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-
   const { id } = useParams();
-  console.log(id);
-
-  // const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const ingredient = ingredients.find((elm) => elm._id === id);
-  console.log(ingredients);
 
   return (
     <>
       {ingredient ? (
-        <>
+        <div className={stylePopupInfo.page}>
           <h3 className={`${stylePopupInfo.title} mt-10 text text_type_main-large`}>
             Детали ингредиента
           </h3>
@@ -37,14 +32,11 @@ const IngredientDetails = () => {
               Углеводы, г {ingredient.carbohydrates}
             </div>
           </div>
-        </>
+        </div>
       ) : null}
     </>
   );
 };
 
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.object,
-};
 
 export default IngredientDetails;

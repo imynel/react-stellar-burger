@@ -4,9 +4,10 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Ingredient = ({ item, handleOpen }) => {
+  const location = useLocation();
   const [meter, setMeter] = useState(0);
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const [, dragRef] = useDrag({
@@ -29,7 +30,7 @@ const Ingredient = ({ item, handleOpen }) => {
   }, [bun, currentIngredients]);
 
   return (
-    <Link to={`/ingredients/${item._id}`} className={style.link}>
+    <Link to={`/ingredients/${item._id}`} state={{ background: location }} className={style.link}>
       <div
         className={style.card}
         onClick={() => {
