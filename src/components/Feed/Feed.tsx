@@ -6,7 +6,7 @@ import { wsConnection, wsDisconnect } from '../../services/actions/feedActions';
 import { WSS_URL } from '../../utils/api';
 import { Link, useLocation } from 'react-router-dom';
 
-export const Feed = () => {
+export const Feed = (): JSX.Element => {
   const location = useLocation()
   const dispatch = useDispatch();
   const { message, total, totalToday } = useSelector((store) => store.feedReducer);

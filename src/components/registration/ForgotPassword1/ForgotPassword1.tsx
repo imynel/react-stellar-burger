@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 
-export const ForgotPassword1 = () => {
+export const ForgotPassword1 = (): JSX.Element => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [email, setEmail] = useState('')
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(postEmailReset(email))
         navigate('/reset-password')
@@ -22,7 +22,6 @@ export const ForgotPassword1 = () => {
         <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
             <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
             <EmailInput 
-                type='email' 
                 placeholder='Укажите e-mail'
                 value={email}
                 onChange={(e) => {setEmail(e.target.value)}}

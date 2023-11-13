@@ -7,13 +7,14 @@ import { useDispatch } from 'react-redux';
 import { postSignIn } from '../../../utils/api';
 import { login } from '../../../services/actions/register';
 
-export const SignIn = () => {
+export const SignIn = (): JSX.Element => {
+
   const dispath = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispath(login(email, password));
   };
@@ -22,7 +23,6 @@ export const SignIn = () => {
     <form className={styles.mainContainer} onSubmit={(e) => onSubmit(e)}>
       <h1 className={`${styles.title} mb-4`}>Вход</h1>
       <EmailInput
-        type="email"
         placeholder="E-mail"
         value={email}
         onChange={(e) => {
@@ -30,7 +30,6 @@ export const SignIn = () => {
         }}
       />
       <PasswordInput
-        type="password"
         placeholder="Пароль"
         extraClass="mt-4 mb-4"
         value={password}

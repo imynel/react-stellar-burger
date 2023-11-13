@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, refreshUser } from '../../../services/actions/register';
 
-export const Profile = () => {
+export const Profile = (): JSX.Element => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
@@ -22,7 +22,7 @@ export const Profile = () => {
     dispatch(logout());
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(refreshUser(login, name, password))
   }

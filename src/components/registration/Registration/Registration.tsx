@@ -10,14 +10,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { postRegisterProfile } from '../../../services/actions/register';
 import { useDispatch } from 'react-redux';
 
-export const Registration = () => {
+export const Registration = (): JSX.Element => {
   const navigate = useNavigate();
   const dispath = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispath(postRegisterProfile(email, password, name));
     navigate('/profile');
@@ -35,7 +35,6 @@ export const Registration = () => {
         }}
       />
       <EmailInput
-        type="email"
         placeholder="E-mail"
         value={email}
         onChange={(e) => {
@@ -44,7 +43,6 @@ export const Registration = () => {
         extraClass="mt-4 mb-4"
       />
       <PasswordInput
-        type="password"
         placeholder="Пароль"
         value={password}
         onChange={(e) => {

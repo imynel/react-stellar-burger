@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-const Ingredient = ({ item, handleOpen }) => {
+const Ingredient = ({ item, handleOpen }): JSX.Element => {
   const location = useLocation();
   const [meter, setMeter] = useState(0);
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);

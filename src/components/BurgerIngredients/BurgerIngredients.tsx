@@ -8,16 +8,35 @@ import { getAllIngredients } from '../../services/actions/ingredients';
 import thunk from 'redux-thunk';
 import Ingredient from '../Ingredient/Ingredient';
 
-const BurgerIngredients = ({ handleOpen }) => {
+type Props = {
+  handleOpen: () => void;
+}
+
+type element = {
+  _id: string;
+  name: string;
+  type: string;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+  calories: number;
+  price: number;
+  image: string;
+  image_mobile: string;
+  image_large: string;
+  __v: number;
+}
+
+const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
   const dataIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-  const ingredient = dataIngredients;
+  const ingredient: element[] = dataIngredients;
 
   const [activeTab, setActiveTab] = React.useState('bun');
 
   useEffect(() => {
     const handleScroll = () => {
       const distances = ['.bun', '.sauce', '.main'].map((section) => {
-        const element = document.querySelector(section);
+        const element = document.querySelector(section)!;
         const distance = Math.abs(element.getBoundingClientRect().top - 90);
         return { section, distance };
       });
@@ -31,7 +50,8 @@ const BurgerIngredients = ({ handleOpen }) => {
       setActiveTab(closestSection.section.slice(1));
     };
 
-    const scrollWrapper = document.querySelector('.custom-scroll');
+   
+    const scrollWrapper = document.querySelector('.custom-scroll')!;
     scrollWrapper.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
@@ -63,7 +83,7 @@ const BurgerIngredients = ({ handleOpen }) => {
       <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
         <div className={`${styleBurgerIngredients.container} bun`}>
-          {ingredient.map((element) => {
+          {ingredient.map((element: element) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
@@ -75,7 +95,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
         <div className={`${styleBurgerIngredients.container} sauce`}>
-          {ingredient.map((element) => {
+          {ingredient.map((element: element) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
@@ -87,7 +107,7 @@ const BurgerIngredients = ({ handleOpen }) => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
         <div className={`${styleBurgerIngredients.container} main`}>
-          {ingredient.map((element) => {
+          {ingredient.map((element: element) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>
@@ -102,8 +122,5 @@ const BurgerIngredients = ({ handleOpen }) => {
   );
 };
 
-BurgerIngredients.propTypes = {
-  handleOpen: PropTypes.func,
-};
 
 export default BurgerIngredients;

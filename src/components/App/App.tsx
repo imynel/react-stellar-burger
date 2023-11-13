@@ -19,7 +19,7 @@ import { Feed } from '../Feed/Feed';
 import { OrderHistory } from '../OrderHistory/OrderHistory';
 import { FeedInfo } from '../FeedInfo/FeedInfo';
 
-function App() {
+function App(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();

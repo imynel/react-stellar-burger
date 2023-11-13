@@ -4,12 +4,28 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const OrderTape = ({ order }) => {
+export const OrderTape = ({ order }: any): JSX.Element => {
+
+  type element = {
+    _id: string;
+    name: string;
+    type: string;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+    calories: number;
+    price: number;
+    image: string;
+    image_mobile: string;
+    image_large: string;
+    __v: number;
+  }
+
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
 
-  const currentIngredients = [];
-  order.ingredients.forEach((elm) => {
-    currentIngredients.push(ingredients.find((element) => element._id === elm));
+  const currentIngredients: element[] = [];
+  order.ingredients.forEach((elm: element) => {
+    currentIngredients.push(ingredients.find((element: element) => element._id === elm));
   });
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
@@ -36,7 +52,7 @@ export const OrderTape = ({ order }) => {
             );
           })}
           <p className={`${styles.price} text text_type_digits-default`}>
-            {price} <CurrencyIcon />
+            {price} <CurrencyIcon type='primary'/>
           </p>
         </div>
       </div>

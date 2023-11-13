@@ -6,13 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { postPasswordReset } from '../../../services/actions/password-reset';
 import { useDispatch } from 'react-redux';
 
-export const ForgotPassword2 = () => {
+export const ForgotPassword2 = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(postPasswordReset(password, code));
     navigate('/');
@@ -23,10 +23,9 @@ export const ForgotPassword2 = () => {
       <h1 className={`${styles.title} mb-4`}>Восстановление пароля</h1>
       {/* ПОМЕНЯТЬ ICON */}
       <PasswordInput
-        type="password"
         name={'password'}
         placeholder="Введите новый пароль"
-        icon="DragIcon"
+        icon="ShowIcon"
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);

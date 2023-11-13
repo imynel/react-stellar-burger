@@ -4,7 +4,7 @@ import stylePopupInfo from './IngredientDetails.module.css';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-const IngredientDetails = () => {
+const IngredientDetails = (): JSX.Element => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const { id } = useParams();
   const ingredient = ingredients.find((elm) => elm._id === id);

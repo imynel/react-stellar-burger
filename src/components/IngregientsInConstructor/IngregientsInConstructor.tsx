@@ -6,7 +6,7 @@ import { deleteIngredient } from '../../services/actions/constructor';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-const IngregientsInConstructor = ({ ingredient, key, index, swap }) => {
+const IngregientsInConstructor = ({ ingredient, key, index, swap }): JSX.Element => {
   const dispatch = useDispatch();
   const ref = useRef(null);
 

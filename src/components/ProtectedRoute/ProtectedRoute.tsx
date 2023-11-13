@@ -1,7 +1,12 @@
 import { useSelector } from 'react-redux';
 import { useLocation, Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
+type Props = {
+  onlyUnAuth?: boolean
+  component: JSX.Element
+}
+
+const ProtectedRoute = ({ onlyUnAuth = false, component}: Props): JSX.Element | null => {
   const isAuthCheck = useSelector((store) => store.registerReducer.isAuthCheck);
   const user = useSelector((store) => store.registerReducer.user);
 
@@ -25,6 +30,6 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
 
 export const OnlyAuth = ProtectedRoute;
 
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = ({ component }: Props): JSX.Element => (
   <ProtectedRoute onlyUnAuth={true} component={component} />
 );

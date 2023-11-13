@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { data } from '../../utils/data';
 import { element } from 'prop-types';
 
-export const FeedInfo = () => {
+export const FeedInfo = (): JSX.Element => {
   const location = useLocation();
   const { numberOrder } = useParams();
   const orderList = useSelector((store) => store.feedReducer.message);

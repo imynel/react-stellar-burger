@@ -19,7 +19,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { Link, useLocation } from 'react-router-dom';
 
-const BurgerConstructor = () => {
+const BurgerConstructor = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);

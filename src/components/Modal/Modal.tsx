@@ -10,7 +10,12 @@ import { closeModal } from '../../services/actions/modal';
 
 const modalRoot = document.getElementById('react-modals');
 
-const Modal = ({ children, onClose }) => {
+type Props = {
+  children: React.ReactNode;
+  onClose: () => void
+}
+
+const Modal = ({ children, onClose}: Props): JSX.Element => {
   const dispatch = useDispatch();
 
   const handlerClose = () => {
@@ -20,7 +25,7 @@ const Modal = ({ children, onClose }) => {
     }
   };
 
-  const escClose = (e) => {
+  const escClose = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       handlerClose();
     }
@@ -38,18 +43,14 @@ const Modal = ({ children, onClose }) => {
       <ModalOverlay closeModal={() => handlerClose()} />
       <section className={styles.modal}>
         <div className={styles.close}>
-          <CloseIcon onClick={() => handlerClose()} />
+          <CloseIcon type='primary'onClick={() => handlerClose()} />
         </div>
         {children}
       </section>
     </>,
-    modalRoot,
+    modalRoot as HTMLElement,
   );
 };
 
-Modal.propTypes = {
-  handleClose: PropTypes.func,
-  children: PropTypes.element,
-};
 
 export default Modal;

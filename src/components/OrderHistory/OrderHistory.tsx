@@ -7,11 +7,12 @@ import { OrderTape } from '../OrderTape/OrderTape';
 import { wsConnection, wsDisconnect } from '../../services/actions/ordersActions';
 import { WSS_URL } from '../../utils/api';
 
-export const OrderHistory = () => {
+export const OrderHistory = (): JSX.Element => {
+
   const orderList = useSelector((store) => store.ordersReducer.message);
   const dispatch = useDispatch();
   const location = useLocation()
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken')!;
   const tokenAPI = token.replace('Bearer ', '');
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export const OrderHistory = () => {
             </p>
           </div>
           <div className={`${styles.history} pr-2 custom-scroll`}>
-            {orderList.map((element) => {
+            {orderList.map((element: any) => {
               return (
                 <Link to={`/profile/orders/${element.number}`} className={styles.linkUrl} state={{background: location}}>
                   <OrderTape order={element} />
