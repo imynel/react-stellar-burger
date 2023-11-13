@@ -1,10 +1,32 @@
 import { postRegister, getUserApi, postLogout, postSignIn, patchRefreshUser } from "../../utils/api"
 
-export const POST_REGISTER_REQUEST = 'POST_REGISTER_REQUEST'
-export const POST_REGISTER_SUCCESS = 'POST_REGISTER_SUCCESS'
-export const POST_REGISTER_FAILED = 'POST_REGISTER_FAILED'
-export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED'
-export const SET_USER = 'SET_USER'
+export const POST_REGISTER_REQUEST: 'POST_REGISTER_REQUEST' = 'POST_REGISTER_REQUEST'
+export const POST_REGISTER_SUCCESS: 'POST_REGISTER_SUCCESS' = 'POST_REGISTER_SUCCESS'
+export const POST_REGISTER_FAILED: 'POST_REGISTER_FAILED' = 'POST_REGISTER_FAILED'
+export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED'
+export const SET_USER: 'SET_USER' = 'SET_USER'
+
+type postRegisterRequestAction = {
+    readonly type: typeof POST_REGISTER_REQUEST
+}
+
+type postRegisterSuccessAction = {
+    readonly type: typeof POST_REGISTER_SUCCESS
+}
+
+type postRegisterFailedAction = {
+    readonly type: typeof POST_REGISTER_FAILED
+}
+
+type setAuthCheckedAction = {
+    readonly type: typeof SET_AUTH_CHECKED
+}
+
+type setUserAction = {
+    readonly type: typeof SET_USER;
+    readonly payload: any;
+}
+
 
 
 export const getUser = () => {
@@ -15,7 +37,7 @@ export const getUser = () => {
     }
 } 
 
-export const refreshUser = (email, name, password) => {
+export const refreshUser = (email: string, name: string, password: string) => {
     return function(dispatch) {
         patchRefreshUser(email, name, password)
             .then((res) => {
@@ -24,7 +46,7 @@ export const refreshUser = (email, name, password) => {
     }
 }
 
-export const setUser = (user) => ({
+export const setUser = (user: any): setUserAction => ({
     type: SET_USER,
     payload: user,
 })
@@ -34,7 +56,7 @@ export const setAuthChecked = (value) => ({
     payload: value,
 })
 
-export const login = (email, password) => {
+export const login = (email: string, password: string) => {
     return function(dispatch) {
         postSignIn(email, password)
             .then((res) => {
@@ -60,7 +82,7 @@ export const logout = () => {
     }
 }
 
-export const postRegisterProfile = (email, password, name) => {
+export const postRegisterProfile = (email: string, password: string, name: string) => {
     return function(dispatch) {
         dispatch({
             type: POST_REGISTER_REQUEST,
