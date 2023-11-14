@@ -9,32 +9,32 @@ export const GET_CONSTRUCTOR_REQUEST: 'GET_CONSTRUCTOR_REQUEST' = 'GET_CONSTRUCT
 export const GET_CONSTRUCTOR_SUCCESS: 'GET_CONSTRUCTOR_SUCCESS' = 'GET_CONSTRUCTOR_SUCCESS'
 export const GET_CONSTRUCTOR_FAILED: 'GET_CONSTRUCTOR_FAILED' = 'GET_CONSTRUCTOR_FAILED'
 
-type addIngredientAction = {
+export type addIngredientAction = {
     readonly type: typeof ADD_INGREDIENT;
     readonly ingredient: TIngredient;
     readonly key: string
 }
-type deleteIngredientAction = {
+export type deleteIngredientAction = {
     readonly type: typeof DELETE_INGREDIENT;
     readonly ingredient: TIngredient;
     readonly key: string
 }
-type changeIngedientsAction = {
+export type changeIngedientsAction = {
     readonly type: typeof CHANGE_INGREDIENT;
     readonly fromIndex: number;
     readonly toIndex: number;
 }
-type getConstructorRequestAction = {
+export type getConstructorRequestAction = {
     readonly type: typeof GET_CONSTRUCTOR_REQUEST;
 }
-type getConstructorSuccessAction = {
+export type getConstructorSuccessAction = {
     readonly type: typeof GET_CONSTRUCTOR_SUCCESS;
 }
-type getConstructorFailedAction = {
+export type getConstructorFailedAction = {
     readonly type: typeof GET_CONSTRUCTOR_FAILED;
 }
 
-type TConstructorActions = addIngredientAction 
+export type TConstructorActions = addIngredientAction 
     | deleteIngredientAction 
     | changeIngedientsAction 
     | getConstructorRequestAction 

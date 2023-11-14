@@ -1,7 +1,20 @@
 import { ADD_INGREDIENT, CHANGE_INGREDIENT, DELETE_INGREDIENT, GET_CONSTRUCTOR_FAILED, GET_CONSTRUCTOR_REQUEST, GET_CONSTRUCTOR_SUCCESS } from '../actions/constructor'
+import { TIngredient } from '../types/types'
+import { TConstructorActions } from '../actions/constructor'
 
+type order = {
+    number: null | number;
+}
 
-const initialState = {
+type state = {
+    currentIngredients: TIngredient[];
+    currentIngredientsRequest: boolean;
+    currentIngredientsFailed: boolean;
+    bun: TIngredient | null;
+    order: order;
+}
+
+const initialState: state = {
     currentIngredients: [],
     currentIngredientsRequest: false,
     currentIngredientsFailed: false,
@@ -11,7 +24,7 @@ const initialState = {
     },
 }
 
-export const constructorReducer = (store = initialState, action) => {
+export const constructorReducer = (store = initialState, action: TConstructorActions): TConstructorActions => {
     switch(action.type) {
         case ADD_INGREDIENT: {
             if (action.ingredient.type === 'bun') {

@@ -7,36 +7,37 @@ export const WS_GET_MESSAGE: 'WS_GET_MESSAGE' = 'WS_GET_MESSAGE';
 export const WS_SEND_MESSAGE: 'WS_SEND_MESSAGE' = 'WS_SEND_MESSAGE';
 export const WS_CONNECTING: 'WS_CONNECTING' = 'WS_CONNECTING';
 
-type wsConnectionAction = {
+export type wsConnectionAction = {
   readonly type: typeof WS_CONNECTION;
   readonly payload: string;
 }
-type wsDisconnectAction = {
+export type wsDisconnectAction = {
   readonly type: typeof WS_DISCONNECT;
 }
-type wsConnectionOpenAction = {
+export type wsConnectionOpenAction = {
   readonly type: typeof WS_CONNECTION_OPEN;
 }
-type wsConnectionCloseAction = {
+export type wsConnectionCloseAction = {
   readonly type: typeof WS_CONNECTION_CLOSE;
 }
-type wsConnectionErrorAction = {
+export type wsConnectionErrorAction = {
   readonly type: typeof WS_CONNECTION_ERROR;
+  readonly payload: string;
 }
-type wsGetMessageAction = {
+export type wsGetMessageAction = {
   readonly type: typeof WS_GET_MESSAGE;
   readonly payload: string;
 }
-type wsSendMessageAction = {
+export type wsSendMessageAction = {
   readonly type: typeof WS_SEND_MESSAGE;
   readonly payload: string;
 }
-type wsConnectingAction = {
+export type wsConnectingAction = {
   readonly type: typeof WS_CONNECTING;
 }
 
 
-type TfeedActions = wsConnectionAction 
+export type TfeedActions = wsConnectionAction 
   | wsDisconnectAction 
   | wsConnectionOpenAction 
   | wsConnectionCloseAction 
@@ -68,17 +69,18 @@ export const wsConnectionClose = (): wsConnectionCloseAction => ({
 });
 
 // экшен для ошибки
-export const wsConnectionError = (): wsConnectionErrorAction => ({
-    type: WS_CONNECTION_ERROR
+export const wsConnectionError = (error: string): wsConnectionErrorAction => ({
+    type: WS_CONNECTION_ERROR,
+    payload: error
 });
 
 
-  export const wsGetMessage = (message): wsGetMessageAction => ({
+  export const wsGetMessage = (message: any): wsGetMessageAction => ({
       type: WS_GET_MESSAGE,
       payload: message
   });
   
-  export const wsSendMessage = (message): wsSendMessageAction => ({
+  export const wsSendMessage = (message: any): wsSendMessageAction => ({
       type: WS_SEND_MESSAGE,
       payload: message
   });
