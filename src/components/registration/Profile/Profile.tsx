@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../services/hooks/hooks';
 import { logout, refreshUser } from '../../../services/actions/register';
 
 export const Profile = (): JSX.Element => {

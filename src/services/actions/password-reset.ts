@@ -10,34 +10,35 @@ export const POST_PASSWORD_SUCCESS: 'POST_PASSWORD_SUCCESS' = 'POST_PASSWORD_SUC
 export const POST_PASSWORD_FAILED: 'POST_PASSWORD_FAILED' = 'POST_PASSWORD_FAILED'
 
 type postEmailRequestAction = {
-    readonly type: typeof POST_EMAIL_REQUEST
+    readonly type: typeof POST_EMAIL_REQUEST;
 }
 
 type postEmailSuccessAction = {
-    readonly type: typeof POST_EMAIL_SUCCESS
+    readonly type: typeof POST_EMAIL_SUCCESS;
+    readonly payload: string;
 }
 
 type postEmailFailedAction = {
-    
-    readonly type: typeof POST_EMAIL_FAILED 
+    readonly type: typeof POST_EMAIL_FAILED;
 }
+
 type postPasswordRequestAction = {
-    readonly type: typeof POST_PASSWORD_REQUEST
+    readonly type: typeof POST_PASSWORD_REQUEST;
 }
 
 type postPasswordSuccesAction = {
-    readonly type: typeof POST_PASSWORD_SUCCESS
+    readonly type: typeof POST_PASSWORD_SUCCESS;
 }
 
 type postPasswordFailedAction = {
-    readonly type: typeof POST_PASSWORD_FAILED
+    readonly type: typeof POST_PASSWORD_FAILED;
 }
 
-type TPasswordActions = postEmailRequestAction | postEmailSuccessAction | postEmailFailedAction | postPasswordRequestAction | postPasswordSuccesAction | postPasswordFailedAction
+export type TPasswordActions = postEmailRequestAction | postEmailSuccessAction | postEmailFailedAction | postPasswordRequestAction | postPasswordSuccesAction | postPasswordFailedAction
 
 
 
-export const postEmailReset = (email) => {
+export const postEmailReset = (email: string) => {
     return function(dispatch) {
         dispatch({
             type: POST_EMAIL_REQUEST,
@@ -63,7 +64,7 @@ export const postEmailReset = (email) => {
     }
 }
 
-export const postPasswordReset = (password, token) => {
+export const postPasswordReset = (password: string, token: string) => {
     return function(dispatch) {
         dispatch({
             type: POST_PASSWORD_REQUEST,

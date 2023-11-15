@@ -1,6 +1,6 @@
 import stylePopup from './OrderDetails.module.css';
 import done from '../../images/graphics.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks';
 
 const OrderDetails = (): JSX.Element => {
   const orderNumber = useSelector(store => store.constructorReducer.order.number)

@@ -5,7 +5,6 @@ import {
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
 import { Link } from 'react-router-dom'
 
 const AppHeader = (): JSX.Element => {

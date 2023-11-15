@@ -1,7 +1,16 @@
 import { WS_CONNECTING, WS_CONNECTION_CLOSE, WS_CONNECTION_ERROR, WS_CONNECTION_OPEN, WS_GET_MESSAGE} from "../actions/feedActions"
 import { WebsocketStatus } from "../../utils/wsStatus";
+import { TOrderActions } from "../actions/ordersActions";
 
-const initialState = {
+type state = {
+    status: string
+    message: any;
+    error: string | null;
+    total: number | null;
+    totalToday: number | null
+}
+
+const initialState: state = {
     status: WebsocketStatus.OFFLINE,
     message: [],
     error: null,
@@ -9,7 +18,7 @@ const initialState = {
     totalToday: null,
 }
 
-export const ordersReducer = (store = initialState, action) => {
+export const ordersReducer = (store = initialState, action: TOrderActions) => {
     switch (action.type) {
         case WS_CONNECTING: {
             return {

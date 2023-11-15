@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styles from './OrderHistory.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { logout } from '../../services/actions/register';
 import { OrderTape } from '../OrderTape/OrderTape';
 import { wsConnection, wsDisconnect } from '../../services/actions/ordersActions';
 import { WSS_URL } from '../../utils/api';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 
 export const OrderHistory = (): JSX.Element => {
 

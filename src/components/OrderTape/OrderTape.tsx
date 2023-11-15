@@ -1,31 +1,16 @@
 import React from 'react';
 import styles from './OrderTape.module.css';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
 
 export const OrderTape = ({ order }: any): JSX.Element => {
 
-  type element = {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
-  }
-
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
 
-  const currentIngredients: element[] = [];
-  order.ingredients.forEach((elm: element) => {
-    currentIngredients.push(ingredients.find((element: element) => element._id === elm));
+  const currentIngredients: TIngredient[] = [];
+  order.ingredients.forEach((elm: TIngredient) => {
+    currentIngredients.push(ingredients.find((element: any) => element._id === elm));
   });
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);

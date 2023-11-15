@@ -1,6 +1,14 @@
-import { POST_EMAIL_FAILED, POST_EMAIL_REQUEST, POST_EMAIL_SUCCESS, POST_PASSWORD_FAILED, POST_PASSWORD_REQUEST, POST_PASSWORD_SUCCESS } from "../actions/password-reset";
+import { POST_EMAIL_FAILED, POST_EMAIL_REQUEST, POST_EMAIL_SUCCESS, POST_PASSWORD_FAILED, POST_PASSWORD_REQUEST, POST_PASSWORD_SUCCESS, TPasswordActions } from "../actions/password-reset";
 
-const initialState = {
+type state = {
+    info: any;
+    emailRequest: boolean;
+    emailFailed: boolean;
+    passwordRequest: boolean;
+    passwordFailed: boolean;
+}
+
+const initialState: state = {
     info: null,
     emailRequest: false,
     emailFailed: false,
@@ -9,7 +17,7 @@ const initialState = {
     
 }
 
-export const passwordReducer = (store = initialState, action) => {
+export const passwordReducer = (store = initialState, action: TPasswordActions) => {
     switch(action.type) {
         case POST_EMAIL_REQUEST: {
             return {

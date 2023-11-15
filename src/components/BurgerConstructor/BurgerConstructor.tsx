@@ -9,7 +9,6 @@ import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInC
 import PropTypes from 'prop-types';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import {
   addIngredient,
@@ -18,6 +17,8 @@ import {
 } from '../../services/actions/constructor';
 import { v4 as uuidv4 } from 'uuid';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
 
 const BurgerConstructor = (): JSX.Element => {
   const location = useLocation();
@@ -25,12 +26,12 @@ const BurgerConstructor = (): JSX.Element => {
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const { isAuthCheck, user } = useSelector((store) => store.registerReducer);
   const [price, setPrice] = useState(null);
-  const ID = currentIngredients.map((item) => {
+  const ID = currentIngredients.map((item: TIngredient) => {
     return item._id;
   });
 
   useEffect(() => {
-    let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
+    let totalPrice = currentIngredients.reduce((acc: any, item: any) => acc + item.price, 0);
     if (bun) {
       totalPrice = totalPrice + bun.price * 2;
     }
@@ -39,7 +40,7 @@ const BurgerConstructor = (): JSX.Element => {
 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
-    drop: (ingredient) => {
+    drop: (ingredient: TIngredient) => {
       dispatch(addIngredient(ingredient));
     },
   });
@@ -71,7 +72,7 @@ const BurgerConstructor = (): JSX.Element => {
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {currentIngredients.map((ingredient, index) => {
+          {currentIngredients.map((ingredient: any, index: any) => {
             if (ingredient.type !== 'bun') {
               return (
                 <React.Fragment key={uuidv4()}>
@@ -110,7 +111,7 @@ const BurgerConstructor = (): JSX.Element => {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={user && isAuthCheck ? onSubmit : null}
+            onClick={user && isAuthCheck ? onSubmit : undefined}
             disabled={currentIngredients.length && bun ? false : true}>
             Оформить заказ
           </Button>

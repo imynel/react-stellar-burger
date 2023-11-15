@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { useLocation, Navigate } from 'react-router-dom';
+import { useSelector } from '../../services/hooks/hooks';
 
 type Props = {
   onlyUnAuth?: boolean

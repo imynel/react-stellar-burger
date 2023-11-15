@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import style from './Ingredient.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { TIngredient } from '../../services/types/types';
+import { useSelector } from '../../services/hooks/hooks';
 
-const Ingredient = ({ item, handleOpen }): JSX.Element => {
+type props = {
+  item: TIngredient;
+  handleOpen: (item: TIngredient) => void;
+}
+
+const Ingredient = ({ item, handleOpen }: props): JSX.Element => {
   const location = useLocation();
   const [meter, setMeter] = useState(0);
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
@@ -24,7 +29,7 @@ const Ingredient = ({ item, handleOpen }): JSX.Element => {
     if (bun && item.type === 'bun' && item._id === bun._id) {
       counter = 1;
     } else {
-      counter = currentIngredients.filter((element) => element._id === item._id).length;
+      counter = currentIngredients.filter((element: TIngredient) => element._id === item._id).length;
     }
     setMeter(counter);
   }, [bun, currentIngredients]);
@@ -47,11 +52,6 @@ const Ingredient = ({ item, handleOpen }): JSX.Element => {
       </div>
     </Link>
   );
-};
-
-Ingredient.propTypes = {
-  handleOpen: PropTypes.func,
-  item: PropTypes.object,
 };
 
 export default Ingredient;

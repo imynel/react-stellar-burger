@@ -6,20 +6,33 @@ export const POST_REGISTER_FAILED: 'POST_REGISTER_FAILED' = 'POST_REGISTER_FAILE
 export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED'
 export const SET_USER: 'SET_USER' = 'SET_USER'
 
+type user = {
+    email: string;
+    name: string;
+}
+
+type userInfo = {
+    user: user;
+    accessToken: string;
+    refreshToken: string;
+}
+
 type postRegisterRequestAction = {
-    readonly type: typeof POST_REGISTER_REQUEST
+    readonly type: typeof POST_REGISTER_REQUEST;
 }
 
 type postRegisterSuccessAction = {
-    readonly type: typeof POST_REGISTER_SUCCESS
+    readonly type: typeof POST_REGISTER_SUCCESS;
+    readonly payload: userInfo
 }
 
 type postRegisterFailedAction = {
-    readonly type: typeof POST_REGISTER_FAILED
+    readonly type: typeof POST_REGISTER_FAILED;
 }
 
 type setAuthCheckedAction = {
-    readonly type: typeof SET_AUTH_CHECKED
+    readonly type: typeof SET_AUTH_CHECKED;
+    readonly payload: boolean;
 }
 
 type setUserAction = {
@@ -27,6 +40,11 @@ type setUserAction = {
     readonly payload: any;
 }
 
+export type TRegisterActions = postRegisterRequestAction 
+    | postRegisterSuccessAction 
+    | postRegisterFailedAction 
+    | setAuthCheckedAction 
+    | setUserAction
 
 
 export const getUser = () => {
@@ -51,7 +69,7 @@ export const setUser = (user: any): setUserAction => ({
     payload: user,
 })
 
-export const setAuthChecked = (value) => ({
+export const setAuthChecked = (value: boolean): setAuthCheckedAction => ({
     type: SET_AUTH_CHECKED,
     payload: value,
 })

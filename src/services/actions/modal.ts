@@ -18,14 +18,14 @@ type modalCloseAction = {
 type modalOrderAction = {
   readonly type: typeof MODAL_OPEN
   readonly modalType: typeof MODAL_ORDER;
-  readonly props: any 
+  readonly modalProps: any 
 }
 
 type modalIngredientAction = {
   readonly type: typeof MODAL_INGREDIENT
 }
 
-type TModalActions =  modalOpenAction 
+export type TModalActions =  modalOpenAction 
   | modalCloseAction 
   | modalOrderAction 
   | modalIngredientAction
@@ -44,5 +44,5 @@ export const closeModal = () => ({
 export const openOrderModal = (order: any) => ({
   type: MODAL_OPEN,
   modalType: MODAL_ORDER,
-  props: order
+  modalProps: order
 });

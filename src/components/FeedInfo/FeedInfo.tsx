@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
 import styles from './FeedInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { data } from '../../utils/data';
-import { element } from 'prop-types';
+import { useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
 
 export const FeedInfo = (): JSX.Element => {
   const location = useLocation();
-  const { numberOrder } = useParams();
+  const { numberOrder = '' } = useParams();
   const orderList = useSelector((store) => store.feedReducer.message);
-  const order = orderList.find((elm) => elm.number === parseInt(numberOrder));
+  const order = orderList.find((elm: any) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-  const currentIngredients = [];
+  const currentIngredients: TIngredient[] = [];
 
   order &&
-    order.ingredients.forEach((elm) => {
-      currentIngredients.push(allIngredients.find((element) => element._id === elm));
+    order.ingredients.forEach((elm: any) => {
+      currentIngredients.push(allIngredients.find((element: any) => element._id === elm));
     });
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
   // Функция, которая проверяет уникальность объектов
-  function isObjectUnique(value, index, self) {
+  function isObjectUnique(value: any, index: number, self: any) {
     // Преобразуем объект в строку и сравниваем
     const objAsString = JSON.stringify(value);
-    return self.findIndex((obj) => JSON.stringify(obj) === objAsString) === index;
+    return self.findIndex((obj: any) => JSON.stringify(obj) === objAsString) === index;
   }
 
   const uniqueObjects = currentIngredients.filter(isObjectUnique);

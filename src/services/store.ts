@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Action, configureStore } from "@reduxjs/toolkit";
 import { socketMiddleware } from "./middleware";
 import { rootReducer } from "./reducers/index"; 
 
@@ -19,8 +19,17 @@ import { wsConnection as ordersConnect,
     wsGetMessage as ordersWsMessage, 
     wsConnecting as ordersWsConnecting
 } from "./actions/ordersActions"; 
+import { TFeed } from "./types/types";
 
-
+export type TMiddlewareActions = ({
+    wsConnection: Action
+    wsDisconnect: Action
+    wsConnectionOpen: Action
+    wsConnectionClose: Action
+    wsConnectionError(error: string): Action
+    wsGetMessage(message: TFeed): Action
+    wsConnecting: Action
+  });
 
 const feedMiddleWare = socketMiddleware({
     wsConnection: feedConnect,
@@ -30,7 +39,7 @@ const feedMiddleWare = socketMiddleware({
     wsConnectionError: feedWsError,
     wsGetMessage: feedWsMessage,
     wsConnecting: feedWsConnecting,
-})
+} as TMiddlewareActions)
 
 const ordersMiddleWare = socketMiddleware({
     wsConnection: ordersConnect,
@@ -40,7 +49,7 @@ const ordersMiddleWare = socketMiddleware({
     wsConnectionError: ordersWsError,
     wsGetMessage: ordersWsMessage,
     wsConnecting: ordersWsConnecting,
-})
+} as TMiddlewareActions)
 
 export const store = configureStore({
     reducer: rootReducer,

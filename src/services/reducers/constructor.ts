@@ -24,7 +24,7 @@ const initialState: state = {
     },
 }
 
-export const constructorReducer = (store = initialState, action: TConstructorActions): TConstructorActions => {
+export const constructorReducer = (store = initialState, action: TConstructorActions): state => {
     switch(action.type) {
         case ADD_INGREDIENT: {
             if (action.ingredient.type === 'bun') {

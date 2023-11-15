@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import stylePopupInfo from './IngredientDetails.module.css';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
 
 const IngredientDetails = (): JSX.Element => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const { id } = useParams();
-  const ingredient = ingredients.find((elm) => elm._id === id);
+  const ingredient = ingredients.find((elm: TIngredient) => elm._id === id);
 
   return (
     <>

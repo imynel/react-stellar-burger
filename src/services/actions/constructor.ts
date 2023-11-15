@@ -1,6 +1,7 @@
 import { postOrderNumber } from '../../utils/api'
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../types/types';
+import { AppDispatch, AppThunk } from '../types';
 
 export const ADD_INGREDIENT: 'ADD_INGREDIENT'  = 'ADD_INGREDIENT' 
 export const DELETE_INGREDIENT: 'DELETE_INGREDIENT' = 'DELETE_INGREDIENT'
@@ -29,6 +30,7 @@ export type getConstructorRequestAction = {
 }
 export type getConstructorSuccessAction = {
     readonly type: typeof GET_CONSTRUCTOR_SUCCESS;
+    readonly number: number | null;
 }
 export type getConstructorFailedAction = {
     readonly type: typeof GET_CONSTRUCTOR_FAILED;
@@ -61,8 +63,8 @@ export const changeIngedients = (fromIndex: number, toIndex: number): changeInge
     toIndex: toIndex
   });
 
-export const getOrderNumder = (id) => {
-    return function(dispatch) {
+export const getOrderNumder: AppThunk = (id: string[]) => {
+    return (dispatch: AppDispatch) => {
         dispatch({
             type: GET_CONSTRUCTOR_REQUEST,
         })

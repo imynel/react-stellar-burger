@@ -2,11 +2,9 @@ import styles from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { closeModal } from '../../services/actions/modal';
+import { useDispatch } from '../../services/hooks/hooks';
 
 const modalRoot = document.getElementById('react-modals');
 

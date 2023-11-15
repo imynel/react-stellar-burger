@@ -1,4 +1,6 @@
 import { getIngredients } from '../../utils/api'
+import { AppDispatch, AppThunk } from '../types'
+import { TIngredient } from '../types/types'
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST'
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS'
 export const GET_INGREDIENTS_FAILED: 'GET_INGREDIENTS_FAILED' = 'GET_INGREDIENTS_FAILED'
@@ -8,19 +10,20 @@ type getIngredientsRequestAction = {
 }
 
 type getIngredientsSuccessAction = {
-readonly type: typeof GET_INGREDIENTS_SUCCESS
+    readonly type: typeof GET_INGREDIENTS_SUCCESS;
+    readonly ingredients: TIngredient[]
 }
 
 type getIngredientsFailedAction = {
     readonly type: typeof GET_INGREDIENTS_FAILED
 }
 
-type TIngredientsActions = getIngredientsRequestAction | getIngredientsSuccessAction | getIngredientsFailedAction
+export type TIngredientsActions = getIngredientsRequestAction | getIngredientsSuccessAction | getIngredientsFailedAction
 
 
-export const getAllIngredients = () => {
+export const getAllIngredients: AppThunk = () => {
 
-    return function(dispatch) {
+    return (dispatch: AppDispatch) => {
         dispatch({
             type: GET_INGREDIENTS_REQUEST,
         })

@@ -22,6 +22,7 @@ type wsConnectionCloseAction = {
 }
 type wsConnectionErrorAction = {
   readonly type: typeof WS_CONNECTION_ERROR;
+  readonly payload: string;
 }
 type wsGetMessageAction = {
   readonly type: typeof WS_GET_MESSAGE;
@@ -35,7 +36,7 @@ type wsConnectingAction = {
   readonly type: typeof WS_CONNECTING;
 }
 
-type TOrderActions = wsConnectionAction 
+export type TOrderActions = wsConnectionAction 
   | wsDisconnectAction 
   | wsConnectionOpenAction 
   | wsConnectionCloseAction 
@@ -67,15 +68,16 @@ export const wsConnectionClose = (): wsConnectionCloseAction => ({
 
 // экшен для ошибки
 export const wsConnectionError = (): wsConnectionErrorAction => ({
-    type: WS_CONNECTION_ERROR
+    type: WS_CONNECTION_ERROR,
+    payload: ''
 });
 
-  export const wsGetMessage = (message): wsGetMessageAction => ({
+  export const wsGetMessage = (message: any): wsGetMessageAction => ({
     type: WS_GET_MESSAGE,
       payload: message
   });
   
-  export const wsSendMessage = (message): wsSendMessageAction => ({
+  export const wsSendMessage = (message: any): wsSendMessageAction => ({
       type: WS_SEND_MESSAGE,
       payload: message
   });

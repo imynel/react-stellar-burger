@@ -5,10 +5,18 @@ import { useDispatch } from 'react-redux';
 import { deleteIngredient } from '../../services/actions/constructor';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { TIngredient } from '../../services/types/types';
 
-const IngregientsInConstructor = ({ ingredient, key, index, swap }): JSX.Element => {
+type props = {
+  ingredient: TIngredient;
+  key: string;
+  index: number;
+  swap: any;
+}
+
+const IngregientsInConstructor = ({ ingredient, key, index, swap }: props): JSX.Element => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: 'constructor',
@@ -20,7 +28,7 @@ const IngregientsInConstructor = ({ ingredient, key, index, swap }): JSX.Element
 
   const [, drop] = useDrop({
     accept: 'constructor',
-    hover(item, monitor) {
+    hover(item: any, monitor: any) {
       if (!ref.current) return;
 
       const dragIndex = item.index;

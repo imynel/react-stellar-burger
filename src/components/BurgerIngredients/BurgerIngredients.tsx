@@ -1,35 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styleBurgerIngredients from './BurgerIngredients.module.css';
-import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
-import { useDrag } from 'react-dnd';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllIngredients } from '../../services/actions/ingredients';
-import thunk from 'redux-thunk';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from '../Ingredient/Ingredient';
+import { useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
 
 type Props = {
   handleOpen: () => void;
 }
 
-type element = {
-  _id: string;
-  name: string;
-  type: string;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-  calories: number;
-  price: number;
-  image: string;
-  image_mobile: string;
-  image_large: string;
-  __v: number;
-}
-
 const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
   const dataIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
-  const ingredient: element[] = dataIngredients;
+  const ingredient: TIngredient[] = dataIngredients;
 
   const [activeTab, setActiveTab] = React.useState('bun');
 
@@ -83,7 +65,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
       <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
         <div className={`${styleBurgerIngredients.container} bun`}>
-          {ingredient.map((element: element) => {
+          {ingredient.map((element: TIngredient) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
@@ -95,7 +77,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
         <div className={`${styleBurgerIngredients.container} sauce`}>
-          {ingredient.map((element: element) => {
+          {ingredient.map((element: TIngredient) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
@@ -107,7 +89,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
         <div className={`${styleBurgerIngredients.container} main`}>
-          {ingredient.map((element: element) => {
+          {ingredient.map((element: TIngredient) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>

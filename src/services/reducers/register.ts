@@ -1,6 +1,17 @@
-import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET_AUTH_CHECKED, SET_USER } from "../actions/register";
+import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET_AUTH_CHECKED, SET_USER, TRegisterActions } from "../actions/register";
 
-const initialState = {
+type state = {
+    email: string;
+    name: string;
+    accessToken: string;
+    refreshToken: string;
+    registerRequest: boolean;
+    registerFailed: boolean;
+    isAuthCheck: boolean;
+    user: any;
+}
+
+const initialState: state = {
     email: '',
     name: '',
     accessToken: '',
@@ -11,7 +22,7 @@ const initialState = {
     user: null,
 }
 
-export const registerReducer = (store = initialState, action) => {
+export const registerReducer = (store = initialState, action: TRegisterActions) => {
     switch(action.type) {
         case SET_USER: {
             return {
