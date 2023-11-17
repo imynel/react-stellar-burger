@@ -3,7 +3,7 @@ import { TMiddlewareActions } from "../store";
 import { RootState } from "../types";
 
 // socketMiddleware.js
-export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<{}, RootState> => {
+export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<RootState> => {
     return store => {
         let socket: WebSocket | null = null;
 
@@ -12,12 +12,12 @@ export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<{}, R
       const { type, payload } = action;
       const { wsConnection, wsDisconnect, wsConnectionOpen, wsConnectionClose, wsConnectionError, wsGetMessage,  wsConnecting } = wsAction
       
-      if (type === wsConnection().type) {
+      if (type === wsConnection) {
         if(!socket) {
           socket = new WebSocket(action.payload);
           // функция, которая вызывается при открытии сокета
           socket.onopen = () => {
-            dispatch(wsConnectionOpen());
+            dispatch(wsConnectionOpen);
           };
           // функция, которая вызывается при ошибке соединения
           socket.onerror = () => {
@@ -31,9 +31,9 @@ export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<{}, R
           };
           // функция, которая вызывается при закрытии соединения
           socket.onclose = () => {
-            dispatch(wsConnectionClose());
+            dispatch(wsConnectionClose);
           };
-          dispatch(wsConnecting())
+          dispatch(wsConnecting)
         }
       }
       

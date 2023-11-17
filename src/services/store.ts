@@ -39,7 +39,7 @@ const feedMiddleWare = socketMiddleware({
     wsConnectionError: feedWsError,
     wsGetMessage: feedWsMessage,
     wsConnecting: feedWsConnecting,
-} as TMiddlewareActions)
+} as unknown as TMiddlewareActions)
 
 const ordersMiddleWare = socketMiddleware({
     wsConnection: ordersConnect,
@@ -49,7 +49,7 @@ const ordersMiddleWare = socketMiddleware({
     wsConnectionError: ordersWsError,
     wsGetMessage: ordersWsMessage,
     wsConnecting: ordersWsConnecting,
-} as TMiddlewareActions)
+} as unknown as TMiddlewareActions)
 
 export const store = configureStore({
     reducer: rootReducer,

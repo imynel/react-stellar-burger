@@ -26,7 +26,7 @@ export type wsConnectionErrorAction = {
 }
 export type wsGetMessageAction = {
   readonly type: typeof WS_GET_MESSAGE;
-  readonly payload: string;
+  readonly payload: any;
 }
 export type wsSendMessageAction = {
   readonly type: typeof WS_SEND_MESSAGE;

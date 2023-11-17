@@ -1,4 +1,5 @@
 import { postRegister, getUserApi, postLogout, postSignIn, patchRefreshUser } from "../../utils/api"
+import { AppDispatch, AppThunk } from "../types"
 
 export const POST_REGISTER_REQUEST: 'POST_REGISTER_REQUEST' = 'POST_REGISTER_REQUEST'
 export const POST_REGISTER_SUCCESS: 'POST_REGISTER_SUCCESS' = 'POST_REGISTER_SUCCESS'
@@ -48,7 +49,7 @@ export type TRegisterActions = postRegisterRequestAction
 
 
 export const getUser = () => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         return getUserApi().then((res) => {
             dispatch(setUser(res.user))
         })
@@ -56,7 +57,7 @@ export const getUser = () => {
 } 
 
 export const refreshUser = (email: string, name: string, password: string) => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         patchRefreshUser(email, name, password)
             .then((res) => {
                 dispatch(setUser(res.user))
@@ -75,7 +76,7 @@ export const setAuthChecked = (value: boolean): setAuthCheckedAction => ({
 })
 
 export const login = (email: string, password: string) => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         postSignIn(email, password)
             .then((res) => {
                 dispatch(setUser(res.user))
@@ -90,7 +91,7 @@ export const login = (email: string, password: string) => {
 }
 
 export const logout = () => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         postLogout(localStorage.getItem('refreshToken'))
             .then(() => {
                 dispatch(setUser(null))
@@ -101,7 +102,7 @@ export const logout = () => {
 }
 
 export const postRegisterProfile = (email: string, password: string, name: string) => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: POST_REGISTER_REQUEST,
         })
@@ -131,7 +132,7 @@ export const postRegisterProfile = (email: string, password: string, name: strin
 }
 
 export const checkUserAuth = () => {
-    return function(dispatch) {
+    return function(dispatch: AppDispatch) {
         if (localStorage.getItem('accessToken')) {
             dispatch(getUser())
                 .catch(() => {

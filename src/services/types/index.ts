@@ -8,6 +8,7 @@ import { TModalActions } from '../actions/modal';
 import { TOrderActions } from '../actions/ordersActions';
 import { TPasswordActions } from '../actions/password-reset';
 import { TRegisterActions } from '../actions/register';
+import { rootReducer } from '../reducers';
 
 
 type TApplicationActions = TConstructorActions 
@@ -19,6 +20,6 @@ type TApplicationActions = TConstructorActions
     | TRegisterActions
 
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;
 export type AppDispatch = typeof store.dispatch;

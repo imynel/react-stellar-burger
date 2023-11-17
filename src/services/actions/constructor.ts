@@ -63,7 +63,7 @@ export const changeIngedients = (fromIndex: number, toIndex: number): changeInge
     toIndex: toIndex
   });
 
-export const getOrderNumder: AppThunk = (id: string[]) => {
+export const getOrderNumder = (id: string[]) => {
     return (dispatch: AppDispatch) => {
         dispatch({
             type: GET_CONSTRUCTOR_REQUEST,

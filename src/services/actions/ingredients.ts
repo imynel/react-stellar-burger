@@ -21,7 +21,7 @@ type getIngredientsFailedAction = {
 export type TIngredientsActions = getIngredientsRequestAction | getIngredientsSuccessAction | getIngredientsFailedAction
 
 
-export const getAllIngredients: AppThunk = () => {
+export const getAllIngredients = () => {
 
     return (dispatch: AppDispatch) => {
         dispatch({
