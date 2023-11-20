@@ -10,8 +10,8 @@ export const Profile = (): JSX.Element => {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const emailServer = useSelector(store => store.registerReducer.user.email)
-  const nameServer = useSelector(store => store.registerReducer.user.name)
+  const emailServer = useSelector(store => store.registerReducer.email)
+  const nameServer = useSelector(store => store.registerReducer.name)
 
   useEffect(() => {
     setLogin(emailServer)

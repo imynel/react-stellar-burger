@@ -6,6 +6,7 @@ import { OrderTape } from '../OrderTape/OrderTape';
 import { wsConnection, wsDisconnect } from '../../services/actions/ordersActions';
 import { WSS_URL } from '../../utils/api';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { TIngredient, TOrder } from '../../services/types/types';
 
 export const OrderHistory = (): JSX.Element => {
 
@@ -47,10 +48,10 @@ export const OrderHistory = (): JSX.Element => {
             </p>
           </div>
           <div className={`${styles.history} pr-2 custom-scroll`}>
-            {orderList.map((element: any) => {
+            {orderList.map((element: TOrder) => {
               return (
                 <Link to={`/profile/orders/${element.number}`} className={styles.linkUrl} state={{background: location}}>
-                  <OrderTape order={element} />
+                  <OrderTape order={element} success={false} name={''} ingredients={[]} status={''} number={0} createdAt={''} _id={''} price={''} />
                 </Link>
               )
             })}

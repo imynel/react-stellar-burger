@@ -25,13 +25,13 @@ const BurgerConstructor = (): JSX.Element => {
   const dispatch = useDispatch();
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const { isAuthCheck, user } = useSelector((store) => store.registerReducer);
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState<number | null>(null);
   const ID = currentIngredients.map((item: TIngredient) => {
     return item._id;
   });
 
   useEffect(() => {
-    let totalPrice = currentIngredients.reduce((acc: any, item: any) => acc + item.price, 0);
+    let totalPrice = currentIngredients.reduce((acc, item) => acc + item.price, 0);
     if (bun) {
       totalPrice = totalPrice + bun.price * 2;
     }
@@ -72,7 +72,7 @@ const BurgerConstructor = (): JSX.Element => {
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {currentIngredients.map((ingredient: any, index: any) => {
+          {currentIngredients.map((ingredient: TIngredient, index: number) => {
             if (ingredient.type !== 'bun') {
               return (
                 <React.Fragment>

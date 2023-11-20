@@ -8,27 +8,14 @@ import Modal from '../../components/Modal/Modal';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter, Router, Routes} from 'react-router-dom'
+import { TIngredient } from '../../services/types/types';
 
 const HomePage = () => {
-  type element = {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
-  }
 
   const [modalIngredient, setModalIngredient] = useState(false);
-  const [ingredient, setIngredient] = useState<element | null>(null);
+  const [ingredient, setIngredient] = useState<TIngredient | null>(null);
 
-  const openIngredientsDetails = (item: element) => {
+  const openIngredientsDetails = (item: TIngredient) => {
     setModalIngredient(true);
     setIngredient(item);
   };

@@ -1,3 +1,5 @@
+import { TFeed, TOrder } from "../types/types";
+
 export const WS_CONNECTION: 'WS_CONNECTION' = 'WS_CONNECTION';
 export const WS_DISCONNECT: 'WS_DISCONNECT' = 'WS_DISCONNECT';
 export const WS_CONNECTION_OPEN: 'WS_CONNECTION_OPEN' = 'WS_CONNECTION_OPEN'; 
@@ -26,11 +28,7 @@ export type wsConnectionErrorAction = {
 }
 export type wsGetMessageAction = {
   readonly type: typeof WS_GET_MESSAGE;
-  readonly payload: any;
-}
-export type wsSendMessageAction = {
-  readonly type: typeof WS_SEND_MESSAGE;
-  readonly payload: string;
+  readonly payload: TFeed;
 }
 export type wsConnectingAction = {
   readonly type: typeof WS_CONNECTING;
@@ -43,7 +41,6 @@ export type TfeedActions = wsConnectionAction
   | wsConnectionCloseAction 
   | wsConnectionErrorAction 
   | wsGetMessageAction 
-  | wsSendMessageAction 
   | wsConnectingAction 
 
 
@@ -75,16 +72,11 @@ export const wsConnectionError = (error: string): wsConnectionErrorAction => ({
 });
 
 
-  export const wsGetMessage = (message: any): wsGetMessageAction => ({
+  export const wsGetMessage = (message: TFeed): wsGetMessageAction => ({
       type: WS_GET_MESSAGE,
       payload: message
   });
   
-  export const wsSendMessage = (message: any): wsSendMessageAction => ({
-      type: WS_SEND_MESSAGE,
-      payload: message
-  });
-
   export const wsConnecting = (): wsConnectingAction => ({
       type: WS_CONNECTING,
   })

@@ -6,7 +6,7 @@ import { useSelector } from '../../services/hooks/hooks';
 import { TIngredient } from '../../services/types/types';
 
 type Props = {
-  handleOpen: () => void;
+  handleOpen: (item: TIngredient) => void;
 }
 
 const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {

@@ -1,6 +1,7 @@
 import { postEmail } from "../../utils/api";
 import { postPassword } from "../../utils/api";
 import { AppDispatch, AppThunk } from "../types";
+import { TOrder } from "../types/types";
 
 export const POST_EMAIL_REQUEST: 'POST_EMAIL_REQUEST'  = 'POST_EMAIL_REQUEST'
 export const POST_EMAIL_SUCCESS: 'POST_EMAIL_SUCCESS' = 'POST_EMAIL_SUCCESS'
@@ -29,14 +30,19 @@ type postPasswordRequestAction = {
 
 type postPasswordSuccesAction = {
     readonly type: typeof POST_PASSWORD_SUCCESS;
-    readonly payload: any;
+    readonly payload: TOrder;
 }
 
 type postPasswordFailedAction = {
     readonly type: typeof POST_PASSWORD_FAILED;
 }
 
-export type TPasswordActions = postEmailRequestAction | postEmailSuccessAction | postEmailFailedAction | postPasswordRequestAction | postPasswordSuccesAction | postPasswordFailedAction
+export type TPasswordActions = postEmailRequestAction 
+    | postEmailSuccessAction 
+    | postEmailFailedAction 
+    | postPasswordRequestAction 
+    | postPasswordSuccesAction 
+    | postPasswordFailedAction
 
 
 
@@ -47,7 +53,7 @@ export const postEmailReset = (email: string) => {
         })
         postEmail(email)
             .then((res) => {
-                if (res && res.success) {
+                if (res) {
                     dispatch({
                         type: POST_EMAIL_SUCCESS,
                         payload: res
@@ -73,7 +79,7 @@ export const postPasswordReset = (password: string, token: string) => {
         })
         postPassword(password, token)
             .then((res) => {
-                if (res && res.success) {
+                if (res) {
                     dispatch({
                         type: POST_PASSWORD_SUCCESS,
                         payload: res

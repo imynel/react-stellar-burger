@@ -4,17 +4,10 @@ import { func, number, object, string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteIngredient } from '../../services/actions/constructor';
 import { useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import { TIngredient } from '../../services/types/types';
+import { useDrag, useDrop, XYCoord  } from 'react-dnd';
+import { TConstructorItem, TIngredient, TDragItem } from '../../services/types/types';
 
-type props = {
-  ingredient: TIngredient;
-  key: string;
-  index: number;
-  swap: any;
-}
-
-const IngregientsInConstructor = ({ ingredient, key, index, swap }: props): JSX.Element => {
+const IngregientsInConstructor = ({ ingredient, key, index, swap }: TConstructorItem): JSX.Element => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,7 +21,7 @@ const IngregientsInConstructor = ({ ingredient, key, index, swap }: props): JSX.
 
   const [, drop] = useDrop({
     accept: 'constructor',
-    hover(item: any, monitor: any) {
+    hover(item: TDragItem, monitor) {
       if (!ref.current) return;
 
       const dragIndex = item.index;
@@ -39,7 +32,7 @@ const IngregientsInConstructor = ({ ingredient, key, index, swap }: props): JSX.
       const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;

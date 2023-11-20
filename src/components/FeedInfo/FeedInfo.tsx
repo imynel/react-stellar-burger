@@ -2,19 +2,23 @@ import styles from './FeedInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from '../../services/hooks/hooks';
-import { TIngredient } from '../../services/types/types';
+import { TIngredient, TOrder } from '../../services/types/types';
 
 export const FeedInfo = (): JSX.Element => {
   const location = useLocation();
   const { numberOrder = '' } = useParams();
   const orderList = useSelector((store) => store.feedReducer.message);
-  const order = orderList.find((elm: any) => elm.number === parseInt(numberOrder));
+  const order = orderList.find((elm: TOrder) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const currentIngredients: TIngredient[] = [];
 
   order &&
     order.ingredients.forEach((elm: any) => {
-      currentIngredients.push(allIngredients.find((element: any) => element._id === elm));
+      console.log(elm)
+      const foundIngredient = allIngredients.find((element: any) => element._id === elm);
+      if (foundIngredient) {
+        currentIngredients.push(foundIngredient);
+      }
     });
 
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
@@ -30,7 +34,7 @@ export const FeedInfo = (): JSX.Element => {
 
   return (
     <>
-      {!orderList ? null : (
+      {!orderList && !order ? null : (
         <div
           className={`${styles.mainContainer} ${
             location.pathname === `/feed/${numberOrder}` ||

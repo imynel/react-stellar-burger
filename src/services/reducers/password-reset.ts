@@ -1,7 +1,8 @@
 import { POST_EMAIL_FAILED, POST_EMAIL_REQUEST, POST_EMAIL_SUCCESS, POST_PASSWORD_FAILED, POST_PASSWORD_REQUEST, POST_PASSWORD_SUCCESS, TPasswordActions } from "../actions/password-reset";
+import { TOrder } from "../types/types";
 
 type state = {
-    info: any;
+    info: null | TOrder;
     emailRequest: boolean;
     emailFailed: boolean;
     passwordRequest: boolean;

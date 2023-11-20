@@ -31,3 +31,21 @@ export type TFeed = {
   total: number;
   totalToday: number;
 }
+
+export type TConstructorItem = {
+  ingredient: TIngredient;
+  index: number;
+  swap (dragIndex: number, hoverIndex: number): void;
+  key: string;
+};
+
+export type TDragItem = {
+  index: number;
+  id: string;
+  type: string;
+}
+
+export type TUser = {
+  email: string | null;
+  name: string | null;
+} | null

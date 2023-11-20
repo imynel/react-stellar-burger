@@ -1,13 +1,14 @@
 import { MODAL_OPEN, MODAL_CLOSE, TModalActions } from "../actions/modal";
+import { TIngredient } from "../types/types";
 
 type state = {
     modalType: null | string;
-    modalProps: any;
+    modalProps: TIngredient | null;
 }
 
 const initialState: state = {
   modalType: null,
-  modalProps: {}
+  modalProps: null
 }
   
 export const modalReducer = (store = initialState, action: TModalActions) => {

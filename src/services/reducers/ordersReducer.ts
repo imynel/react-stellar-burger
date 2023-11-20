@@ -1,10 +1,11 @@
 import { WS_CONNECTING, WS_CONNECTION_CLOSE, WS_CONNECTION_ERROR, WS_CONNECTION_OPEN, WS_GET_MESSAGE} from "../actions/feedActions"
 import { WebsocketStatus } from "../../utils/wsStatus";
 import { TOrderActions } from "../actions/ordersActions";
+import { TOrder } from "../types/types";
 
 type state = {
     status: string
-    message: any;
+    message: TOrder[];
     error: string | null;
     total: number | null;
     totalToday: number | null

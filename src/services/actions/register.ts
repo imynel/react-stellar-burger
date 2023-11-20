@@ -1,5 +1,6 @@
 import { postRegister, getUserApi, postLogout, postSignIn, patchRefreshUser } from "../../utils/api"
 import { AppDispatch, AppThunk } from "../types"
+import { TUser } from "../types/types"
 
 export const POST_REGISTER_REQUEST: 'POST_REGISTER_REQUEST' = 'POST_REGISTER_REQUEST'
 export const POST_REGISTER_SUCCESS: 'POST_REGISTER_SUCCESS' = 'POST_REGISTER_SUCCESS'
@@ -38,7 +39,7 @@ type setAuthCheckedAction = {
 
 type setUserAction = {
     readonly type: typeof SET_USER;
-    readonly payload: any;
+    readonly payload: TUser;
 }
 
 export type TRegisterActions = postRegisterRequestAction 
@@ -65,7 +66,7 @@ export const refreshUser = (email: string, name: string, password: string) => {
     }
 }
 
-export const setUser = (user: any): setUserAction => ({
+export const setUser = (user: TUser): setUserAction => ({
     type: SET_USER,
     payload: user,
 })
@@ -92,7 +93,7 @@ export const login = (email: string, password: string) => {
 
 export const logout = () => {
     return function(dispatch: AppDispatch) {
-        postLogout(localStorage.getItem('refreshToken'))
+        postLogout(`${localStorage.getItem('refreshToken')}`)
             .then(() => {
                 dispatch(setUser(null))
                 localStorage.removeItem('accessToken')
@@ -134,16 +135,16 @@ export const postRegisterProfile = (email: string, password: string, name: strin
 export const checkUserAuth = () => {
     return function(dispatch: AppDispatch) {
         if (localStorage.getItem('accessToken')) {
-            dispatch(getUser())
-                .catch(() => {
+            try {
+                (dispatch as AppThunk<void>)(getUser());
+            }   catch (error) {
                     localStorage.removeItem('accessToken')
                     localStorage.removeItem('refreshToken')
                     dispatch(setUser(null))
                     dispatch(setAuthChecked(true))
-                })
-                .finally(() => {
+            }   finally {
                     dispatch(setAuthChecked(true))
-                })
+                }
         } else {
             dispatch(setAuthChecked(true))
         }

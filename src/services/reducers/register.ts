@@ -1,4 +1,5 @@
 import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET_AUTH_CHECKED, SET_USER, TRegisterActions } from "../actions/register";
+import { TUser } from "../types/types";
 
 type state = {
     email: string;
@@ -8,7 +9,7 @@ type state = {
     registerRequest: boolean;
     registerFailed: boolean;
     isAuthCheck: boolean;
-    user: any;
+    user: TUser | null;
 }
 
 const initialState: state = {
