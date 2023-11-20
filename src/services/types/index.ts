@@ -2,20 +2,20 @@ import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 import { store } from '../store';
 import { TConstructorActions } from '../actions/constructor';
-import { TfeedActions } from '../actions/feedActions';
+import { TFeedActions } from '../actions/feedActions';
 import { TIngredientsActions } from '../actions/ingredients';
 import { TModalActions } from '../actions/modal';
-import { TOrderActions } from '../actions/ordersActions';
+import { TOrdersActions } from '../actions/ordersActions';
 import { TPasswordActions } from '../actions/password-reset';
 import { TRegisterActions } from '../actions/register';
 import { rootReducer } from '../reducers';
 
 
 type TApplicationActions = TConstructorActions 
-    | TfeedActions 
+    | TFeedActions 
     | TIngredientsActions 
     | TModalActions 
-    | TOrderActions 
+    | TOrdersActions 
     | TPasswordActions 
     | TRegisterActions
 

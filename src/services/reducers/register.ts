@@ -2,10 +2,6 @@ import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET
 import { TUser } from "../types/types";
 
 type state = {
-    email: string;
-    name: string;
-    accessToken: string;
-    refreshToken: string;
     registerRequest: boolean;
     registerFailed: boolean;
     isAuthCheck: boolean;
@@ -13,10 +9,6 @@ type state = {
 }
 
 const initialState: state = {
-    email: '',
-    name: '',
-    accessToken: '',
-    refreshToken: '',
     registerRequest: false,
     registerFailed: false,
     isAuthCheck: false,
@@ -48,10 +40,6 @@ export const registerReducer = (store = initialState, action: TRegisterActions) 
                 ...store, 
                 registerRequest: false, 
                 registerFailed: false, 
-                name: action.payload.user.name, 
-                email: action.payload.user.email, 
-                accessToken: action.payload.accessToken, 
-                refreshToken: action.payload.refreshToken
             }
         }
 

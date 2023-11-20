@@ -28,7 +28,7 @@ export const Feed = (): JSX.Element => {
               {message.map((elm: TOrder) => {
                 return (
                   <Link to={`/feed/${elm.number}`} className={styles.link} state={{background: location}}>
-                    <OrderTape order={elm} success={false} name={''} ingredients={[]} status={''} number={0} createdAt={''} _id={''} price={''} />
+                    <OrderTape order={elm} success={false} name={''} ingredients={[]} status={''} number={0} createdAt={''} _id={''} price={''}/>
                   </Link>
                 )
               })}

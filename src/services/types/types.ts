@@ -14,6 +14,18 @@ export type TIngredient = {
   key?: string;
 }
 
+export type TDetails = {
+  success: boolean;
+  name: string;
+  ingredients: string[];
+  status: string;
+  number: number;
+  createdAt: string;
+  _id: string;
+  price: string;
+  order: TOrder;
+}
+
 export type TOrder = {
   success: boolean;
   name: string;
@@ -23,7 +35,7 @@ export type TOrder = {
   createdAt: string;
   _id: string;
   price: string;
-  order: any;
+  order: TDetails;
 }
 
 export type TFeed = {
@@ -46,6 +58,6 @@ export type TDragItem = {
 }
 
 export type TUser = {
-  email: string | null;
-  name: string | null;
-} | null
+  email: string;
+  name: string;
+}

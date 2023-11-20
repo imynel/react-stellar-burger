@@ -3,7 +3,7 @@ import { ingredientsReducer } from "./ingredients";
 import { constructorReducer } from "./constructor";
 import { passwordReducer } from "./password-reset";
 import { registerReducer } from './register'
-import { feedReducer } from "./feedReducer";
+import { feedReducer } from './feedReducer'
 import { ordersReducer } from './ordersReducer';
 import { modalReducer } from "./modal";
 

@@ -1,7 +1,7 @@
 import { postEmail } from "../../utils/api";
 import { postPassword } from "../../utils/api";
 import { AppDispatch, AppThunk } from "../types";
-import { TOrder } from "../types/types";
+import { TOrder, TUser } from "../types/types";
 
 export const POST_EMAIL_REQUEST: 'POST_EMAIL_REQUEST'  = 'POST_EMAIL_REQUEST'
 export const POST_EMAIL_SUCCESS: 'POST_EMAIL_SUCCESS' = 'POST_EMAIL_SUCCESS'
@@ -30,7 +30,7 @@ type postPasswordRequestAction = {
 
 type postPasswordSuccesAction = {
     readonly type: typeof POST_PASSWORD_SUCCESS;
-    readonly payload: TOrder;
+    readonly payload: TUser;
 }
 
 type postPasswordFailedAction = {

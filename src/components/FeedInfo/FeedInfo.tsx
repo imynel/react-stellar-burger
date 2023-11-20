@@ -7,15 +7,15 @@ import { TIngredient, TOrder } from '../../services/types/types';
 export const FeedInfo = (): JSX.Element => {
   const location = useLocation();
   const { numberOrder = '' } = useParams();
+  console.log(numberOrder)
   const orderList = useSelector((store) => store.feedReducer.message);
   const order = orderList.find((elm: TOrder) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const currentIngredients: TIngredient[] = [];
-
+  console.log(orderList)
   order &&
-    order.ingredients.forEach((elm: any) => {
-      console.log(elm)
-      const foundIngredient = allIngredients.find((element: any) => element._id === elm);
+    order.ingredients.forEach((elm: string) => {
+      const foundIngredient = allIngredients.find((element: TIngredient) => element._id === elm);
       if (foundIngredient) {
         currentIngredients.push(foundIngredient);
       }
@@ -24,10 +24,11 @@ export const FeedInfo = (): JSX.Element => {
   const price = currentIngredients.reduce((a, b) => a + b.price, 0);
 
   // Функция, которая проверяет уникальность объектов
-  function isObjectUnique(value: any, index: number, self: any) {
+  function isObjectUnique(value: TIngredient, index: number, self: TIngredient[]) {
+    console.log(value)
     // Преобразуем объект в строку и сравниваем
     const objAsString = JSON.stringify(value);
-    return self.findIndex((obj: any) => JSON.stringify(obj) === objAsString) === index;
+    return self.findIndex((obj: TIngredient) => JSON.stringify(obj) === objAsString) === index;
   }
 
   const uniqueObjects = currentIngredients.filter(isObjectUnique);
@@ -43,11 +44,11 @@ export const FeedInfo = (): JSX.Element => {
               : null
           }`}>
           <p className={`${styles.orderNumber} mb-10 text text_type_digits-medium`}>
-            #{order.number}
+            #{order?.number}
           </p>
-          <h3 className={`${styles.nameBurger} mb-3 text text_type_main-medium`}>{order.name}</h3>
+          <h3 className={`${styles.nameBurger} mb-3 text text_type_main-medium`}>{order?.name}</h3>
           <p className={`${styles.complited} mb-15 text text_type_main-default`}>
-            {order.status === 'done' ? 'Выполнен' : 'Готовится'}
+            {order?.status === 'done' ? 'Выполнен' : 'Готовится'}
           </p>
           <p className={`${styles.compound} mb-4 text text_type_main-medium`}>Состав:</p>
           <div className={`${styles.container} custom-scroll pr-6`}>

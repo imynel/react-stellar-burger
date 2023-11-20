@@ -9,8 +9,8 @@ export const OrderTape = ({ order }: TOrder): JSX.Element => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
 
   const currentIngredients: TIngredient[] = [];
-  order.ingredients.forEach((elm: TIngredient) => {
-    const foundIngredient = ingredients.find((element: TIngredient) => element._id === elm._id);
+  order.ingredients.forEach((elm: string) => {
+    const foundIngredient = ingredients.find((element: TIngredient) => element._id === elm);
     if (foundIngredient) {
       currentIngredients.push(foundIngredient);
     }
@@ -24,7 +24,7 @@ export const OrderTape = ({ order }: TOrder): JSX.Element => {
         <div className={styles.textContainer}>
           <p className={`${styles.orderNumber} text text_type_digits-default`}>#{order.number}</p>
           <p className={`${styles.time} text text_type_main-default text_color_inactive`}>
-            {order.createAt}
+            {order.createdAt}
           </p>
         </div>
         <p className={`${styles.nameBurger} text text_type_main-medium`}>{order.name}</p>

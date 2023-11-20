@@ -4,18 +4,20 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../../services/hooks/hooks';
 import { logout, refreshUser } from '../../../services/actions/register';
+import { TUser } from '../../../services/types/types';
 
 export const Profile = (): JSX.Element => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const emailServer = useSelector(store => store.registerReducer.email)
-  const nameServer = useSelector(store => store.registerReducer.name)
+  const { user } = useSelector(store => store.registerReducer)
 
   useEffect(() => {
-    setLogin(emailServer)
-    setName(nameServer)
+    if (user) {
+      setLogin(user.email)
+      setName(user.name)
+    }
   }, [])
 
   const onLogout = () => {
@@ -26,7 +28,7 @@ export const Profile = (): JSX.Element => {
     e.preventDefault()
     dispatch(refreshUser(login, name, password))
   }
-
+  
   return (
     <section className={styles.mainContainer}>
       <div className={styles.container}>

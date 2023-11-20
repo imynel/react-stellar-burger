@@ -12,7 +12,7 @@ export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<RootS
       const { type, payload } = action;
       const { wsConnection, wsDisconnect, wsConnectionOpen, wsConnectionClose, wsConnectionError, wsGetMessage,  wsConnecting } = wsAction
       
-      if (type === wsConnection) {
+      if (type === wsConnection.type) {
         if(!socket) {
           socket = new WebSocket(action.payload);
           // функция, которая вызывается при открытии сокета
