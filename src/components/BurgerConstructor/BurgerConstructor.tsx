@@ -75,9 +75,9 @@ const BurgerConstructor = (): JSX.Element => {
           {currentIngredients.map((ingredient: any, index: any) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment key={uuidv4()}>
+                <React.Fragment>
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} />
+                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} key={uuidv4()}/>
                   </li>
                 </React.Fragment>
               );

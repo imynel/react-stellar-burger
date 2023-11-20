@@ -1,26 +1,34 @@
+import { IHeaders, IIngredientResponse, IOptions, IRegisterResponse, IResponse } from "../services/types/api";
+import { TOrder } from "../services/types/types";
+
 const url = 'https://norma.nomoreparties.space/api/'
 export const WSS_URL = 'wss://norma.nomoreparties.space/orders'
 
 
-const fetchWithRefresh = async (url, options) => {
+const fetchWithRefresh = async (url: string, options: IOptions) => {
   try {
     const res = await fetch(url, options); //делаем запрос
     return await checkResponse(res);
   } catch (err) {
-    if (err.message === "jwt expired") {
-      const refreshData = await refreshToken(); //обновляем токен
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      localStorage.setItem("accessToken", refreshData.accessToken); //(или в cookies)
-      options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(url, options); //вызываем перезапрос данных
-      return await checkResponse(res);
-    } else {
-      return Promise.reject(err);
+    if (err instanceof Error) {
+      if (err.message === "jwt expired") {
+        const refreshData = await refreshToken(); //обновляем токен
+        if (!refreshData.success) {
+          return Promise.reject(refreshData);
+        }
+        localStorage.setItem("refreshToken", refreshData.refreshToken);
+        localStorage.setItem("accessToken", refreshData.accessToken); //(или в cookies)
+        options.headers.authorization = refreshData.accessToken;
+        const res = await fetch(url, options); //вызываем перезапрос данных
+        return await checkResponse(res);
+      } else {
+        return Promise.reject(err);
+      }
     }
   }
 };
 
-const refreshToken = () => {
+const refreshToken = (): Promise<IResponse> => {
   return fetch(`${url}auth/token`, {
     method: 'POST',
     headers: {
@@ -29,30 +37,30 @@ const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem('refreshToken')
     })
-  }).then(checkResponse)
+  }).then(checkResponse<IResponse>)
 }
 
-export function getIngredients() {
+export function getIngredients(): Promise<IIngredientResponse> {
   return fetch(`${url}ingredients`)
-    .then(checkResponse)
+    .then(checkResponse<IIngredientResponse>)
 }
 
-export function postOrderNumber(id) {
+export function postOrderNumber(id: string[]) {
   return fetch(`${url}orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('accessToken')
-    },
+    } as IHeaders,
     body: JSON.stringify({
       'ingredients': id,
     })
   } 
   )
-   .then(checkResponse)    
+   .then(checkResponse<TOrder>)    
 }
 
-export function postEmail(email) {
+export function postEmail(email: string) {
   return fetch(`${url}password-reset`, {
     method: 'POST',
     headers: {
@@ -65,7 +73,7 @@ export function postEmail(email) {
   .then(checkResponse)
 }
 
-export function postPassword(password, token) {
+export function postPassword(password: string, token: string) {
   return fetch(`${url}password-reset/reset`, {
     method: 'POST',
     headers: {
@@ -79,8 +87,8 @@ export function postPassword(password, token) {
   .then(checkResponse)
 }
 
-export const postRegister = async (email, password, name) => {
-  const response = await fetchWithRefresh(`${url}auth/register`, {
+export const postRegister = async (email: string, password: string, name: string) => {
+  return fetch(`${url}auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -90,13 +98,11 @@ export const postRegister = async (email, password, name) => {
       'password': password,
       'name': name,
     })
-  })
-  
-  return response
+  }).then(checkResponse<IRegisterResponse>)
 }
 
-export const postSignIn = async (email, password) => {
-  const response = await fetchWithRefresh(`${url}auth/login`, {
+export const postSignIn = async (email: string, password: string) => {
+  return fetch(`${url}auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -105,16 +111,14 @@ export const postSignIn = async (email, password) => {
       'email': email,
       'password': password,
     })
-  })
-
-  return response
+  }).then(checkResponse<IRegisterResponse>)
 }
 
 
 
 
-export const postLogout = async (refreshToken) => {
-  const response = fetchWithRefresh(`${url}auth/logout`, {
+export const postLogout = async (refreshToken: string) => {
+  return fetchWithRefresh(`${url}auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -123,10 +127,9 @@ export const postLogout = async (refreshToken) => {
       'token': refreshToken
     })
   })
-  return response
 }
 
-export function postToken(refreshToken) {
+export function postToken(refreshToken: string) {
   return fetch(`${url}auth/token`, {
     method: 'POST',
     headers: {
@@ -140,33 +143,31 @@ export function postToken(refreshToken) {
 }
 
 export const getUserApi = async () => {
-  const response = await fetchWithRefresh(`${url}auth/user`, {
+  return fetchWithRefresh(`${url}auth/user`, {
     method: 'GET',
     headers: {
+      'Content-Type': 'application/json',
       Authorization: localStorage.getItem('accessToken')
-    }
-  })
-  return response
+    } as IHeaders
+  }) as Promise<IRegisterResponse>
 }
 
-export const patchRefreshUser = async (email, name, password) => {
-  const response = await fetchWithRefresh(`${url}auth/user`, {
+export const patchRefreshUser = async (email: string, name: string, password: string) => {
+  return fetchWithRefresh(`${url}auth/user`, {
     method: 'PATCH',
     headers: {
       Authorization: localStorage.getItem('accessToken'),
       "Content-Type": 'application/json'
-    },
+    } as IHeaders,
     body: JSON.stringify({
       'email': email,
       'name': name,
       'password': password,
     })
-  })
-
-  return response
+  }) as Promise<IRegisterResponse>
 }
 
-const checkResponse = (res) => {
+const checkResponse = <T>(res: Response): Promise<T> => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
