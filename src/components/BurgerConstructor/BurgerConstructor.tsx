@@ -6,9 +6,6 @@ import {
   ConstructorElement,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngregientsInConstructor from '../IngregientsInConstructor/IngregientsInConstructor';
-import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
-import OrderDetails from '../OrderDetails/OrderDetails';
 import { useDrop } from 'react-dnd';
 import {
   addIngredient,
@@ -26,7 +23,7 @@ const BurgerConstructor = (): JSX.Element => {
   const { bun, currentIngredients } = useSelector((store) => store.constructorReducer);
   const { isAuthCheck, user } = useSelector((store) => store.registerReducer);
   const [price, setPrice] = useState<number | null>(null);
-  const ID = currentIngredients.map((item: TIngredient) => {
+  const ID = currentIngredients.map((item) => {
     return item._id;
   });
 
@@ -72,12 +69,12 @@ const BurgerConstructor = (): JSX.Element => {
           </div>
         </li>
         <div className={`${styleBurgerConstructor.scroll} custom-scroll`}>
-          {currentIngredients.map((ingredient: TIngredient, index: number) => {
+          {currentIngredients.map((ingredient, index) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment>
+                <React.Fragment key={ingredient._id} >
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} key={uuidv4()}/>
+                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} keys={uuidv4()}/>
                   </li>
                 </React.Fragment>
               );
@@ -107,6 +104,7 @@ const BurgerConstructor = (): JSX.Element => {
           to={user && isAuthCheck ? '/order' : '/login'}
           onClick={(e) => (!currentIngredients.length || !bun ? e.preventDefault() : null)}
           state={{ background: location }}>
+            {console.log(user && isAuthCheck ? '/order' : '/login')}
           <Button
             htmlType="button"
             type="primary"

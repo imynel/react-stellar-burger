@@ -7,8 +7,8 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { postRegisterProfile } from '../../../services/actions/register';
-import { useDispatch } from 'react-redux';
+import { postRegisterProfile } from '../../services/actions/register';
+import { useDispatch } from '../../services/hooks/hooks';
 
 export const Registration = (): JSX.Element => {
   const navigate = useNavigate();

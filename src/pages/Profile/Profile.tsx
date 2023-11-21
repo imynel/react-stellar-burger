@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../../services/hooks/hooks';
-import { logout, refreshUser } from '../../../services/actions/register';
-import { TUser } from '../../../services/types/types';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { logout, refreshUser } from '../../services/actions/register';
 
 export const Profile = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ export const Profile = (): JSX.Element => {
       setLogin(user.email)
       setName(user.name)
     }
-  }, [])
+  }, [user])
 
   const onLogout = () => {
     dispatch(logout());

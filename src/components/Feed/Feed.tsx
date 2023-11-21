@@ -25,11 +25,13 @@ export const Feed = (): JSX.Element => {
           <h1 className={`${styles.title}`}>Лента заказов</h1>
           <div className={styles.container}>
             <div className={`${styles.ribbon} pr-2 custom-scroll`}>
-              {message.map((elm: TOrder) => {
+              {message.map((elm) => {
                 return (
-                  <Link to={`/feed/${elm.number}`} className={styles.link} state={{background: location}}>
-                    <OrderTape order={elm} success={false} name={''} ingredients={[]} status={''} number={0} createdAt={''} _id={''} price={''}/>
-                  </Link>
+                  <React.Fragment key={elm._id}>
+                    <Link to={`/feed/${elm.number}`} className={styles.link} state={{background: location}}>
+                      <OrderTape order={elm} success={false} name={''} ingredients={[]} status={''} number={0} createdAt={''} _id={''} price={''}/>
+                    </Link>
+                  </React.Fragment>
                 )
               })}
             </div>
@@ -37,23 +39,27 @@ export const Feed = (): JSX.Element => {
               <div className={styles.statsContainer}>
                 <div className={styles.ready}>
                   <h3 className="text text_type_main-medium">Готовы:</h3>
-                  {message.map((elm: TOrder, index: number) => {
+                  {message.map((elm, index) => {
                     if (elm.status === 'done' && index < 10)
                       return (
-                        <p className={`${styles.readyNumber} text text_type_digits-default`}>
-                          {elm.number}
-                        </p>
+                        <React.Fragment key={index}>
+                          <p className={`${styles.readyNumber} text text_type_digits-default`}>
+                            {elm.number}
+                          </p>
+                        </React.Fragment>
                       );
                   })}
                 </div>
                 <div className={styles.inProgress}>
                   <h3 className="text text_type_main-medium">В работе:</h3>
-                  {message.map((elm: TOrder, index: number) => {
+                  {message.map((elm, index) => {
                     if (elm.status !== 'done' && index < 10)
                       return (
-                        <p className={`${styles.readyNumber} text text_type_digits-default`}>
-                          {elm.number}
-                        </p>
+                        <React.Fragment key={index}>
+                          <p className={`${styles.readyNumber} text text_type_digits-default`}>
+                            {elm.number}
+                          </p>
+                        </React.Fragment>
                       );
                   })}
                 </div>

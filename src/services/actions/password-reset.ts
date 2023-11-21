@@ -1,7 +1,7 @@
 import { postEmail } from "../../utils/api";
 import { postPassword } from "../../utils/api";
-import { AppDispatch, AppThunk } from "../types";
-import { TOrder, TUser } from "../types/types";
+import { AppDispatch } from "../types";
+import { TUser } from "../types/types";
 
 export const POST_EMAIL_REQUEST: 'POST_EMAIL_REQUEST'  = 'POST_EMAIL_REQUEST'
 export const POST_EMAIL_SUCCESS: 'POST_EMAIL_SUCCESS' = 'POST_EMAIL_SUCCESS'

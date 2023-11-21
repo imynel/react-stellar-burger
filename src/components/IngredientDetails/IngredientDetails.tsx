@@ -6,7 +6,7 @@ import { TIngredient } from '../../services/types/types';
 const IngredientDetails = (): JSX.Element => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const { id } = useParams();
-  const ingredient = ingredients.find((elm: TIngredient) => elm._id === id);
+  const ingredient = ingredients.find((elm) => elm._id === id);
 
   return (
     <>

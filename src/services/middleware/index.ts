@@ -8,8 +8,8 @@ export const socketMiddleware = (wsAction: TMiddlewareActions): Middleware<RootS
         let socket: WebSocket | null = null;
 
     return next => action => {
-      const { dispatch, getState } = store;
-      const { type, payload } = action;
+      const { dispatch } = store;
+      const { type } = action;
       const { wsConnection, wsDisconnect, wsConnectionOpen, wsConnectionClose, wsConnectionError, wsGetMessage,  wsConnecting } = wsAction
       
       if (type === wsConnection.type) {

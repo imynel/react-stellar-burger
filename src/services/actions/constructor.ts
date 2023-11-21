@@ -1,7 +1,7 @@
 import { postOrderNumber } from '../../utils/api'
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../types/types';
-import { AppDispatch, AppThunk } from '../types';
+import { AppThunk } from '../types';
 
 export const ADD_INGREDIENT: 'ADD_INGREDIENT'  = 'ADD_INGREDIENT' 
 export const DELETE_INGREDIENT: 'DELETE_INGREDIENT' = 'DELETE_INGREDIENT'
@@ -63,8 +63,8 @@ export const changeIngedients = (fromIndex: number, toIndex: number): changeInge
     toIndex: toIndex
   });
 
-export const getOrderNumder = (id: string[]) => {
-    return (dispatch: AppDispatch) => {
+export const getOrderNumder: AppThunk = (id: string[]) => {
+    return (dispatch) => {
         dispatch({
             type: GET_CONSTRUCTOR_REQUEST,
         })

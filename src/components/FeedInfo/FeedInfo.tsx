@@ -9,13 +9,13 @@ export const FeedInfo = (): JSX.Element => {
   const { numberOrder = '' } = useParams();
   console.log(numberOrder)
   const orderList = useSelector((store) => store.feedReducer.message);
-  const order = orderList.find((elm: TOrder) => elm.number === parseInt(numberOrder));
+  const order = orderList.find((elm) => elm.number === parseInt(numberOrder));
   const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
   const currentIngredients: TIngredient[] = [];
   console.log(orderList)
   order &&
     order.ingredients.forEach((elm: string) => {
-      const foundIngredient = allIngredients.find((element: TIngredient) => element._id === elm);
+      const foundIngredient = allIngredients.find((element) => element._id === elm);
       if (foundIngredient) {
         currentIngredients.push(foundIngredient);
       }
@@ -28,7 +28,7 @@ export const FeedInfo = (): JSX.Element => {
     console.log(value)
     // Преобразуем объект в строку и сравниваем
     const objAsString = JSON.stringify(value);
-    return self.findIndex((obj: TIngredient) => JSON.stringify(obj) === objAsString) === index;
+    return self.findIndex((obj) => JSON.stringify(obj) === objAsString) === index;
   }
 
   const uniqueObjects = currentIngredients.filter(isObjectUnique);

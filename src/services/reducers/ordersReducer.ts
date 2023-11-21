@@ -3,7 +3,7 @@ import { WebsocketStatus } from "../../utils/wsStatus";
 import { TOrder } from "../types/types";
 import { createReducer } from '@reduxjs/toolkit'
 
-type state = {
+type State = {
     status: string
     message: TOrder[];
     error: string | null;
@@ -11,7 +11,7 @@ type state = {
     totalToday: number | null
 }
 
-const initialState: state = {
+const initialState: State = {
     status: WebsocketStatus.OFFLINE,
     message: [],
     error: '',

@@ -1,7 +1,7 @@
 import { POST_EMAIL_FAILED, POST_EMAIL_REQUEST, POST_EMAIL_SUCCESS, POST_PASSWORD_FAILED, POST_PASSWORD_REQUEST, POST_PASSWORD_SUCCESS, TPasswordActions } from "../actions/password-reset";
-import { TOrder, TUser } from "../types/types";
+import { TUser } from "../types/types";
 
-type state = {
+type State = {
     info: null | TUser;
     emailRequest: boolean;
     emailFailed: boolean;
@@ -9,7 +9,7 @@ type state = {
     passwordFailed: boolean;
 }
 
-const initialState: state = {
+const initialState: State = {
     info: null,
     emailRequest: false,
     emailFailed: false,

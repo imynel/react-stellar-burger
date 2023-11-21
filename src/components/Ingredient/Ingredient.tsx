@@ -29,7 +29,7 @@ const Ingredient = ({ item, handleOpen }: props): JSX.Element => {
     if (bun && item.type === 'bun' && item._id === bun._id) {
       counter = 1;
     } else {
-      counter = currentIngredients.filter((element: TIngredient) => element._id === item._id).length;
+      counter = currentIngredients.filter((element) => element._id === item._id).length;
     }
     setMeter(counter);
   }, [bun, currentIngredients]);

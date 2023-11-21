@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from '../../pages/home-page/home-page';
-import { SignIn } from '../registration/SignIn/SignIn';
-import { Registration } from '../registration/Registration/Registration';
-import { ForgotPassword1 } from '../registration/ForgotPassword1/ForgotPassword1';
-import { ForgotPassword2 } from '../registration/ForgotPassword2/ForgotPassword2';
+import { Registration } from '../../pages/Registration/Registration';
+import { ForgotPassword1 } from '../../pages/ForgotPassword1/ForgotPassword1';
+import { ForgotPassword2 } from '../../pages/ForgotPassword2/ForgotPassword2';
 import { NotFound404 } from '../NotFound404/NotFound404';
-import { Profile } from '../registration/Profile/Profile';
+import { Profile } from '../../pages/Profile/Profile';
 import AppHeader from '../AppHeader/AppHeader';
 import { checkUserAuth } from '../../services/actions/register';
-import { useDispatch } from 'react-redux';
 import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
@@ -18,6 +16,8 @@ import { getAllIngredients } from '../../services/actions/ingredients';
 import { Feed } from '../Feed/Feed';
 import { OrderHistory } from '../OrderHistory/OrderHistory';
 import { FeedInfo } from '../FeedInfo/FeedInfo';
+import { useDispatch } from '../../services/hooks/hooks';
+import { SignIn } from '../../pages/SignIn/SignIn';
 
 function App(): JSX.Element {
   const navigate = useNavigate();

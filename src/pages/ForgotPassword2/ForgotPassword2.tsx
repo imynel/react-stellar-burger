@@ -3,8 +3,8 @@ import styles from './ForgotPassword2.module.css';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { postPasswordReset } from '../../../services/actions/password-reset';
-import { useDispatch } from 'react-redux';
+import { postPasswordReset } from '../../services/actions/password-reset';
+import { useDispatch } from '../../services/hooks/hooks';
 
 export const ForgotPassword2 = (): JSX.Element => {
   const navigate = useNavigate();

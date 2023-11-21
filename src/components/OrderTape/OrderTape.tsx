@@ -10,7 +10,7 @@ export const OrderTape = ({ order }: TOrder): JSX.Element => {
 
   const currentIngredients: TIngredient[] = [];
   order.ingredients.forEach((elm: string) => {
-    const foundIngredient = ingredients.find((element: TIngredient) => element._id === elm);
+    const foundIngredient = ingredients.find((element) => element._id === elm);
     if (foundIngredient) {
       currentIngredients.push(foundIngredient);
     }
@@ -31,12 +31,14 @@ export const OrderTape = ({ order }: TOrder): JSX.Element => {
         <div className={styles.ingredientsContainer}>
           {currentIngredients.map((elm, index) => {
             return (
-              <img
-                className={styles.img}
-                style={{ zIndex: currentIngredients.length - index }}
-                src={elm.image}
-                alt={elm.name}
-              />
+              <React.Fragment key={index}>
+                <img
+                  className={styles.img}
+                  style={{ zIndex: currentIngredients.length - index }}
+                  src={elm.image}
+                  alt={elm.name}
+                />
+              </React.Fragment>
             );
           })}
           <p className={`${styles.price} text text_type_digits-default`}>

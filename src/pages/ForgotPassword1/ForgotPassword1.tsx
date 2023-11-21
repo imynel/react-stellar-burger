@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import styles from './ForgotPassword1.module.css'
-
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { postEmailReset } from '../../../services/actions/password-reset'
-import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from '../../services/hooks/hooks'
+import { postEmailReset } from '../../services/actions/password-reset'
 
 
 export const ForgotPassword1 = (): JSX.Element => {

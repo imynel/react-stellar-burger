@@ -1,13 +1,12 @@
 import styles from './IngregientsInConstructor.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { func, number, object, string } from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { deleteIngredient } from '../../services/actions/constructor';
 import { useRef } from 'react';
 import { useDrag, useDrop, XYCoord  } from 'react-dnd';
-import { TConstructorItem, TIngredient, TDragItem } from '../../services/types/types';
+import { TConstructorItem, TDragItem } from '../../services/types/types';
+import { useDispatch } from '../../services/hooks/hooks';
 
-const IngregientsInConstructor = ({ ingredient, key, index, swap }: TConstructorItem): JSX.Element => {
+const IngregientsInConstructor = ({ ingredient, keys, index, swap }: TConstructorItem): JSX.Element => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -51,17 +50,11 @@ const IngregientsInConstructor = ({ ingredient, key, index, swap }: TConstructor
         text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}
-        handleClose={() => dispatch(deleteIngredient(ingredient, key))}
+        handleClose={() => dispatch(deleteIngredient(ingredient, keys))}
       />
     </div>
   );
 };
 
-IngregientsInConstructor.propTypes = {
-  swap: func,
-  ingredient: object,
-  index: number,
-  key: string,
-};
 
 export default IngregientsInConstructor;

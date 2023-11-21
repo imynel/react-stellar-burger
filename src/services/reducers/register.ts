@@ -1,14 +1,14 @@
 import { POST_REGISTER_FAILED, POST_REGISTER_SUCCESS, POST_REGISTER_REQUEST, SET_AUTH_CHECKED, SET_USER, TRegisterActions } from "../actions/register";
 import { TUser } from "../types/types";
 
-type state = {
+type State = {
     registerRequest: boolean;
     registerFailed: boolean;
     isAuthCheck: boolean;
     user: TUser | null;
 }
 
-const initialState: state = {
+const initialState: State = {
     registerRequest: false,
     registerFailed: false,
     isAuthCheck: false,

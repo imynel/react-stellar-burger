@@ -3,9 +3,8 @@ import styles from './SignIn.module.css';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { postSignIn } from '../../../utils/api';
-import { login } from '../../../services/actions/register';
+import { useDispatch } from '../../services/hooks/hooks';
+import { login } from '../../services/actions/register';
 
 export const SignIn = (): JSX.Element => {
 

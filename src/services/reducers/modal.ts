@@ -1,12 +1,12 @@
 import { MODAL_OPEN, MODAL_CLOSE, TModalActions } from "../actions/modal";
 import { TIngredient } from "../types/types";
 
-type state = {
+type State = {
     modalType: null | string;
     modalProps: TIngredient | null;
 }
 
-const initialState: state = {
+const initialState: State = {
   modalType: null,
   modalProps: null
 }

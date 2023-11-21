@@ -1,4 +1,3 @@
-import { AppThunk } from "../services/types";
 import { IHeaders, IIngredientResponse, IOptions, IRegisterResponse, IResponse } from "../services/types/api";
 import { TOrder } from "../services/types/types";
 

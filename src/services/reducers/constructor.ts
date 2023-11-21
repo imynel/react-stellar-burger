@@ -6,7 +6,7 @@ type order = {
     number: null | number;
 }
 
-type state = {
+type State = {
     currentIngredients: TIngredient[];
     currentIngredientsRequest: boolean;
     currentIngredientsFailed: boolean;
@@ -14,7 +14,7 @@ type state = {
     order: order;
 }
 
-const initialState: state = {
+const initialState: State = {
     currentIngredients: [],
     currentIngredientsRequest: false,
     currentIngredientsFailed: false,
@@ -24,7 +24,7 @@ const initialState: state = {
     },
 }
 
-export const constructorReducer = (store = initialState, action: TConstructorActions): state => {
+export const constructorReducer = (store = initialState, action: TConstructorActions): State => {
     switch(action.type) {
         case ADD_INGREDIENT: {
             if (action.ingredient.type === 'bun') {

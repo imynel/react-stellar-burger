@@ -1,13 +1,13 @@
 import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUEST, TIngredientsActions } from "../actions/ingredients"
 import { TIngredient } from "../types/types"
 
-type state = {
+type State = {
     allIngredients: TIngredient[];
     ingredientsRequest: boolean;
     ingredientsFailed: boolean;
 }
 
-const initialState: state = {
+const initialState: State = {
     allIngredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false,

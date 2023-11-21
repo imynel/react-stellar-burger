@@ -48,7 +48,7 @@ export type TConstructorItem = {
   ingredient: TIngredient;
   index: number;
   swap (dragIndex: number, hoverIndex: number): void;
-  key: string;
+  keys: string;
 };
 
 export type TDragItem = {

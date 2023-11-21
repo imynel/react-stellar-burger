@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styleBurgerIngredients from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from '../Ingredient/Ingredient';
@@ -65,7 +65,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
       <div className={`${styleBurgerIngredients.mainContainer} custom-scroll`}>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Булки</h3>
         <div className={`${styleBurgerIngredients.container} bun`}>
-          {ingredient.map((element: TIngredient) => {
+          {ingredient.map((element) => {
             if (element.type === 'bun') {
               return (
                 <React.Fragment key={element._id}>
@@ -77,7 +77,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Соусы</h3>
         <div className={`${styleBurgerIngredients.container} sauce`}>
-          {ingredient.map((element: TIngredient) => {
+          {ingredient.map((element) => {
             if (element.type === 'sauce') {
               return (
                 <React.Fragment key={element._id}>
@@ -89,7 +89,7 @@ const BurgerIngredients = ({ handleOpen }: Props): JSX.Element => {
         </div>
         <h3 className={`${styleBurgerIngredients.subtitle} text text_type_main-medium`}>Начинки</h3>
         <div className={`${styleBurgerIngredients.container} main`}>
-          {ingredient.map((element: TIngredient) => {
+          {ingredient.map((element) => {
             if (element.type === 'main') {
               return (
                 <React.Fragment key={element._id}>

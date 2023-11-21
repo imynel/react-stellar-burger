@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './home-page.module.css';
-import AppHeader from '../../components/AppHeader/AppHeader';
 import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../../components/BurgerConstructor/BurgerConstructor';
-import IngredientDetails from '../../components/IngredientDetails/IngredientDetails';
-import Modal from '../../components/Modal/Modal';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BrowserRouter, Router, Routes} from 'react-router-dom'
 import { TIngredient } from '../../services/types/types';
 
 const HomePage = () => {
@@ -20,9 +16,9 @@ const HomePage = () => {
     setIngredient(item);
   };
 
-  const closeModal = () => {
-    setModalIngredient(false);
-  };
+  // const closeModal = () => {
+  //   setModalIngredient(false);
+  // };
 
   return (
     <>
