@@ -1,18 +1,24 @@
+import React, { useEffect } from 'react'
 import styles from './FeedInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from '../../services/hooks/hooks';
-import { TIngredient, TOrder } from '../../services/types/types';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { TIngredient } from '../../services/types/types';
+import { wsConnection as wsConnectionFeed, wsDisconnect as wsDisconnectfeed } from '../../services/actions/feedActions';
+import { WSS_URL } from '../../utils/api';
+import { wsConnection as wsConnectionOrders, wsDisconnect as wsDisconnectOrders } from '../../services/actions/ordersActions';
+
 
 export const FeedInfo = (): JSX.Element => {
+  const dispatch = useDispatch()
   const location = useLocation();
   const { numberOrder = '' } = useParams();
-  console.log(numberOrder)
-  const orderList = useSelector((store) => store.feedReducer.message);
-  const order = orderList.find((elm) => elm.number === parseInt(numberOrder));
-  const allIngredients = useSelector((store) => store.ingredientsReducer.allIngredients);
+  const orderListFeed = useSelector((store) => store.feedReducer.message);
+  const orderListOrders = useSelector((store) => store.ordersReducer.message);
+  const order = orderListFeed.find((elm) => elm.number === parseInt(numberOrder)) || orderListOrders.find((elm) => elm.number === parseInt(numberOrder))
+  
+  const allIngredients = useSelector((store) => store.ingredientsReducer?.allIngredients);
   const currentIngredients: TIngredient[] = [];
-  console.log(orderList)
   order &&
     order.ingredients.forEach((elm: string) => {
       const foundIngredient = allIngredients.find((element) => element._id === elm);
@@ -25,7 +31,6 @@ export const FeedInfo = (): JSX.Element => {
 
   // Функция, которая проверяет уникальность объектов
   function isObjectUnique(value: TIngredient, index: number, self: TIngredient[]) {
-    console.log(value)
     // Преобразуем объект в строку и сравниваем
     const objAsString = JSON.stringify(value);
     return self.findIndex((obj) => JSON.stringify(obj) === objAsString) === index;
@@ -33,9 +38,21 @@ export const FeedInfo = (): JSX.Element => {
 
   const uniqueObjects = currentIngredients.filter(isObjectUnique);
 
+  const token = localStorage.getItem('accessToken')!;
+  const tokenAPI = token.replace('Bearer ', '');
+
+  useEffect(() => {
+    dispatch(wsConnectionFeed(`${WSS_URL}/all`));
+    dispatch(wsConnectionOrders(`${WSS_URL}?token=${tokenAPI}`)); // Я НЕ НАШЕЛ ДРУГОГО СПОСОБА, ЧТОБЫ СТОР НЕ ОТЧИЩАЛСЯ ПОСЛЕ ВВОДА В ПОИСКОВОЙ СТРОКЕ
+    return () => {
+      dispatch(wsDisconnectfeed());
+      dispatch(wsDisconnectOrders());
+    };
+  }, []);
+
   return (
     <>
-      {!orderList && !order ? null : (
+      {!order ? null : (
         <div
           className={`${styles.mainContainer} ${
             location.pathname === `/feed/${numberOrder}` ||
@@ -52,7 +69,7 @@ export const FeedInfo = (): JSX.Element => {
           </p>
           <p className={`${styles.compound} mb-4 text text_type_main-medium`}>Состав:</p>
           <div className={`${styles.container} custom-scroll pr-6`}>
-            {uniqueObjects.map((element) => {
+            {uniqueObjects.map((element, index) => {
               let count = 0;
               currentIngredients.forEach((elm) => {
                 if (element._id === elm._id) {
@@ -60,15 +77,17 @@ export const FeedInfo = (): JSX.Element => {
                 }
               });
               return (
-                <div className={styles.ingredient}>
-                  <img src={element.image} alt={element.name} className={styles.image} />
-                  <p className={`${styles.ingregientName} text text_type_main-default`}>
-                    {element.name}
-                  </p>
-                  <p className={`${styles.price} text text_type_digits-default`}>
-                    {count} x {element.price} <CurrencyIcon type="primary" />
-                  </p>
-                </div>
+                <React.Fragment key={index}>
+                  <div className={styles.ingredient}>
+                    <img src={element.image} alt={element.name} className={styles.image} />
+                    <p className={`${styles.ingregientName} text text_type_main-default`}>
+                      {element.name}
+                    </p>
+                    <p className={`${styles.price} text text_type_digits-default`}>
+                      {count} x {element.price} <CurrencyIcon type="primary" />
+                    </p>
+                  </div>
+                </React.Fragment>
               );
             })}
           </div>

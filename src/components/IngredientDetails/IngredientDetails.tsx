@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import stylePopupInfo from './IngredientDetails.module.css';
 import { useSelector } from '../../services/hooks/hooks';
-import { TIngredient } from '../../services/types/types';
 
 const IngredientDetails = (): JSX.Element => {
   const ingredients = useSelector((store) => store.ingredientsReducer.allIngredients);

@@ -11,7 +11,7 @@ export type TIngredient = {
   image_mobile: string;
   image_large: string;
   __v: number;
-  key?: string;
+  uniqueId?: string | undefined;
 }
 
 export type TDetails = {
@@ -48,7 +48,6 @@ export type TConstructorItem = {
   ingredient: TIngredient;
   index: number;
   swap (dragIndex: number, hoverIndex: number): void;
-  keys: string;
 };
 
 export type TDragItem = {

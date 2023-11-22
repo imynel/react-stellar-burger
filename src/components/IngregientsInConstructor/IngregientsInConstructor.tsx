@@ -6,7 +6,7 @@ import { useDrag, useDrop, XYCoord  } from 'react-dnd';
 import { TConstructorItem, TDragItem } from '../../services/types/types';
 import { useDispatch } from '../../services/hooks/hooks';
 
-const IngregientsInConstructor = ({ ingredient, keys, index, swap }: TConstructorItem): JSX.Element => {
+const IngregientsInConstructor = ({ ingredient, index, swap }: TConstructorItem): JSX.Element => {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -50,7 +50,7 @@ const IngregientsInConstructor = ({ ingredient, keys, index, swap }: TConstructo
         text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}
-        handleClose={() => dispatch(deleteIngredient(ingredient, keys))}
+        handleClose={() => dispatch(deleteIngredient(ingredient))}
       />
     </div>
   );

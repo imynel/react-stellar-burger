@@ -12,25 +12,24 @@ export const GET_CONSTRUCTOR_FAILED: 'GET_CONSTRUCTOR_FAILED' = 'GET_CONSTRUCTOR
 
 export type addIngredientAction = {
     readonly type: typeof ADD_INGREDIENT;
-    readonly ingredient: TIngredient;
-    readonly key: string
+    ingredient: TIngredient;
+    uniqueId: string
 }
 export type deleteIngredientAction = {
     readonly type: typeof DELETE_INGREDIENT;
-    readonly ingredient: TIngredient;
-    readonly key: string
+    ingredient: TIngredient;
 }
 export type changeIngedientsAction = {
     readonly type: typeof CHANGE_INGREDIENT;
-    readonly fromIndex: number;
-    readonly toIndex: number;
+    fromIndex: number;
+    toIndex: number;
 }
 export type getConstructorRequestAction = {
     readonly type: typeof GET_CONSTRUCTOR_REQUEST;
 }
 export type getConstructorSuccessAction = {
     readonly type: typeof GET_CONSTRUCTOR_SUCCESS;
-    readonly number: number | null;
+    number: number | null;
 }
 export type getConstructorFailedAction = {
     readonly type: typeof GET_CONSTRUCTOR_FAILED;
@@ -48,13 +47,12 @@ export type TConstructorActions = addIngredientAction
 export const addIngredient = (ingredient: TIngredient) :addIngredientAction  => ({
     type: ADD_INGREDIENT,
     ingredient: ingredient,
-    key: uuidv4(),
+    uniqueId: uuidv4(),
 })
 
-export const deleteIngredient = (ingredient: TIngredient, key: string): deleteIngredientAction => ({
+export const deleteIngredient = (ingredient: TIngredient): deleteIngredientAction => ({
     type: DELETE_INGREDIENT,
     ingredient: ingredient,
-    key: key,
 })
 
 export const changeIngedients = (fromIndex: number, toIndex: number): changeIngedientsAction => ({

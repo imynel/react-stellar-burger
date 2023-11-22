@@ -11,7 +11,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component}: Props): JSX.Element | 
   const user = useSelector((store) => store.registerReducer.user);
 
   const location = useLocation();
-
+  
   if (!isAuthCheck) {
     return null;
   }

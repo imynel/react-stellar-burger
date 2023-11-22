@@ -27,20 +27,24 @@ const initialState: State = {
 export const constructorReducer = (store = initialState, action: TConstructorActions): State => {
     switch(action.type) {
         case ADD_INGREDIENT: {
-            if (action.ingredient.type === 'bun') {
+            const newIngredient = {
+                ...action.ingredient,
+                uniqueId: action.uniqueId
+            }
+            if (newIngredient.type === 'bun') {
                 return {
-                    ...store, bun: action.ingredient
+                    ...store, bun: newIngredient // возможно поменять на action.ungredient
                 }
             } else {
                 return {
-                    ...store, currentIngredients: [...store.currentIngredients, action.ingredient]
+                    ...store, currentIngredients: [...store.currentIngredients, newIngredient]
                 }
             }
         }
         case DELETE_INGREDIENT: {
             return {
                 ...store, currentIngredients: [...store.currentIngredients.filter(item => {
-                    if (item.key !== action.key) return true
+                    if (item.uniqueId !== action.ingredient.uniqueId) return true
                 })]
             }
         }

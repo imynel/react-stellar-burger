@@ -23,8 +23,8 @@ function App(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const background = location.state && location.state.background;
-
+  
+  const background = location.state && location.state?.background;
   const handleModalClose = () => {
     navigate(-1);
   };
@@ -40,16 +40,24 @@ function App(): JSX.Element {
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<OnlyUnAuth component={<SignIn />} />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/forgot-password" element={<ForgotPassword1 />} />
+        <Route path="/registration" element={<OnlyUnAuth component={<Registration />} />} />
+        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword1 />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ForgotPassword2 />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/profile/orders" element={<OnlyAuth component={<OrderHistory />} />} />
-        <Route path="/feed/:id" element={<FeedInfo />} />
+        <Route path="/feed/:numberOrder" element={<FeedInfo />} />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="/profile/orders/:numberOrder" element={<FeedInfo />} />
         <Route path="*" element={<NotFound404 />} />
+        <Route
+            path="/order"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderDetails />
+              </Modal>
+            }
+          />
       </Routes>
       {background && (
         <Routes>

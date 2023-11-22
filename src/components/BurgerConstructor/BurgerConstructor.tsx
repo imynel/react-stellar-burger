@@ -12,10 +12,10 @@ import {
   getOrderNumder,
   changeIngedients,
 } from '../../services/actions/constructor';
-import { v4 as uuidv4 } from 'uuid';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
 import { TIngredient } from '../../services/types/types';
+import { AppThunk } from '../../services/types';
 
 const BurgerConstructor = (): JSX.Element => {
   const location = useLocation();
@@ -44,13 +44,15 @@ const BurgerConstructor = (): JSX.Element => {
 
   const onSubmit = () => {
     if (ID.length) {
-      dispatch(getOrderNumder(ID));
+      dispatch(getOrderNumder(ID) as AppThunk<void>);
     }
   };
 
   const change = useCallback((dragIndex, hoverIndex) => {
     dispatch(changeIngedients(dragIndex, hoverIndex));
   }, []);
+
+  const navigateTo = user && isAuthCheck ? { pathname: '/order', state: { background: location } } : '/login';
 
   return (
     <section className={styleBurgerConstructor.burgerConstructor} ref={dropRef}>
@@ -72,9 +74,9 @@ const BurgerConstructor = (): JSX.Element => {
           {currentIngredients.map((ingredient, index) => {
             if (ingredient.type !== 'bun') {
               return (
-                <React.Fragment key={ingredient._id} >
+                <React.Fragment key={ingredient.uniqueId}>
                   <li className={styleBurgerConstructor.card}>
-                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index} keys={uuidv4()}/>
+                    <IngregientsInConstructor ingredient={ingredient} swap={change} index={index}/>
                   </li>
                 </React.Fragment>
               );
@@ -101,10 +103,9 @@ const BurgerConstructor = (): JSX.Element => {
           <CurrencyIcon type="primary" />
         </div>
         <Link
-          to={user && isAuthCheck ? '/order' : '/login'}
+          to={navigateTo}
           onClick={(e) => (!currentIngredients.length || !bun ? e.preventDefault() : null)}
-          state={{ background: location }}>
-            {console.log(user && isAuthCheck ? '/order' : '/login')}
+        >
           <Button
             htmlType="button"
             type="primary"
