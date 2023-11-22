@@ -39,11 +39,17 @@ export const FeedInfo = (): JSX.Element => {
   const uniqueObjects = currentIngredients.filter(isObjectUnique);
 
   const token = localStorage.getItem('accessToken')!;
-  const tokenAPI = token.replace('Bearer ', '');
+  let tokenAPI: string = ''
+  if (token) {
+    tokenAPI = token.replace('Bearer ', '');
+  }
 
   useEffect(() => {
     dispatch(wsConnectionFeed(`${WSS_URL}/all`));
-    dispatch(wsConnectionOrders(`${WSS_URL}?token=${tokenAPI}`)); // Я НЕ НАШЕЛ ДРУГОГО СПОСОБА, ЧТОБЫ СТОР НЕ ОТЧИЩАЛСЯ ПОСЛЕ ВВОДА В ПОИСКОВОЙ СТРОКЕ
+    if (tokenAPI) {
+      dispatch(wsConnectionOrders(`${WSS_URL}?token=${tokenAPI}`)); // Я НЕ НАШЕЛ ДРУГОГО СПОСОБА, ЧТОБЫ СТОР НЕ ОТЧИЩАЛСЯ ПОСЛЕ ВВОДА В ПОИСКОВОЙ СТРОКЕ
+    }
+
     return () => {
       dispatch(wsDisconnectfeed());
       dispatch(wsDisconnectOrders());
